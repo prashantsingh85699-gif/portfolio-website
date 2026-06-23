@@ -5,6 +5,10 @@
 
 import Lenis from 'lenis';
 import { initEmbeddingsNetwork } from './embeddings-network.js';
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+gsap.registerPlugin(ScrollTrigger);
 
 // Initialize Lenis smooth scroll
 const lenis = new Lenis({
@@ -18,6 +22,9 @@ function raf(time) {
 }
 requestAnimationFrame(raf);
 
+// Link Lenis to update GSAP ScrollTrigger on scroll
+lenis.on('scroll', ScrollTrigger.update);
+
 // Lock scrolling during preloader phase
 lenis.stop();
 
@@ -29,6 +36,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initCertificateFilter();
   initAnchorLinks();
   initProfileInteraction();
+  initGSAPAnimations();
 });
 
 /**
@@ -261,17 +269,18 @@ function initCertificateFilter() {
 }
 
 /**
- * 3D Parallax Tilt and Click-Swap Profile Image Interaction
+ * 3D Parallax Tilt and Hover-Swap Profile Image Interaction
  * Rotates the circular profile frame on hover to track the cursor,
- * shifts the active portrait in the opposite direction for 3D depth,
- * and toggles active classes to swap between formal and casual portraits on click.
+ * shifts the nested slides container in the opposite direction for 3D depth,
+ * and swaps between formal and casual portraits smoothly without visual jumps.
  */
 function initProfileInteraction() {
   const frame = document.getElementById('hero-portrait-frame');
+  const slides = document.getElementById('hero-portrait-slides');
   const frontImg = document.getElementById('hero-portrait-front');
   const backImg = document.getElementById('hero-portrait-back');
 
-  if (!frame || !frontImg || !backImg) return;
+  if (!frame || !slides || !frontImg || !backImg) return;
 
   // Track hover status for window-mousemove efficiency
   let isHovered = false;
@@ -279,7 +288,7 @@ function initProfileInteraction() {
   frame.addEventListener('mouseenter', () => {
     isHovered = true;
 
-    // Automatically cross-fade to alternate portrait on hover
+    // Automatically cross-fade to alternate portrait on hover (CSS transitions this)
     frontImg.classList.remove('active');
     backImg.classList.add('active');
   });
@@ -296,8 +305,8 @@ function initProfileInteraction() {
     const dx = e.clientX - frameCenterX;
     const dy = e.clientY - frameCenterY;
 
-    // Normalised values for rotation limits (max 12deg tilt)
-    const maxTilt = 12;
+    // Normalised values for rotation limits (max 10deg tilt)
+    const maxTilt = 10;
     const tiltX = (dy / (window.innerHeight / 2)) * maxTilt;
     const tiltY = -(dx / (window.innerWidth / 2)) * maxTilt;
 
@@ -308,13 +317,10 @@ function initProfileInteraction() {
     // Rotate frame in 3D space
     frame.style.transform = `rotateX(${clampedTiltX}deg) rotateY(${clampedTiltY}deg) scale(1.03)`;
 
-    // Parallax depth offset: translate photo inside frame in the opposite direction
-    const activeImg = frame.querySelector('.hero-portrait-img.active');
-    if (activeImg) {
-      const moveX = (dx / (window.innerWidth / 2)) * 8; // Max 8px shift
-      const moveY = (dy / (window.innerHeight / 2)) * 8;
-      activeImg.style.transform = `scale(1.08) translate(${-moveX}px, ${-moveY}px)`;
-    }
+    // Parallax depth offset: translate slides container inside frame in the opposite direction
+    const moveX = (dx / (window.innerWidth / 2)) * 12; // Max 12px shift
+    const moveY = (dy / (window.innerHeight / 2)) * 12;
+    slides.style.transform = `translate(${-moveX}px, ${-moveY}px)`;
   });
 
   frame.addEventListener('mouseleave', () => {
@@ -326,9 +332,116 @@ function initProfileInteraction() {
     
     // Smooth reset on cursor exit
     frame.style.transform = 'rotateX(0deg) rotateY(0deg) scale(1)';
-    const imgs = frame.querySelectorAll('.hero-portrait-img');
-    imgs.forEach(img => {
-      img.style.transform = '';
-    });
+    slides.style.transform = 'translate(0px, 0px)';
   });
+}
+
+/**
+ * Premium GSAP Scroll-Trigger Reveals & Visual Effects
+ * Animates vertical hairline dividers, staggers grid card cascades,
+ * and slides up display headings gracefully as they enter the viewport.
+ */
+function initGSAPAnimations() {
+  // 1. Growing horizontal hairline dividers
+  gsap.utils.toArray('.editorial-divider').forEach(divider => {
+    gsap.fromTo(divider, 
+      { scaleX: 0, transformOrigin: 'left center' }, 
+      { 
+        scaleX: 1, 
+        duration: 1.5, 
+        ease: 'power2.out', 
+        scrollTrigger: {
+          trigger: divider,
+          start: 'top 92%',
+          toggleActions: 'play none none none'
+        }
+      }
+    );
+  });
+
+  // 2. Fade & rise reveals for section titles and badges
+  gsap.utils.toArray('.section-title-editorial, .section-badge, .about-headings, .contact-title-editorial').forEach(elem => {
+    gsap.fromTo(elem,
+      { opacity: 0, y: 35 },
+      {
+        opacity: 1,
+        y: 0,
+        duration: 1.1,
+        ease: 'power3.out',
+        scrollTrigger: {
+          trigger: elem,
+          start: 'top 88%',
+          toggleActions: 'play none none none'
+        }
+      }
+    );
+  });
+
+  // 3. Staggered reveal for selected project cards
+  gsap.fromTo('.project-card-editorial',
+    { opacity: 0, y: 55 },
+    {
+      opacity: 1,
+      y: 0,
+      duration: 0.9,
+      stagger: 0.16,
+      ease: 'power3.out',
+      scrollTrigger: {
+        trigger: '.projects-editorial-grid',
+        start: 'top 82%',
+        toggleActions: 'play none none none'
+      }
+    }
+  );
+
+  // 4. Staggered reveal for hackathon achievement cells
+  gsap.fromTo('.achievement-cell',
+    { opacity: 0, y: 45 },
+    {
+      opacity: 1,
+      y: 0,
+      duration: 0.9,
+      stagger: 0.14,
+      ease: 'power3.out',
+      scrollTrigger: {
+        trigger: '.achievements-editorial-grid',
+        start: 'top 82%',
+        toggleActions: 'play none none none'
+      }
+    }
+  );
+
+  // 5. Staggered reveal for technical competence columns
+  gsap.fromTo('.skills-column',
+    { opacity: 0, y: 40 },
+    {
+      opacity: 1,
+      y: 0,
+      duration: 0.9,
+      stagger: 0.12,
+      ease: 'power3.out',
+      scrollTrigger: {
+        trigger: '.skills-editorial-grid',
+        start: 'top 82%',
+        toggleActions: 'play none none none'
+      }
+    }
+  );
+
+  // 6. Staggered reveal for contact brand cards
+  gsap.fromTo('.contact-card-editorial',
+    { opacity: 0, y: 35 },
+    {
+      opacity: 1,
+      y: 0,
+      duration: 0.9,
+      stagger: 0.1,
+      ease: 'power3.out',
+      scrollTrigger: {
+        trigger: '.contact-grid-editorial',
+        start: 'top 88%',
+        toggleActions: 'play none none none'
+      }
+    }
+  );
 }
