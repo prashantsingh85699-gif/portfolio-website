@@ -3,12 +3,31 @@
  * Custom Interactive JavaScript Engine (Light Theme)
  */
 
+import Lenis from 'lenis';
+import { initEmbeddingsNetwork } from './embeddings-network.js';
+
+// Initialize Lenis smooth scroll
+const lenis = new Lenis({
+  duration: 1.2,
+  easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // Custom out-cubic-like easing
+});
+
+function raf(time) {
+  lenis.raf(time);
+  requestAnimationFrame(raf);
+}
+requestAnimationFrame(raf);
+
+// Lock scrolling during preloader phase
+lenis.stop();
+
 document.addEventListener('DOMContentLoaded', () => {
   initPreloader();
   initCustomCursor();
   initMobileNav();
   initScrollSpy();
   initCertificateFilter();
+  initAnchorLinks();
 });
 
 /**
@@ -22,7 +41,29 @@ function initPreloader() {
   // Let the CSS line animation complete first (approx 1.8 seconds)
   setTimeout(() => {
     preloader.classList.add('loaded');
+    lenis.start(); // Unlock scrolling
+    
+    // Initialize Three.js interactive nodes after the loader has exited
+    initEmbeddingsNetwork();
   }, 2000);
+}
+
+/**
+ * Intercept anchor clicks and scroll smoothly using Lenis
+ */
+function initAnchorLinks() {
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+      e.preventDefault();
+      const targetId = this.getAttribute('href');
+      if (targetId === '#') return;
+
+      const targetElement = document.querySelector(targetId);
+      if (targetElement) {
+        lenis.scrollTo(targetElement);
+      }
+    });
+  });
 }
 
 /**
