@@ -273,23 +273,15 @@ function initProfileInteraction() {
 
   if (!frame || !frontImg || !backImg) return;
 
-  // Click-to-swap portrait images with tactile feedback
-  frame.addEventListener('click', () => {
-    frontImg.classList.toggle('active');
-    backImg.classList.toggle('active');
-
-    // Tactile scale squeeze
-    frame.style.transform = 'scale(0.92)';
-    setTimeout(() => {
-      frame.style.transform = '';
-    }, 150);
-  });
-
   // Track hover status for window-mousemove efficiency
   let isHovered = false;
 
   frame.addEventListener('mouseenter', () => {
     isHovered = true;
+
+    // Automatically cross-fade to alternate portrait on hover
+    frontImg.classList.remove('active');
+    backImg.classList.add('active');
   });
 
   // Smooth 3D tilt coordinates
@@ -327,6 +319,10 @@ function initProfileInteraction() {
 
   frame.addEventListener('mouseleave', () => {
     isHovered = false;
+
+    // Automatically cross-fade back to main portrait on leave
+    backImg.classList.remove('active');
+    frontImg.classList.add('active');
     
     // Smooth reset on cursor exit
     frame.style.transform = 'rotateX(0deg) rotateY(0deg) scale(1)';
