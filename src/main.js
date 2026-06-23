@@ -28,6 +28,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initScrollSpy();
   initCertificateFilter();
   initAnchorLinks();
+  initProfileInteraction();
 });
 
 /**
@@ -257,4 +258,81 @@ function initCertificateFilter() {
       }
     });
   }
+}
+
+/**
+ * 3D Parallax Tilt and Click-Swap Profile Image Interaction
+ * Rotates the circular profile frame on hover to track the cursor,
+ * shifts the active portrait in the opposite direction for 3D depth,
+ * and toggles active classes to swap between formal and casual portraits on click.
+ */
+function initProfileInteraction() {
+  const frame = document.getElementById('hero-portrait-frame');
+  const frontImg = document.getElementById('hero-portrait-front');
+  const backImg = document.getElementById('hero-portrait-back');
+
+  if (!frame || !frontImg || !backImg) return;
+
+  // Click-to-swap portrait images with tactile feedback
+  frame.addEventListener('click', () => {
+    frontImg.classList.toggle('active');
+    backImg.classList.toggle('active');
+
+    // Tactile scale squeeze
+    frame.style.transform = 'scale(0.92)';
+    setTimeout(() => {
+      frame.style.transform = '';
+    }, 150);
+  });
+
+  // Track hover status for window-mousemove efficiency
+  let isHovered = false;
+
+  frame.addEventListener('mouseenter', () => {
+    isHovered = true;
+  });
+
+  // Smooth 3D tilt coordinates
+  window.addEventListener('mousemove', (e) => {
+    if (!isHovered) return;
+
+    const rect = frame.getBoundingClientRect();
+    const frameCenterX = rect.left + rect.width / 2;
+    const frameCenterY = rect.top + rect.height / 2;
+
+    // Offset from center
+    const dx = e.clientX - frameCenterX;
+    const dy = e.clientY - frameCenterY;
+
+    // Normalised values for rotation limits (max 12deg tilt)
+    const maxTilt = 12;
+    const tiltX = (dy / (window.innerHeight / 2)) * maxTilt;
+    const tiltY = -(dx / (window.innerWidth / 2)) * maxTilt;
+
+    // Bound values
+    const clampedTiltX = Math.max(-maxTilt, Math.min(maxTilt, tiltX));
+    const clampedTiltY = Math.max(-maxTilt, Math.min(maxTilt, tiltY));
+
+    // Rotate frame in 3D space
+    frame.style.transform = `rotateX(${clampedTiltX}deg) rotateY(${clampedTiltY}deg) scale(1.03)`;
+
+    // Parallax depth offset: translate photo inside frame in the opposite direction
+    const activeImg = frame.querySelector('.hero-portrait-img.active');
+    if (activeImg) {
+      const moveX = (dx / (window.innerWidth / 2)) * 8; // Max 8px shift
+      const moveY = (dy / (window.innerHeight / 2)) * 8;
+      activeImg.style.transform = `scale(1.08) translate(${-moveX}px, ${-moveY}px)`;
+    }
+  });
+
+  frame.addEventListener('mouseleave', () => {
+    isHovered = false;
+    
+    // Smooth reset on cursor exit
+    frame.style.transform = 'rotateX(0deg) rotateY(0deg) scale(1)';
+    const imgs = frame.querySelectorAll('.hero-portrait-img');
+    imgs.forEach(img => {
+      img.style.transform = '';
+    });
+  });
 }
