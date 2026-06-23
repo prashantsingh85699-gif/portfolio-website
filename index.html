@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Prashant Singh | B.Tech Student & Aspiring Software Engineer</title>
+    <title>Prashant Singh | B.Tech Student &amp; Aspiring Software Engineer</title>
     
     <!-- SEO Meta Tags -->
     <meta name="description" content="Personal portfolio of Prashant Singh, a B.Tech Computer Science student at VGU × NIAT. Exploring software engineering, AI/ML, and web development." />
@@ -12,34 +12,50 @@
     
     <!-- Open Graph (LinkedIn / Socials) -->
     <meta property="og:title" content="Prashant Singh | Personal Portfolio" />
-    <meta property="og:description" content="B.Tech Computer Science student & Aspiring Software Engineer. Exploring C++, Python, React, and AI/ML." />
+    <meta property="og:description" content="B.Tech Computer Science student &amp; Aspiring Software Engineer. Exploring C++, Python, React, and AI/ML." />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://linkedin.com/in/prashant-singh-8b629b380" />
+    <meta property="og:image" content="/portfolio-website/images/profile.png" />
     
-    <!-- Google Fonts: Sora (Headings) and Inter (Body) -->
+    <!-- Google Fonts: Sora (Headings), DM Serif Display (Editorial Serifs), Inter (Body copy) -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Sora:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@300;400;500;600;700&family=Sora:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
     
-    <!-- CSS Stylesheet -->
-    <script type="module" crossorigin src="/portfolio-website/assets/index-CwYIoH97.js"></script>
-    <link rel="stylesheet" crossorigin href="/portfolio-website/assets/index-BfALERWf.css">
+    <!-- CSS Stylesheet -->
+    <script type="module" crossorigin src="/portfolio-website/assets/index-fzv_U0WZ.js"></script>
+    <link rel="stylesheet" crossorigin href="/portfolio-website/assets/index-DE2i-cwy.css">
   </head>
   <body>
-    <!-- Simple Sticky Navbar -->
+    <!-- Preloader Screen (Light Theme) -->
+    <div class="preloader" id="preloader">
+      <div class="preloader-content">
+        <span class="preloader-name">Prashant Singh</span>
+        <div class="preloader-bar"></div>
+      </div>
+    </div>
+
+    <!-- Custom Cursor Follower (Cobalt Blue themed) -->
+    <div class="cursor-dot" id="cursor-dot"></div>
+    <div class="cursor-ring" id="cursor-ring"></div>
+
+    <!-- Background Noise Overlay -->
+    <div class="noise-layer" aria-hidden="true"></div>
+
+    <!-- Sticky Navbar -->
     <header class="navbar" id="site-header">
       <div class="nav-container">
-        <a href="#home" class="nav-logo" id="nav-logo-link">Prashant Singh</a>
+        <a href="#home" class="nav-logo" id="nav-logo-link" data-hover="true">Prashant Singh</a>
         <nav class="nav-menu" id="nav-menu-bar">
-          <a href="#home" class="nav-link active" id="nav-link-home">Home</a>
-          <a href="#about" class="nav-link" id="nav-link-about">About</a>
-          <a href="#skills" class="nav-link" id="nav-link-skills">Skills</a>
-          <a href="#projects" class="nav-link" id="nav-link-projects">Projects</a>
-          <a href="#certificates" class="nav-link" id="nav-link-certificates">Certificates</a>
-          <a href="#contact" class="nav-link" id="nav-link-contact">Contact</a>
+          <a href="#home" class="nav-link active" id="nav-link-home" data-hover="true">Home</a>
+          <a href="#about" class="nav-link" id="nav-link-about" data-hover="true">About</a>
+          <a href="#skills" class="nav-link" id="nav-link-skills" data-hover="true">Skills</a>
+          <a href="#projects" class="nav-link" id="nav-link-projects" data-hover="true">Projects</a>
+          <a href="#certificates" class="nav-link" id="nav-link-certificates" data-hover="true">Certificates</a>
+          <a href="#contact" class="nav-link" id="nav-link-contact" data-hover="true">Contact</a>
         </nav>
         <!-- Mobile Menu Toggle -->
-        <button class="nav-toggle" id="nav-toggle-btn" aria-label="Toggle navigation menu">
+        <button class="nav-toggle" id="nav-toggle-btn" aria-label="Toggle navigation menu" data-hover="true">
           <span class="toggle-bar"></span>
           <span class="toggle-bar"></span>
           <span class="toggle-bar"></span>
@@ -47,82 +63,149 @@
       </div>
     </header>
 
-    <!-- Main Content Area -->
     <main>
-      <!-- Hero Section (Warm background) -->
+      <!-- Hero Section (Dynamic Layered Layout in Light Theme) -->
       <section class="hero-section" id="home">
+        <!-- Soft blue/gold radial glow behind portrait -->
+        <div class="hero-ambient-glow" aria-hidden="true"></div>
+        
         <div class="hero-container">
-          <div class="hero-content">
-            <div class="hero-status">
-              <span class="status-indicator-dot" id="internship-status-dot"></span>
-              <span class="status-text">Open to Internships</span>
+          <!-- Top Row info -->
+          <div class="hero-top-row">
+            <div class="hero-bio-short">
+              <svg viewBox="0 0 24 24" fill="currentColor" class="star-icon" aria-hidden="true">
+                <path d="M12 0L15.5 8.5L24 12L15.5 15.5L12 24L8.5 15.5L0 12L8.5 8.5L12 0Z"></path>
+              </svg>
+              <p>B.Tech Student. Systems Builder. AI Explorer. Focused on engineering high-integrity software solutions that address concrete constraints.</p>
             </div>
-            <h1 class="hero-title" id="main-hero-title">Prashant Singh</h1>
-            <p class="hero-role">B.Tech Student &amp; Aspiring Software Engineer</p>
-            <p class="hero-tagline" id="main-hero-tagline">"Engineering the Future, One Line at a Time."</p>
             
-            <div class="hero-actions">
-              <a href="#projects" class="btn-primary" id="btn-view-work">View My Work</a>
-              <a href="https://linkedin.com/in/prashant-singh-8b629b380" target="_blank" rel="noopener noreferrer" class="btn-secondary" id="hero-linkedin-link">
-                Connect on LinkedIn
-              </a>
+            <div class="hero-featured-project">
+              <div class="featured-badge-box" data-hover="true">
+                <div class="featured-icon-box">
+                  <span class="featured-indicator-dot"></span>
+                </div>
+                <div class="featured-info">
+                  <span class="featured-label">Active Development</span>
+                  <span class="featured-title">BRAVE Project</span>
+                </div>
+              </div>
             </div>
           </div>
-          <div class="hero-image-container">
-            <div class="hero-portrait-frame">
-              <img src="/portfolio-website/images/profile.png" alt="Prashant Singh Profile Photo" class="hero-portrait-img" />
+
+          <!-- Middle Layered Title & Portrait Image -->
+          <div class="hero-portrait-section">
+            <div class="hero-bg-text-wrapper">
+              <span class="hero-bg-text text-left">PRASHANT</span>
+              <span class="hero-bg-text text-right">SINGH</span>
+            </div>
+            
+            <div class="hero-portrait-wrapper">
+              <!-- Linear transparency mask applied here -->
+              <img src="/portfolio-website/images/profile.png" alt="Prashant Singh Portrait" class="hero-portrait-img" id="hero-portrait" />
+            </div>
+          </div>
+
+          <!-- Bottom Row Tagline & Pills -->
+          <div class="hero-bottom-row">
+            <div class="hero-statement">
+              <p class="statement-italic">"I collaborate with teams to design modular systems, optimize web performance, and build functional pipelines that turn theoretical models into products."</p>
+            </div>
+            
+            <div class="hero-pills">
+              <span class="hero-pill">Web Applications</span>
+              <span class="hero-pill">Systems Architecture</span>
+              <span class="hero-pill">Applied Intelligence</span>
+            </div>
+          </div>
+          
+          <div class="hero-footer-status">
+            <div class="hero-status-tag">
+              <span class="status-indicator-dot animate-pulse"></span>
+              <span class="status-text">Available for Internships</span>
+            </div>
+            
+            <div class="hero-actions">
+              <a href="#projects" class="btn-primary-editorial" id="btn-view-work" data-hover="true">View Selected Work</a>
             </div>
           </div>
         </div>
       </section>
 
-      <!-- About & Education Section (White background) -->
+      <!-- About & Education Section -->
       <section class="about-section" id="about">
         <div class="section-container">
+          <div class="editorial-divider"></div>
+          
           <div class="about-grid">
-            <!-- First-person causal Bio (Left) -->
-            <div class="about-bio">
-              <h2 class="section-title">About Me</h2>
-              <p class="bio-text">
-                Hey, I'm Prashant. I'm a first-year Computer Science student currently wrapping up my second semester at VGU × NIAT. I'm driven by a simple motivation: finding clean, direct solutions to challenging technical problems. Whether it's planning algorithms in C++, automating workflows in Python, or building frontend interfaces, I enjoy the focus that coding requires.
-              </p>
-              <p class="bio-text">
-                I'm not a big fan of shortcuts or generic templates. During a recent college hackathon, my team and I built three websites from scratch in under five hours with zero templates or AI generation — just pure, hand-written code. For me, software engineering is about understanding the fundamentals and learning how to build tools that actually work.
-              </p>
-              <p class="bio-text">
-                I'm based in Satna, Madhya Pradesh, and am actively looking for opportunities where I can contribute to real projects, learn from senior devs, and hone my skills.
-              </p>
+            <!-- Large confident editorial heading (Left) -->
+            <div class="about-headings">
+              <h2 class="editorial-large-title">Think.</h2>
+              <h2 class="editorial-large-title">Build.</h2>
+              <h2 class="editorial-large-title accent-gold">Ship.</h2>
+              
+              <div class="editorial-stats-row">
+                <div class="stat-box">
+                  <span class="stat-number">5+</span>
+                  <span class="stat-label">Hackathons Completed</span>
+                </div>
+                <div class="stat-box">
+                  <span class="stat-number">11</span>
+                  <span class="stat-label">Technical Certifications</span>
+                </div>
+              </div>
             </div>
             
-            <!-- Education & Currently Doing (Right) -->
-            <div class="about-status">
-              <div class="status-card">
-                <h3 class="status-card-title">Currently Building &amp; Learning</h3>
-                <ul class="status-list">
-                  <li>
-                    <span class="status-item-badge text-green">In Progress</span>
-                    <strong class="status-item-name">BRAVE</strong>
-                    <span class="status-item-desc">NIAT engineering project</span>
-                  </li>
-                  <li>
-                    <span class="status-item-badge text-blue">Ongoing</span>
-                    <strong class="status-item-name">GRIT Program</strong>
-                    <span class="status-item-desc">Advanced technical curriculum at NIAT</span>
-                  </li>
-                  <li>
-                    <span class="status-item-badge text-orange">Exploring</span>
-                    <strong class="status-item-name">React</strong>
-                    <span class="status-item-desc">Building modular web components</span>
-                  </li>
-                </ul>
-              </div>
+            <!-- Bio & Current Endeavors (Right) -->
+            <div class="about-content">
+              <p class="body-editorial drop-cap">
+                A strong project is created by real constraints. I build at the intersection of structured code and applied intelligence, focusing on creating applications that perform efficiently under pressure. I enjoy working on projects where software meets tight timelines, limited resources, and concrete outcomes.
+              </p>
+              <p class="body-editorial">
+                Like a craftsman, I prefer starting from raw materials. Hackathons are my preferred mode of building: tight scopes, hard deadlines, and forced decisions that keep projects practical. When I'm not in competitions, I focus on building independently: structuring search algorithms, experimenting with text embeddings, and setting up workflows from scratch.
+              </p>
+              
+              <div class="status-edu-flex-container">
+                <!-- Current projects card -->
+                <div class="editorial-panel">
+                  <h3 class="panel-heading">Toolkit &amp; Focus Area</h3>
+                  <ul class="panel-list">
+                    <li>
+                      <span class="panel-item-badge text-green">System</span>
+                      <div class="panel-item-content">
+                        <strong>BRAVE Project</strong>
+                        <span>Undergoing modular system integration at NIAT</span>
+                      </div>
+                    </li>
+                    <li>
+                      <span class="panel-item-badge text-blue">Curriculum</span>
+                      <div class="panel-item-content">
+                        <strong>GRIT Program</strong>
+                        <span>Advanced professional training pathway</span>
+                      </div>
+                    </li>
+                    <li>
+                      <span class="panel-item-badge text-orange">Exploring</span>
+                      <div class="panel-item-content">
+                        <strong>React Library</strong>
+                        <span>Exploring component states and clean renders</span>
+                      </div>
+                    </li>
+                  </ul>
+                </div>
 
-              <div class="education-card">
-                <h3 class="status-card-title">Education</h3>
-                <div class="education-item">
-                  <h4 class="education-degree">B.Tech in Computer Science</h4>
-                  <p class="education-school">Vivekananda Global University × NIAT</p>
-                  <p class="education-meta">1st Year (2nd Semester Completed) | Ongoing</p>
+                <!-- Education details -->
+                <div class="editorial-panel">
+                  <h3 class="panel-heading">Education</h3>
+                  <div class="panel-edu-item">
+                    <h4 class="edu-degree">B.Tech in Computer Science</h4>
+                    <p class="edu-institution">Vivekananda Global University × NIAT</p>
+                    <p class="edu-meta">1st Year (2nd Semester Completed)</p>
+                  </div>
+                  <div class="panel-edu-item mt-4">
+                    <h4 class="edu-degree">GRIT Program Cohort</h4>
+                    <p class="edu-institution">NxtWave Institute of Advanced Technologies</p>
+                    <p class="edu-meta">Advanced Technical Frameworks</p>
+                  </div>
                 </div>
               </div>
             </div>
@@ -130,335 +213,447 @@
         </div>
       </section>
 
-      <!-- Achievements & Highlights Section (Alternating Light background) -->
+      <!-- Key Highlights Section (Asymmetric grid with borders) -->
       <section class="achievements-section" id="achievements">
         <div class="section-container">
-          <h2 class="section-title text-center">Key Highlights</h2>
-          <p class="section-subtitle text-center">Key moments from buildathons and college competitions</p>
+          <div class="editorial-divider"></div>
           
-          <div class="achievements-grid">
-            <!-- Highlight 1: Web-A-Thon -->
-            <div class="achievement-card">
-              <div class="achievement-icon" aria-hidden="true">🏆</div>
-              <div class="achievement-content">
-                <h3 class="achievement-title">2nd Position</h3>
-                <p class="achievement-subtitle">Web-A-Thon, Panache S-16</p>
-                <p class="achievement-desc">Built a high-performance web solution with my team under tight competition pressure at VGU's flagship fest.</p>
-              </div>
+          <div class="achievements-section-header">
+            <span class="section-badge">Competitive Track</span>
+            <h2 class="section-title-editorial">Hackathons &amp; Builds</h2>
+          </div>
+          
+          <div class="achievements-editorial-grid">
+            <!-- Card 1 -->
+            <div class="achievement-cell" data-hover="true">
+              <span class="cell-num">01 /</span>
+              <h3 class="cell-title">2nd Position</h3>
+              <span class="cell-subtitle">Web-A-Thon, Panache S-16</span>
+              <p class="cell-desc">Collaborated with my team to build a high-performance web solution under severe time limits at VGU's flagship tech festival, securing 2nd place.</p>
             </div>
-
-            <!-- Highlight 2: State-Level Buildathon -->
-            <div class="achievement-card">
-              <div class="achievement-icon" aria-hidden="true">🚀</div>
-              <div class="achievement-content">
-                <h3 class="achievement-title">State-Level Qualifier</h3>
-                <p class="achievement-subtitle">OpenAI Academy × NxtWave × INDIAai</p>
-                <p class="achievement-desc">Qualified for the state-level round after our project was selected from the competitive regional buildathon.</p>
-              </div>
+            
+            <!-- Card 2 -->
+            <div class="achievement-cell" data-hover="true">
+              <span class="cell-num">02 /</span>
+              <h3 class="cell-title">State-Level Qualifier</h3>
+              <span class="cell-subtitle">OpenAI Academy × NxtWave × INDIAai</span>
+              <p class="cell-desc">Qualified for the state buildathon after developing a functional prototype that passed regional rounds evaluated by industry leads.</p>
             </div>
-
-            <!-- Highlight 3: Solo Participant -->
-            <div class="achievement-card">
-              <div class="achievement-icon" aria-hidden="true">👤</div>
-              <div class="achievement-content">
-                <h3 class="achievement-title">Solo Builder</h3>
-                <p class="achievement-subtitle">Regional Buildathon, Delhi</p>
-                <p class="achievement-desc">Handled everything end-to-end solo — from ideation and coding to final submission at the NIAT × OpenAI Academy event.</p>
-              </div>
+            
+            <!-- Card 3 -->
+            <div class="achievement-cell" data-hover="true">
+              <span class="cell-num">03 /</span>
+              <h3 class="cell-title">Solo Builder</h3>
+              <span class="cell-subtitle">Regional Buildathon, Delhi</span>
+              <p class="cell-desc">Took charge of the complete product lifecycle solo — from conceptual mapping and schema writing to final front-end deployment.</p>
             </div>
-
-            <!-- Highlight 4: Webathon Fest -->
-            <div class="achievement-card">
-              <div class="achievement-icon" aria-hidden="true">⚡</div>
-              <div class="achievement-content">
-                <h3 class="achievement-title">3 Sites in 5 Hours</h3>
-                <p class="achievement-subtitle">College Webathon Fest</p>
-                <p class="achievement-desc">Coded three complete website structures from scratch under a 5-hour limit. No templates, no AI assistants.</p>
-              </div>
+            
+            <!-- Card 4 -->
+            <div class="achievement-cell" data-hover="true">
+              <span class="cell-num">04 /</span>
+              <h3 class="cell-title">3 Sites, 5 Hours</h3>
+              <span class="cell-subtitle">College Webathon Fest</span>
+              <p class="cell-desc">Coded and pushed three fully structured web properties from scratch within 5 hours, using only clean, hand-written HTML/CSS/JS.</p>
             </div>
           </div>
         </div>
       </section>
 
-      <!-- Skills Section (White background) -->
+      <!-- Infinite Marquee Toolkit Section -->
+      <section class="marquee-section" id="toolkit-marquee">
+        <div class="marquee-wrapper">
+          <div class="marquee-track" id="marquee-track-elem">
+            <span>PYTHON</span>
+            <span>JAVASCRIPT</span>
+            <span>C++</span>
+            <span>HTML</span>
+            <span>CSS</span>
+            <span>REACT</span>
+            <span>GENERATIVE AI</span>
+            <span>LLMs</span>
+            <span>TEXT EMBEDVINGS</span>
+            <span>AI AGENTS</span>
+            <span>GIT</span>
+            <span>GITHUB</span>
+            <span>BASE44</span>
+            <!-- Duplicate for infinite transition -->
+            <span>PYTHON</span>
+            <span>JAVASCRIPT</span>
+            <span>C++</span>
+            <span>HTML</span>
+            <span>CSS</span>
+            <span>REACT</span>
+            <span>GENERATIVE AI</span>
+            <span>LLMs</span>
+            <span>TEXT EMBEDDINGS</span>
+            <span>AI AGENTS</span>
+            <span>GIT</span>
+            <span>GITHUB</span>
+            <span>BASE44</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Technical Skills Section -->
       <section class="skills-section" id="skills">
         <div class="section-container">
-          <h2 class="section-title">My Skills</h2>
-          <p class="section-subtitle">A list of technical skills I actively use. No fluff, no exaggeration.</p>
+          <div class="editorial-divider"></div>
           
-          <div class="skills-container">
-            <!-- Languages Group -->
-            <div class="skills-group">
-              <h3 class="skills-group-title">Languages</h3>
-              <div class="skills-badges">
-                <span class="skill-badge">C++</span>
-                <span class="skill-badge">Python</span>
-                <span class="skill-badge">JavaScript</span>
+          <div class="skills-section-header">
+            <span class="section-badge">Capabilities</span>
+            <h2 class="section-title-editorial">Technical Competence</h2>
+          </div>
+          
+          <div class="skills-editorial-grid">
+            <!-- Programming Languages -->
+            <div class="skills-column">
+              <div class="skills-col-header">
+                <span class="skills-col-index">01 //</span>
+                <h3 class="skills-col-title">Languages</h3>
+              </div>
+              <div class="skills-col-content">
+                <div class="skills-tags-wrap">
+                  <span class="skills-editorial-tag" data-hover="true">C++</span>
+                  <span class="skills-editorial-tag" data-hover="true">Python</span>
+                  <span class="skills-editorial-tag" data-hover="true">JavaScript</span>
+                </div>
               </div>
             </div>
 
-            <!-- Web Development Group -->
-            <div class="skills-group">
-              <h3 class="skills-group-title">Web Development</h3>
-              <div class="skills-badges">
-                <span class="skill-badge">HTML</span>
-                <span class="skill-badge">CSS</span>
-                <span class="skill-badge">React <span class="badge-subtext">(Learning)</span></span>
+            <!-- Web Development -->
+            <div class="skills-column">
+              <div class="skills-col-header">
+                <span class="skills-col-index">02 //</span>
+                <h3 class="skills-col-title">Web</h3>
+              </div>
+              <div class="skills-col-content">
+                <div class="skills-tags-wrap">
+                  <span class="skills-editorial-tag" data-hover="true">HTML</span>
+                  <span class="skills-editorial-tag" data-hover="true">CSS</span>
+                  <span class="skills-editorial-tag" data-hover="true">React <span class="skills-tag-meta">(Learning)</span></span>
+                </div>
               </div>
             </div>
 
-            <!-- AI / ML Group -->
-            <div class="skills-group">
-              <h3 class="skills-group-title">AI &amp; Machine Learning</h3>
-              <div class="skills-badges">
-                <span class="skill-badge">Generative AI</span>
-                <span class="skill-badge">LLMs</span>
-                <span class="skill-badge">Text Embeddings</span>
-                <span class="skill-badge">AI Agents</span>
+            <!-- AI / ML -->
+            <div class="skills-column">
+              <div class="skills-col-header">
+                <span class="skills-col-index">03 //</span>
+                <h3 class="skills-col-title">Applied AI</h3>
+              </div>
+              <div class="skills-col-content">
+                <div class="skills-tags-wrap">
+                  <span class="skills-editorial-tag" data-hover="true">Generative AI</span>
+                  <span class="skills-editorial-tag" data-hover="true">LLMs</span>
+                  <span class="skills-editorial-tag" data-hover="true">Text Embeddings</span>
+                  <span class="skills-editorial-tag" data-hover="true">AI Agents</span>
+                </div>
               </div>
             </div>
 
-            <!-- Developer Tools Group -->
-            <div class="skills-group">
-              <h3 class="skills-group-title">Developer Tools</h3>
-              <div class="skills-badges">
-                <span class="skill-badge">Git</span>
-                <span class="skill-badge">GitHub</span>
-                <span class="skill-badge">Base44</span>
+            <!-- Developer Tools -->
+            <div class="skills-column">
+              <div class="skills-col-header">
+                <span class="skills-col-index">04 //</span>
+                <h3 class="skills-col-title">Tools</h3>
+              </div>
+              <div class="skills-col-content">
+                <div class="skills-tags-wrap">
+                  <span class="skills-editorial-tag" data-hover="true">Git</span>
+                  <span class="skills-editorial-tag" data-hover="true">GitHub</span>
+                  <span class="skills-editorial-tag" data-hover="true">Base44</span>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      <!-- Projects Section (Alternating Light background) -->
+      <!-- Selected Projects Section -->
       <section class="projects-section" id="projects">
         <div class="section-container">
-          <h2 class="section-title">Projects</h2>
-          <p class="section-subtitle">Real coding projects built during hackathons, courses, and independent learning sessions.</p>
+          <div class="editorial-divider"></div>
           
-          <div class="projects-grid">
+          <div class="projects-section-header">
+            <span class="section-badge">Selected Work</span>
+            <h2 class="section-title-editorial">Functional Projects</h2>
+          </div>
+          
+          <div class="projects-editorial-grid">
             <!-- Project 1: X Manage -->
-            <div class="project-card">
-              <div class="project-card-header">
-                <h3 class="project-card-title">X Manage</h3>
-                <span class="project-tag-status">Hackathon Project</span>
+            <div class="project-card-editorial" data-hover="true">
+              <div class="project-card-head">
+                <span class="project-index">01</span>
+                <span class="project-badge success">Live Build</span>
               </div>
-              <p class="project-desc">
-                An event management web application featuring interactive login, events board, about section, and dynamic scores tracker. Designed and structured entirely by hand with my team in under 5 hours.
-              </p>
-              <div class="project-tags">
-                <span class="project-tag">HTML</span>
-                <span class="project-tag">CSS</span>
-                <span class="project-tag">JavaScript</span>
-              </div>
-            </div>
-
-            <!-- Project 2: Web-A-Thon Project -->
-            <div class="project-card">
-              <div class="project-card-header">
-                <h3 class="project-card-title">Web-A-Thon Project</h3>
-                <span class="project-tag-status success">2nd Position</span>
-              </div>
-              <p class="project-desc">
-                A high-performance web solution built in HTML, CSS, and JS. Designed to optimize page loading speeds and responsiveness under heavy client-side requests, earning 2nd place at VGU's annual festival (Panache S-16).
-              </p>
-              <div class="project-tags">
-                <span class="project-tag">HTML</span>
-                <span class="project-tag">CSS</span>
-                <span class="project-tag">React JS</span>
+              <div class="project-card-body">
+                <h3 class="project-title-label">X Manage</h3>
+                <span class="project-tagline-label">Hackathon Event Management Dashboard</span>
+                <p class="project-desc-label">
+                  An event management web app featuring score integrations, login state verification, and event creation modules. Built from scratch with my team in under 5 hours during a live Webathon.
+                </p>
+                <div class="project-tech-pills">
+                  <span>HTML</span>
+                  <span>CSS</span>
+                  <span>JavaScript</span>
+                </div>
               </div>
             </div>
 
-            <!-- Project 3: Base44 Hackathon Project -->
-            <div class="project-card">
-              <div class="project-card-header">
-                <h3 class="project-card-title">Base44 Hackathon Project</h3>
-                <span class="project-tag-status">Base44 Platform</span>
+            <!-- Project 2: Web-A-Thon -->
+            <div class="project-card-editorial" data-hover="true">
+              <div class="project-card-head">
+                <span class="project-index">02</span>
+                <span class="project-badge gold">2nd Place</span>
               </div>
-              <p class="project-desc">
-                A functional web solution built using the Base44 development platform as part of the NIAT × Base44 Hackathon. Focused on rapid backend module mapping and lightweight client rendering.
-              </p>
-              <div class="project-tags">
-                <span class="project-tag">Base44</span>
-                <span class="project-tag">JavaScript</span>
-                <span class="project-tag">HTML/CSS</span>
-              </div>
-            </div>
-
-            <!-- Project 4: AI Buildathon Project -->
-            <div class="project-card">
-              <div class="project-card-header">
-                <h3 class="project-card-title">AI Buildathon Project</h3>
-                <span class="project-tag-status warning">State Qualifier</span>
-              </div>
-              <p class="project-desc">
-                An AI-driven software agent developed solo for the OpenAI Academy × NxtWave Regional Buildathon in Delhi, qualifying for the competitive State-Level round.
-              </p>
-              <div class="project-tags">
-                <span class="project-tag">Python</span>
-                <span class="project-tag">LLMs</span>
-                <span class="project-tag">Generative AI</span>
+              <div class="project-card-body">
+                <h3 class="project-title-label">Web-A-Thon Project</h3>
+                <span class="project-tagline-label">High-Performance VGU Festival Portal</span>
+                <p class="project-desc-label">
+                  A high-performance client web solution designed to handle rapid navigation requests smoothly under festival competition limits. Built during Panache S-16 at VGU.
+                </p>
+                <div class="project-tech-pills">
+                  <span>HTML</span>
+                  <span>CSS</span>
+                  <span>React JS</span>
+                </div>
               </div>
             </div>
 
-            <!-- Project 5: BRAVE -->
-            <div class="project-card current-building-card">
-              <div class="project-card-header">
-                <h3 class="project-card-title">BRAVE</h3>
-                <span class="project-tag-status info">In Progress</span>
+            <!-- Project 3: Base44 Hackathon -->
+            <div class="project-card-editorial" data-hover="true">
+              <div class="project-card-head">
+                <span class="project-index">03</span>
+                <span class="project-badge">D-Coders Team</span>
               </div>
-              <p class="project-desc">
-                An ongoing academic and engineering project in progress at NIAT. Working on developing system modules and integrating specialized workflow pipelines.
-              </p>
-              <div class="project-tags">
-                <span class="project-tag">Python</span>
-                <span class="project-tag">Git</span>
-                <span class="project-tag">Engineering</span>
+              <div class="project-card-body">
+                <h3 class="project-title-label">Base44 Hackathon Project</h3>
+                <span class="project-tagline-label">Module Integration App</span>
+                <p class="project-desc-label">
+                  A web application built using the Base44 system architecture. Focuses on integrating API modules to parse inputs and update user states in real time.
+                </p>
+                <div class="project-tech-pills">
+                  <span>Base44</span>
+                  <span>JavaScript</span>
+                  <span>HTML/CSS</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Project 4: AI Buildathon -->
+            <div class="project-card-editorial" data-hover="true">
+              <div class="project-card-head">
+                <span class="project-index">04</span>
+                <span class="project-badge state">State Qualifier</span>
+              </div>
+              <div class="project-card-body">
+                <h3 class="project-title-label">AI Buildathon Project</h3>
+                <span class="project-tagline-label">OpenAI Academy × NxtWave Model Agent</span>
+                <p class="project-desc-label">
+                  An AI agent solution built solo. Designed to interact with local text structures to retrieve and evaluate queries, qualifying for the state-level round.
+                </p>
+                <div class="project-tech-pills">
+                  <span>Python</span>
+                  <span>Generative AI</span>
+                  <span>LLMs</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Project 5: BRAVE (Active construction) -->
+            <div class="project-card-editorial active-project" data-hover="true">
+              <div class="project-card-head">
+                <span class="project-index">05</span>
+                <span class="project-badge info">Active Building</span>
+              </div>
+              <div class="project-card-body">
+                <h3 class="project-title-label">BRAVE</h3>
+                <span class="project-tagline-label">NIAT Program System Modules</span>
+                <p class="project-desc-label">
+                  Ongoing engineering project designed to manage workflows. Implementing systems logic and data integration pipelines under current academic guidelines.
+                </p>
+                <div class="project-tech-pills">
+                  <span>Python</span>
+                  <span>Git</span>
+                  <span>Engineering</span>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      <!-- Certificates Section (White background) -->
+      <!-- Certificates Section -->
       <section class="certificates-section" id="certificates">
         <div class="section-container">
-          <h2 class="section-title">Certifications &amp; Workshops</h2>
-          <p class="section-subtitle">A record of workshops, hackathons, and technical masterclasses completed during my B.Tech program.</p>
+          <div class="editorial-divider"></div>
           
-          <!-- Subtle Search and Filter for Certificates (Clean, non-flashy) -->
-          <div class="certificates-filter-container">
-            <label for="certificate-search" class="visually-hidden">Search certificates</label>
-            <input type="text" id="certificate-search" placeholder="Filter certificates by name or organization..." class="filter-input" aria-label="Search certificates" />
-            <div class="filter-badges" id="filter-badges-container">
-              <button class="filter-btn active" data-org="all" id="btn-filter-all">All</button>
-              <button class="filter-btn" data-org="openai" id="btn-filter-openai">OpenAI Academy / NxtWave</button>
-              <button class="filter-btn" data-org="niat" id="btn-filter-niat">NIAT</button>
-              <button class="filter-btn" data-org="robotics" id="btn-filter-robotics">Robotics Team</button>
-              <button class="filter-btn" data-org="other" id="btn-filter-other">Others</button>
+          <div class="certificates-section-header">
+            <span class="section-badge">Certifications</span>
+            <h2 class="section-title-editorial">Masterclasses &amp; Hackathons</h2>
+          </div>
+          
+          <!-- Subtle Search and Filter for Certificates (Editorial design) -->
+          <div class="certificates-filter-wrapper">
+            <div class="filter-search-container">
+              <input type="text" id="certificate-search" placeholder="Type to filter certificates..." class="filter-search-input" aria-label="Search certificates" data-hover="true" />
+            </div>
+            
+            <div class="filter-badges-wrapper" id="filter-badges-container">
+              <button class="filter-btn-editorial active" data-org="all" id="btn-filter-all" data-hover="true">All</button>
+              <button class="filter-btn-editorial" data-org="openai" id="btn-filter-openai" data-hover="true">OpenAI / NxtWave</button>
+              <button class="filter-btn-editorial" data-org="niat" id="btn-filter-niat" data-hover="true">NIAT Masterclass</button>
+              <button class="filter-btn-editorial" data-org="robotics" id="btn-filter-robotics" data-hover="true">Robotics Team</button>
+              <button class="filter-btn-editorial" data-org="other" id="btn-filter-other" data-hover="true">Others</button>
             </div>
           </div>
 
-          <!-- 2-column clean certificate grid -->
-          <div class="certificates-grid" id="certs-grid">
+          <!-- Clean list grid layout -->
+          <div class="certs-list-container" id="certs-grid">
             
             <!-- Cert 1 -->
-            <div class="cert-item" data-orgs="openai niat">
-              <div class="cert-meta">
-                <span class="cert-date">Aug 2025</span>
-                <span class="cert-issuer">OpenAI Academy × NxtWave</span>
+            <div class="cert-row-editorial" data-orgs="openai niat" data-hover="true">
+              <div class="cert-row-meta">
+                <span class="cert-row-date">Aug 2025</span>
+                <span class="cert-row-issuer">OpenAI Academy × NxtWave</span>
               </div>
-              <h3 class="cert-title">Generative AI Mastery Workshop</h3>
+              <div class="cert-row-main">
+                <h3 class="cert-row-title">Generative AI Mastery Workshop</h3>
+              </div>
             </div>
 
             <!-- Cert 2 -->
-            <div class="cert-item" data-orgs="openai niat">
-              <div class="cert-meta">
-                <span class="cert-date">Sep 2025</span>
-                <span class="cert-issuer">OpenAI Academy × NxtWave</span>
+            <div class="cert-row-editorial" data-orgs="openai niat" data-hover="true">
+              <div class="cert-row-meta">
+                <span class="cert-row-date">Sep 2025</span>
+                <span class="cert-row-issuer">OpenAI Academy × NxtWave</span>
               </div>
-              <h3 class="cert-title">Generative AI Mastery Workshop Certificate of Appreciation</h3>
+              <div class="cert-row-main">
+                <h3 class="cert-row-title">Generative AI Mastery Workshop Certificate of Appreciation</h3>
+              </div>
             </div>
 
             <!-- Cert 3 -->
-            <div class="cert-item" data-orgs="niat other">
-              <div class="cert-meta">
-                <span class="cert-date">Nov 2025</span>
-                <span class="cert-issuer">NIAT × Base44</span>
+            <div class="cert-row-editorial" data-orgs="niat other" data-hover="true">
+              <div class="cert-row-meta">
+                <span class="cert-row-date">Nov 2025</span>
+                <span class="cert-row-issuer">NIAT × Base44</span>
               </div>
-              <h3 class="cert-title">Base44 Hackathon (D-Coders Team)</h3>
+              <div class="cert-row-main">
+                <h3 class="cert-row-title">Base44 Hackathon (D-Coders Team)</h3>
+              </div>
             </div>
 
             <!-- Cert 4 -->
-            <div class="cert-item" data-orgs="other">
-              <div class="cert-meta">
-                <span class="cert-date">Jan 2026</span>
-                <span class="cert-issuer">India AI Impact Summit (JECC Jaipur)</span>
+            <div class="cert-row-editorial" data-orgs="other" data-hover="true">
+              <div class="cert-row-meta">
+                <span class="cert-row-date">Jan 2026</span>
+                <span class="cert-row-issuer">India AI Impact Summit (JECC Jaipur)</span>
               </div>
-              <h3 class="cert-title">AI Hackathon</h3>
+              <div class="cert-row-main">
+                <h3 class="cert-row-title">AI Hackathon</h3>
+              </div>
             </div>
 
             <!-- Cert 5 -->
-            <div class="cert-item" data-orgs="other">
-              <div class="cert-meta">
-                <span class="cert-date">Feb 2026</span>
-                <span class="cert-issuer">GUVI × HCL (India AI Impact Summit 2026)</span>
+            <div class="cert-row-editorial" data-orgs="other" data-hover="true">
+              <div class="cert-row-meta">
+                <span class="cert-row-date">Feb 2026</span>
+                <span class="cert-row-issuer">GUVI × HCL (Summit 2026)</span>
               </div>
-              <h3 class="cert-title">India AI Impact Buildathon</h3>
-              <p class="cert-highlight-desc">Competed among 40,000+ participants</p>
+              <div class="cert-row-main">
+                <h3 class="cert-row-title">India AI Impact Buildathon</h3>
+                <span class="cert-row-description">Competed among 40,000+ participants</span>
+              </div>
             </div>
 
             <!-- Cert 6 -->
-            <div class="cert-item" data-orgs="other">
-              <div class="cert-meta">
-                <span class="cert-date">Feb 2026</span>
-                <span class="cert-issuer">IEEE × VGU (Dept. of CSE)</span>
+            <div class="cert-row-editorial" data-orgs="other" data-hover="true">
+              <div class="cert-row-meta">
+                <span class="cert-row-date">Feb 2026</span>
+                <span class="cert-row-issuer">IEEE × VGU (Dept. of CSE)</span>
               </div>
-              <h3 class="cert-title">Geoinformatics &amp; AI Workshop</h3>
+              <div class="cert-row-main">
+                <h3 class="cert-row-title">Geoinformatics &amp; AI Workshop</h3>
+              </div>
             </div>
 
             <!-- Cert 7 -->
-            <div class="cert-item" data-orgs="niat">
-              <div class="cert-meta">
-                <span class="cert-date">Feb 24, 2026</span>
-                <span class="cert-issuer">NIAT Masterclass</span>
+            <div class="cert-row-editorial" data-orgs="niat" data-hover="true">
+              <div class="cert-row-meta">
+                <span class="cert-row-date">Feb 24, 2026</span>
+                <span class="cert-row-issuer">NIAT Masterclass</span>
               </div>
-              <h3 class="cert-title">Text Embeddings in LLM Systems</h3>
-              <p class="cert-highlight-desc">Delivered by Stuti Gupta, Data Scientist at Flipkart</p>
+              <div class="cert-row-main">
+                <h3 class="cert-row-title">Text Embeddings in LLM Systems</h3>
+                <span class="cert-row-description">Delivered by Stuti Gupta, Data Scientist at Flipkart</span>
+              </div>
             </div>
 
             <!-- Cert 8 -->
-            <div class="cert-item" data-orgs="robotics niat">
-              <div class="cert-meta">
-                <span class="cert-date">Feb 27, 2026</span>
-                <span class="cert-issuer">Robotics &amp; Advanced Technologies, NIAT</span>
+            <div class="cert-row-editorial" data-orgs="robotics niat" data-hover="true">
+              <div class="cert-row-meta">
+                <span class="cert-row-date">Feb 27, 2026</span>
+                <span class="cert-row-issuer">Robotics Team, NIAT</span>
               </div>
-              <h3 class="cert-title">Hack the Human Signal Workshop</h3>
+              <div class="cert-row-main">
+                <h3 class="cert-row-title">Hack the Human Signal Workshop</h3>
+              </div>
             </div>
 
             <!-- Cert 9 -->
-            <div class="cert-item" data-orgs="other">
-              <div class="cert-meta">
-                <span class="cert-date">Jan 23, 2026</span>
-                <span class="cert-issuer">Murf.AI Workshop</span>
+            <div class="cert-row-editorial" data-orgs="other" data-hover="true">
+              <div class="cert-row-meta">
+                <span class="cert-row-date">Jan 23, 2026</span>
+                <span class="cert-row-issuer">Murf.AI Workshop</span>
               </div>
-              <h3 class="cert-title">Murf.AI Hands-On App Building Workshop</h3>
+              <div class="cert-row-main">
+                <h3 class="cert-row-title">Murf.AI Hands-On App Building Workshop</h3>
+              </div>
             </div>
 
             <!-- Cert 10 -->
-            <div class="cert-item" data-orgs="niat">
-              <div class="cert-meta">
-                <span class="cert-date">Apr 13, 2026</span>
-                <span class="cert-issuer">NIAT</span>
+            <div class="cert-row-editorial" data-orgs="niat" data-hover="true">
+              <div class="cert-row-meta">
+                <span class="cert-row-date">Apr 13, 2026</span>
+                <span class="cert-row-issuer">NIAT</span>
               </div>
-              <h3 class="cert-title">AI Agents 201 Hands-On Workshop</h3>
+              <div class="cert-row-main">
+                <h3 class="cert-row-title">AI Agents 201 Hands-On Workshop</h3>
+              </div>
             </div>
 
             <!-- Cert 11 -->
-            <div class="cert-item" data-orgs="robotics niat">
-              <div class="cert-meta">
-                <span class="cert-date">Apr 10, 2026</span>
-                <span class="cert-issuer">Robotics &amp; Advanced Technologies, NIAT</span>
+            <div class="cert-row-editorial" data-orgs="robotics niat" data-hover="true">
+              <div class="cert-row-meta">
+                <span class="cert-row-date">Apr 10, 2026</span>
+                <span class="cert-row-issuer">Robotics Team, NIAT</span>
               </div>
-              <h3 class="cert-title">Gesture Tech Workshop</h3>
+              <div class="cert-row-main">
+                <h3 class="cert-row-title">Gesture Tech Workshop</h3>
+              </div>
             </div>
             
           </div>
         </div>
       </section>
 
-      <!-- Contact Section (Alternating Light background) -->
+      <!-- Contact Section (Clean Editorial) -->
       <section class="contact-section" id="contact">
-        <div class="section-container text-center">
-          <h2 class="section-title">Get In Touch</h2>
-          <p class="contact-prompt">
-            I'm currently looking for software engineering internships and open collaborations. If you want to connect, feel free to reach out via my LinkedIn profile.
-          </p>
-          <div class="contact-actions">
-            <a href="https://linkedin.com/in/prashant-singh-8b629b380" target="_blank" rel="noopener noreferrer" class="btn-primary" id="contact-linkedin-link">
-              View LinkedIn Profile
-            </a>
+        <div class="section-container">
+          <div class="editorial-divider"></div>
+          
+          <div class="contact-wrapper">
+            <h2 class="contact-title-editorial">Let's build systems together.</h2>
+            <p class="contact-pitch">
+              I am open to software engineering internships and collaborative hackathon teams. If you are looking for an engineer who prioritizes shipping functional software over theorizing, let's connect.
+            </p>
+            
+            <div class="contact-links-box">
+              <a href="https://linkedin.com/in/prashant-singh-8b629b380" target="_blank" rel="noopener noreferrer" class="btn-primary-editorial" id="contact-linkedin-link" data-hover="true">
+                Connect on LinkedIn
+              </a>
+            </div>
           </div>
         </div>
       </section>
@@ -467,10 +662,10 @@
     <!-- Footer -->
     <footer class="site-footer">
       <div class="footer-container">
-        <p>&copy; 2026 Prashant Singh. Coded by hand with HTML, CSS &amp; JavaScript. No templates, no frameworks.</p>
+        <p>&copy; 2026 Prashant Singh. Coded using vanilla HTML, CSS &amp; JS. No framework, no templates.</p>
       </div>
     </footer>
 
-    <!-- JS Scripts -->
+    <!-- Script File -->
   </body>
 </html>
