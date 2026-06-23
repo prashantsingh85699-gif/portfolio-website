@@ -99,8 +99,21 @@
             </div>
             
             <div class="hero-portrait-wrapper">
-              <!-- Linear transparency mask applied here -->
-              <img src="/images/profile.png" alt="Prashant Singh Portrait" class="hero-portrait-img" id="hero-portrait" />
+              <div class="hero-image-wrapper">
+                <!-- Creative rotating text ring around circular profile -->
+                <div class="rotating-text-ring">
+                  <svg viewBox="0 0 200 200" class="rotating-text-svg">
+                    <path id="textCirclePath" d="M 100, 100 m -80, 0 a 80,80 0 1,1 160,0 a 80,80 0 1,1 -160,0" fill="none"></path>
+                    <text fill="#2563eb" font-family="Sora" font-size="8.2" font-weight="700" letter-spacing="3.2px">
+                      <textPath href="#textCirclePath">ENGINEERING THE FUTURE • ONE LINE AT A TIME •</textPath>
+                    </text>
+                  </svg>
+                </div>
+                <!-- Circular headshot frame -->
+                <div class="hero-portrait-frame" data-hover="true">
+                  <img src="/images/profile.png" alt="Prashant Singh Portrait" class="hero-portrait-img" id="hero-portrait" />
+                </div>
+              </div>
             </div>
           </div>
 
