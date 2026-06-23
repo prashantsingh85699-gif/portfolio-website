@@ -1,20 +1,109 @@
 /**
- * Prashant Singh - Personal Portfolio Logic
- * Handles interactive behaviors including:
- * 1. Mobile navigation menu toggle
- * 2. Active section highlighting on scroll (Scroll Spy)
- * 3. Search and Category filter combination engine for Certificates
+ * Prashant Singh - Dynamic Editorial Portfolio
+ * Custom Interactive JavaScript Engine (Light Theme)
  */
 
 document.addEventListener('DOMContentLoaded', () => {
+  initPreloader();
+  initCustomCursor();
   initMobileNav();
   initScrollSpy();
   initCertificateFilter();
 });
 
 /**
- * Mobile Navigation Menu
- * Toggles visibility of links on mobile devices and updates hamburger states.
+ * Preloader Controller
+ * Handles visual delays, line fill timings, and the slide-up exit transition.
+ */
+function initPreloader() {
+  const preloader = document.getElementById('preloader');
+  if (!preloader) return;
+
+  // Let the CSS line animation complete first (approx 1.8 seconds)
+  setTimeout(() => {
+    preloader.classList.add('loaded');
+  }, 2000);
+}
+
+/**
+ * Custom Cursor Follower Engine
+ * Implements mouse coordinate listeners and updates a lag-compensated ring follower 
+ * using requestAnimationFrame to ensure high performance and fluid rendering.
+ */
+function initCustomCursor() {
+  const dot = document.getElementById('cursor-dot');
+  const ring = document.getElementById('cursor-ring');
+  
+  if (!dot || !ring) return;
+
+  let mouseX = 0;
+  let mouseY = 0;
+  let ringX = 0;
+  let ringY = 0;
+  let isMoving = false;
+
+  // Hide default cursor indicators on start, show on first movement
+  dot.style.opacity = '0';
+  ring.style.opacity = '0';
+
+  window.addEventListener('mousemove', (e) => {
+    mouseX = e.clientX;
+    mouseY = e.clientY;
+    
+    if (!isMoving) {
+      dot.style.opacity = '1';
+      ring.style.opacity = '1';
+      isMoving = true;
+    }
+    
+    // Dot moves-instantly
+    dot.style.left = `${mouseX}px`;
+    dot.style.top = `${mouseY}px`;
+  });
+
+  // Smooth lag follower loop
+  function updateRingPosition() {
+    // 0.15 is the lag coefficient (higher means faster, lower means more trailing lag)
+    ringX += (mouseX - ringX) * 0.15;
+    ringY += (mouseY - ringY) * 0.15;
+
+    ring.style.left = `${ringX}px`;
+    ring.style.top = `${ringY}px`;
+
+    requestAnimationFrame(updateRingPosition);
+  }
+  
+  requestAnimationFrame(updateRingPosition);
+
+  // Attach hover expanding listeners to all tagged elements
+  const attachHoverListeners = () => {
+    const hoverables = document.querySelectorAll('[data-hover="true"]');
+    
+    hoverables.forEach(el => {
+      // Scale up outer ring on hover
+      el.addEventListener('mouseenter', () => {
+        ring.classList.add('active');
+      });
+      
+      // Reset outer ring on leave
+      el.addEventListener('mouseleave', () => {
+        ring.classList.remove('active');
+      });
+    });
+  };
+
+  attachHoverListeners();
+
+  // Re-observe if elements are dynamically filtered/changed
+  const observer = new MutationObserver(() => {
+    attachHoverListeners();
+  });
+  
+  observer.observe(document.body, { childList: true, subtree: true });
+}
+
+/**
+ * Mobile Navigation Toggle Menu
  */
 function initMobileNav() {
   const toggleBtn = document.getElementById('nav-toggle-btn');
@@ -23,14 +112,12 @@ function initMobileNav() {
 
   if (!toggleBtn || !navMenu) return;
 
-  // Toggle active state on button click
   toggleBtn.addEventListener('click', (e) => {
     e.stopPropagation();
     navMenu.classList.toggle('open');
     toggleBtn.classList.toggle('active');
   });
 
-  // Close menu when clicking outside
   document.addEventListener('click', (e) => {
     if (navMenu.classList.contains('open') && !navMenu.contains(e.target) && e.target !== toggleBtn) {
       navMenu.classList.remove('open');
@@ -38,7 +125,6 @@ function initMobileNav() {
     }
   });
 
-  // Close menu when clicking a link
   navLinks.forEach(link => {
     link.addEventListener('click', () => {
       navMenu.classList.remove('open');
@@ -48,8 +134,7 @@ function initMobileNav() {
 }
 
 /**
- * Scroll Spy
- * Uses IntersectionObserver to watch page sections and highlight the corresponding navbar link.
+ * Scroll Spy Navigation Underliner
  */
 function initScrollSpy() {
   const sections = document.querySelectorAll('main > section');
@@ -59,7 +144,7 @@ function initScrollSpy() {
 
   const observerOptions = {
     root: null,
-    rootMargin: '-20% 0px -60% 0px', // Trigger when section occupies the sweet spot of viewport
+    rootMargin: '-30% 0px -50% 0px',
     threshold: 0
   };
 
@@ -83,30 +168,26 @@ function initScrollSpy() {
 }
 
 /**
- * Certificate Filter & Search Engine
- * Integrates search input filtering with button category filters.
- * Returns the intersection of both filters for a seamless search experience.
+ * Combined Certificate Filtration Engine
+ * Integrates keyphrase search inputs with category badges.
  */
 function initCertificateFilter() {
   const searchInput = document.getElementById('certificate-search');
-  const filterBtns = document.querySelectorAll('.filter-btn');
-  const certItems = document.querySelectorAll('.cert-item');
+  const filterBtns = document.querySelectorAll('.filter-btn-editorial');
+  const certRows = document.querySelectorAll('.cert-row-editorial');
 
-  if (!searchInput || filterBtns.length === 0 || certItems.length === 0) return;
+  if (!searchInput || filterBtns.length === 0 || certRows.length === 0) return;
 
   let currentCategory = 'all';
   let currentSearchQuery = '';
 
-  // Listen for search inputs
   searchInput.addEventListener('input', (e) => {
     currentSearchQuery = e.target.value.toLowerCase().trim();
     applyCombinedFilters();
   });
 
-  // Listen for category selection clicks
   filterBtns.forEach(btn => {
     btn.addEventListener('click', () => {
-      // Manage active visual state
       filterBtns.forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
 
@@ -115,29 +196,23 @@ function initCertificateFilter() {
     });
   });
 
-  /**
-   * Evaluates each certificate item against both text query and category parameters.
-   */
   function applyCombinedFilters() {
-    certItems.forEach(item => {
-      // 1. Evaluate Category Match
-      const itemOrgs = item.getAttribute('data-orgs') || '';
-      const matchesCategory = (currentCategory === 'all') || itemOrgs.split(' ').includes(currentCategory);
+    certRows.forEach(row => {
+      const rowOrgs = row.getAttribute('data-orgs') || '';
+      const matchesCategory = (currentCategory === 'all') || rowOrgs.split(' ').includes(currentCategory);
 
-      // 2. Evaluate Text Match
-      const title = item.querySelector('.cert-title')?.textContent.toLowerCase() || '';
-      const issuer = item.querySelector('.cert-issuer')?.textContent.toLowerCase() || '';
-      const highlight = item.querySelector('.cert-highlight-desc')?.textContent.toLowerCase() || '';
+      const title = row.querySelector('.cert-row-title')?.textContent.toLowerCase() || '';
+      const issuer = row.querySelector('.cert-row-issuer')?.textContent.toLowerCase() || '';
+      const desc = row.querySelector('.cert-row-description')?.textContent.toLowerCase() || '';
       
       const matchesText = title.includes(currentSearchQuery) || 
                           issuer.includes(currentSearchQuery) || 
-                          highlight.includes(currentSearchQuery);
+                          desc.includes(currentSearchQuery);
 
-      // 3. Show/Hide based on both conditions
       if (matchesCategory && matchesText) {
-        item.classList.remove('hidden');
+        row.classList.remove('hidden');
       } else {
-        item.classList.add('hidden');
+        row.classList.add('hidden');
       }
     });
   }
