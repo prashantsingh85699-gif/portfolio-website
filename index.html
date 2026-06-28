@@ -5,23 +5,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     
     <!-- SEO Optimization -->
-    <title>Prashant Singh | B.Tech CSE Student &amp; Developer</title>
+    <title>Prashant Singh | B.Tech CSE Student &amp; C++ Developer</title>
     <meta name="description" content="Portfolio of Prashant Singh. Computer Science student, systems builder, and aspiring software engineer." />
     
-    <!-- Google Fonts: Inter (headings and body) & Space Mono (metadata labels) -->
+    <!-- Google Fonts: Inter (headings and body) & Space Mono (monospace labels & code terminal) -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
     
     <!-- CSS Stylesheet -->
-    <script type="module" crossorigin src="./assets/index-J085SAWP.js"></script>
-    <link rel="stylesheet" crossorigin href="./assets/index-DX8x27JO.css">
+    <script type="module" crossorigin src="./assets/index-Bk3codZP.js"></script>
+    <link rel="stylesheet" crossorigin href="./assets/index-BEWJ8HVL.css">
   </head>
   <body>
     <!-- Simple Fade preloader -->
     <div class="preloader" id="preloader">
       <div class="preloader-content">
-        <span class="preloader-name">[ prashant_singh ]</span>
+        <span class="preloader-name">[ compiling_assets... ]</span>
         <div class="preloader-line"></div>
       </div>
     </div>
@@ -78,51 +78,76 @@
         <div class="hero-container">
           <div class="hero-grid">
             
-            <!-- Left: Name, Bio, Specifications -->
+            <!-- Left: Name, Bio, Portrait -->
             <div class="hero-left">
-              <span class="section-tag">[00 // START]</span>
-              <h1 class="hero-name">PRASHANT SINGH</h1>
-              <p class="hero-title-tag">B.Tech CSE Student &amp; Software Explorer</p>
+              <span class="section-tag">[00 // INITIAL_SETUP]</span>
               
-              <p class="hero-desc">
-                I am a Computer Science student focused on learning the core foundations of software systems. I enjoy writing clean code, building responsive interfaces, and understanding how data pipelines function under the hood.
-              </p>
-              
-              <!-- Clean Monospace Specs Table -->
-              <div class="specs-table">
-                <div class="specs-row">
-                  <span class="spec-lbl">Academic_Grid:</span>
-                  <span class="spec-val">Vivekananda Global University × NIAT</span>
-                </div>
-                <div class="specs-row">
-                  <span class="spec-lbl">Location_Coords:</span>
-                  <span class="spec-val">Satna, MP, India</span>
-                </div>
-                <div class="specs-row">
-                  <span class="spec-lbl">Radar_Status:</span>
-                  <span class="spec-val text-green">[Active // Seeking Internships 2026]</span>
-                </div>
-                <div class="specs-row">
-                  <span class="spec-lbl">Current_Project:</span>
-                  <span class="spec-val">BRAVE Modular System Integration</span>
-                </div>
-              </div>
-
-              <div class="hero-actions">
-                <a href="#projects" class="btn-primary" id="btn-view-work" data-hover="true">
-                  View Selected Work
-                </a>
-              </div>
-            </div>
-            
-            <!-- Right: Elegant Circular Portrait Mount -->
-            <div class="hero-right">
-              <div class="portrait-mount-box">
+              <div class="hero-header-flex">
+                <!-- Circular Portrait Mount (Cross-fades on hover) -->
                 <div class="portrait-frame" id="hero-portrait-frame" data-hover="true">
                   <div class="portrait-slides" id="hero-portrait-slides">
                     <img src="./images/profile.png" alt="Prashant Singh Portrait" class="portrait-img active" id="hero-portrait-front" />
                     <img src="./images/profile-alt.jpg" alt="Prashant Singh Alternate Portrait" class="portrait-img" id="hero-portrait-back" />
                   </div>
+                </div>
+                
+                <div class="hero-title-group">
+                  <h1 class="hero-name">PRASHANT SINGH</h1>
+                  <p class="hero-title-tag">B.Tech CSE Student &amp; Programmer</p>
+                </div>
+              </div>
+              
+              <p class="hero-desc">
+                I am a first-year Computer Science student interested in learning the core logic of software systems. I enjoy testing code architectures, developing clean front-end systems, and learning how data flows between client interfaces and back-end environments.
+              </p>
+
+              <div class="hero-actions">
+                <a href="#projects" class="btn-primary" id="btn-view-work" data-hover="true">
+                  Explore Projects
+                </a>
+              </div>
+            </div>
+            
+            <!-- Right: Interactive C++ Code Terminal -->
+            <div class="hero-right">
+              <div class="code-terminal">
+                <div class="terminal-header">
+                  <div class="terminal-dots">
+                    <span class="dot red"></span>
+                    <span class="dot yellow"></span>
+                    <span class="dot green"></span>
+                  </div>
+                  <span class="terminal-title">portfolio.cpp</span>
+                  <button id="run-code-btn" class="run-btn" data-hover="true">
+                    [ RUN CODE ]
+                  </button>
+                </div>
+                
+                <div class="terminal-body">
+                  <pre class="code-editor"><code><span class="c-keyword">#include</span> <span class="c-string">&lt;iostream&gt;</span>
+<span class="c-keyword">#include</span> <span class="c-string">&lt;vector&gt;</span>
+
+<span class="c-keyword">struct</span> <span class="c-type">Developer</span> {
+    std::string name = <span class="c-string">"Prashant Singh"</span>;
+    std::string focus = <span class="c-string">"Systems &amp; Web Dev"</span>;
+    std::vector&lt;std::string&gt; core = {<span class="c-string">"C++"</span>, <span class="c-string">"Python"</span>, <span class="c-string">"HTML/CSS"</span>};
+
+    <span class="c-type">void</span> <span class="c-func">greet</span>() {
+        std::cout &lt;&lt; <span class="c-string">"Status: Ready to build"</span> &lt;&lt; std::endl;
+        std::cout &lt;&lt; <span class="c-string">"B.Tech CSE Student @ VGU x NIAT"</span> &lt;&lt; std::endl;
+    }
+};
+
+<span class="c-type">int</span> <span class="c-func">main</span>() {
+    <span class="c-type">Developer</span> coder;
+    coder.<span class="c-func">greet</span>();
+    <span class="c-keyword">return</span> <span class="c-number">0</span>;
+}</code></pre>
+                </div>
+                
+                <div class="terminal-console">
+                  <div class="console-header">// CONSOLE OUTPUT</div>
+                  <div id="console-logs" class="console-logs">Click "RUN CODE" to compile and execute program...</div>
                 </div>
               </div>
             </div>
@@ -140,7 +165,7 @@
           <div class="about-grid">
             <!-- Left: Highlights & Stats -->
             <div class="about-left">
-              <h2 class="section-title">Introduction</h2>
+              <h2 class="section-title">Education &amp; Background</h2>
               <div class="stats-panel">
                 <div class="stat-item">
                   <span class="stat-val">5+</span>
@@ -156,36 +181,36 @@
             <!-- Right: Bio & Education Grid -->
             <div class="about-right">
               <p class="bio-text">
-                My journey into software engineering started with curiosity about how software solves daily challenges. As a first-year student, I focus on coding fundamentals, structures, and building projects. I enjoy participating in college hackathons because they push me to plan, collaborate, and ship functional web prototypes under time constraints.
+                My interest in software engineering began with understanding how structured logic solves real-world challenges. As a first-year student, I focus on building a strong foundation in computer science and programming. I enjoy participating in college buildathons and hackathons because they push me to plan code logic, coordinate layouts, and deliver functional prototypes under constraints.
               </p>
               <p class="bio-text">
-                Beyond coursework, I spend my time exploring database schemas, experimenting with Web APIs, and learning how modern AI models can be integrated into web applications. I believe in hands-on learning—writing code from scratch, testing pipelines, and deploying working prototypes.
+                Outside of core B.Tech classes, I spend my time exploring clean code principles, working with relational structures, and experimenting with Web APIs. I believe in learning by doing—writing code from scratch, testing databases, and hosting project setups.
               </p>
               
               <div class="details-grid">
                 <!-- Current projects card -->
                 <div class="details-card">
-                  <h3 class="details-heading">// ACTIVE MODULES</h3>
+                  <h3 class="details-heading">// CORE STUDY WORKFLOWS</h3>
                   <ul class="details-list">
                     <li>
-                      <span class="badge badge-green">System</span>
+                      <span class="badge badge-green">Modules</span>
                       <div class="details-list-content">
-                        <strong>BRAVE Project</strong>
-                        <span>Undergoing modular system integration at NIAT</span>
+                        <strong>BRAVE System</strong>
+                        <span>Undergoing modular integration classes at NIAT</span>
                       </div>
                     </li>
                     <li>
-                      <span class="badge badge-blue">Curriculum</span>
+                      <span class="badge badge-blue">Pathways</span>
                       <div class="details-list-content">
-                        <strong>GRIT Program</strong>
-                        <span>Advanced professional training pathway</span>
+                        <strong>GRIT Cohort</strong>
+                        <span>Advanced professional developer pathway</span>
                       </div>
                     </li>
                     <li>
-                      <span class="badge badge-orange">Exploring</span>
+                      <span class="badge badge-orange">Framework</span>
                       <div class="details-list-content">
                         <strong>React Library</strong>
-                        <span>Exploring component states and clean renders</span>
+                        <span>Exploring component state lifecycle properties</span>
                       </div>
                     </li>
                   </ul>
@@ -193,7 +218,7 @@
 
                 <!-- Education details -->
                 <div class="details-card">
-                  <h3 class="details-heading">// EDUCATION HISTORY</h3>
+                  <h3 class="details-heading">// EDUCATION MATRIX</h3>
                   <div class="edu-item">
                     <h4 class="edu-title">B.Tech in Computer Science</h4>
                     <p class="edu-school">Vivekananda Global University × NIAT</p>
@@ -215,8 +240,8 @@
       <section class="achievements-section" id="achievements">
         <div class="section-container">
           <div class="section-divider"></div>
-          <span class="section-tag">[02 // HACKATHONS]</span>
-          <h2 class="section-title">Competitive Builds</h2>
+          <span class="section-tag">[02 // COMPETITIVE_BUILDS]</span>
+          <h2 class="section-title">Hackathon History</h2>
           
           <div class="hackathon-grid">
             <!-- Card 1 -->
@@ -224,7 +249,7 @@
               <span class="card-num">[01]</span>
               <h3 class="card-title">2nd Position</h3>
               <span class="card-subtitle">Web-A-Thon, Panache S-16</span>
-              <p class="card-desc">Worked with a team of three to build a functional event portal under a 6-hour deadline, focusing on layout and fast navigation.</p>
+              <p class="card-desc">Worked in a team of three to build a functional event portal under a 6-hour deadline, focusing on layout and fast navigation.</p>
             </div>
             
             <!-- Card 2 -->
@@ -258,7 +283,7 @@
       <section class="skills-section" id="skills">
         <div class="section-container">
           <div class="section-divider"></div>
-          <span class="section-tag">[03 // TOOLKIT]</span>
+          <span class="section-tag">[03 // ACQUIRED_SKILLS]</span>
           <h2 class="section-title">Skills &amp; Technologies</h2>
           
           <div class="skills-grid">
@@ -349,7 +374,7 @@
       <section class="projects-section" id="projects">
         <div class="section-container">
           <div class="section-divider"></div>
-          <span class="section-tag">[04 // SHIPPED_PROJECTS]</span>
+          <span class="section-tag">[04 // BUILT_PROJECTS]</span>
           <h2 class="section-title">Functional Projects</h2>
           
           <div class="projects-grid">
@@ -502,7 +527,7 @@
       <section class="certificates-section" id="certificates">
         <div class="section-container">
           <div class="section-divider"></div>
-          <span class="section-tag">[05 // VERIFICATIONS]</span>
+          <span class="section-tag">[05 // VERIFICATION]</span>
           <h2 class="section-title">Certifications &amp; Masterclasses</h2>
           
           <!-- Subtle Search and Filter -->
@@ -654,10 +679,10 @@
       <section class="contact-section" id="contact">
         <div class="section-container">
           <div class="section-divider"></div>
-          <span class="section-tag">[06 // CONNECT]</span>
+          <span class="section-tag">[06 // GET_IN_TOUCH]</span>
           
           <div class="contact-wrapper">
-            <h2 class="section-title">Let's build systems together.</h2>
+            <h2 class="section-title">Let's connect.</h2>
             <p class="contact-pitch">
               I am open to software engineering internships, collaborative builds, and technical teams. Connect with me on any of these platforms:
             </p>
