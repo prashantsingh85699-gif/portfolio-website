@@ -36,8 +36,68 @@ document.addEventListener('DOMContentLoaded', () => {
   initAnchorLinks();
   initProfileInteraction();
   initTerminalSimulation();
+  initCopyProtection(); // Load anti-copy mechanisms
   initGSAPAnimations();
 });
+
+/**
+ * Copy Protection System (with Owner Exception)
+ * Prevents unauthorized text selection, right-click, devtools inspection, and copy hotkeys.
+ * Access with URL parameter "?admin=true" to bypass blocks.
+ */
+function initCopyProtection() {
+  const urlParams = new URLSearchParams(window.location.search);
+  const isOwner = urlParams.get('admin') === 'true' || localStorage.getItem('admin') === 'true';
+
+  if (isOwner) {
+    // Enable full copy access for the owner
+    document.body.classList.add('allow-copy');
+    localStorage.setItem('admin', 'true');
+    console.log('[SYSTEM: Owner session authorized. Copy protection disabled.]');
+    return;
+  }
+
+  // 1. Disable Right Click Context Menu
+  document.addEventListener('contextmenu', (e) => {
+    e.preventDefault();
+  });
+
+  // 2. Prevent Keyboard Hotkeys (Ctrl+C, Ctrl+X, Ctrl+A, Ctrl+U, Ctrl+S, F12, Ctrl+Shift+I/J/C)
+  document.addEventListener('keydown', (e) => {
+    // Disable F12
+    if (e.key === 'F12' || e.keyCode === 123) {
+      e.preventDefault();
+      return false;
+    }
+
+    // Disable Ctrl combinations
+    if (e.ctrlKey) {
+      const key = e.key.toLowerCase();
+      if (key === 'c' || key === 'x' || key === 'a' || key === 'u' || key === 's') {
+        e.preventDefault();
+        return false;
+      }
+      
+      // Disable Ctrl+Shift+I / J / C
+      if (e.shiftKey && (key === 'i' || key === 'j' || key === 'c')) {
+        e.preventDefault();
+        return false;
+      }
+    }
+  });
+
+  // 3. Disable Text Drag Selection via JS fallback
+  document.addEventListener('selectstart', (e) => {
+    e.preventDefault();
+  });
+
+  // 4. Disable Image Dragging
+  document.querySelectorAll('img').forEach(img => {
+    img.addEventListener('dragstart', (e) => {
+      e.preventDefault();
+    });
+  });
+}
 
 /**
  * Interactive C++ Code Terminal Simulation
@@ -49,17 +109,15 @@ function initTerminalSimulation() {
   if (!runBtn || !consoleLogs) return;
 
   runBtn.addEventListener('click', () => {
-    // Disable during compile simulation
     if (runBtn.disabled) return;
     runBtn.disabled = true;
     runBtn.textContent = '[ COMPILING... ]';
     
-    consoleLogs.style.color = '#71717a'; // Muted color during compilation
+    consoleLogs.style.color = '#71717a';
     consoleLogs.textContent = '$ g++ portfolio.cpp -o portfolio && ./portfolio\nCompiling source tree...';
 
     setTimeout(() => {
-      // Simulation outcome
-      consoleLogs.style.color = '#10b981'; // Green console output
+      consoleLogs.style.color = '#10b981';
       consoleLogs.textContent = `$ g++ portfolio.cpp -o portfolio && ./portfolio\n\nStatus: Ready to build\nB.Tech CSE Student @ VGU x NIAT\n\n[Process completed with exit code 0]`;
       
       runBtn.disabled = false;
@@ -104,7 +162,7 @@ function initPreloader() {
 
   setTimeout(() => {
     preloader.classList.add('loaded');
-    lenis.start(); // Enable scroll
+    lenis.start();
   }, 600);
 }
 
