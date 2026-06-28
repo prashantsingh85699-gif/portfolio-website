@@ -14,14 +14,17 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
     
     <!-- CSS Stylesheet -->
-    <script type="module" crossorigin src="./assets/index-Bk3codZP.js"></script>
-    <link rel="stylesheet" crossorigin href="./assets/index-BEWJ8HVL.css">
+    <script type="module" crossorigin src="./assets/index-Co1GQMeN.js"></script>
+    <link rel="stylesheet" crossorigin href="./assets/index-D7ZsOhTk.css">
   </head>
   <body>
-    <!-- Simple Fade preloader -->
+    <!-- Premium Portrait Fade preloader -->
     <div class="preloader" id="preloader">
       <div class="preloader-content">
-        <span class="preloader-name">[ compiling_assets... ]</span>
+        <div class="preloader-avatar-container">
+          <img src="./images/profile.png" alt="Preloader Avatar" class="preloader-avatar" />
+        </div>
+        <span class="preloader-name">[ compiling_profile... ]</span>
         <div class="preloader-line"></div>
       </div>
     </div>
@@ -78,19 +81,11 @@
         <div class="hero-container">
           <div class="hero-grid">
             
-            <!-- Left: Name, Bio, Portrait -->
+            <!-- Left: Name, Bio -->
             <div class="hero-left">
               <span class="section-tag">[00 // INITIAL_SETUP]</span>
               
               <div class="hero-header-flex">
-                <!-- Circular Portrait Mount (Cross-fades on hover) -->
-                <div class="portrait-frame" id="hero-portrait-frame" data-hover="true">
-                  <div class="portrait-slides" id="hero-portrait-slides">
-                    <img src="./images/profile.png" alt="Prashant Singh Portrait" class="portrait-img active" id="hero-portrait-front" />
-                    <img src="./images/profile-alt.jpg" alt="Prashant Singh Alternate Portrait" class="portrait-img" id="hero-portrait-back" />
-                  </div>
-                </div>
-                
                 <div class="hero-title-group">
                   <h1 class="hero-name">PRASHANT SINGH</h1>
                   <p class="hero-title-tag">B.Tech CSE Student &amp; Programmer</p>
@@ -108,23 +103,46 @@
               </div>
             </div>
             
-            <!-- Right: Interactive C++ Code Terminal -->
+            <!-- Right: Polaroid Card Portrait & Interactive C++ Code Terminal below -->
             <div class="hero-right">
-              <div class="code-terminal">
-                <div class="terminal-header">
-                  <div class="terminal-dots">
-                    <span class="dot red"></span>
-                    <span class="dot yellow"></span>
-                    <span class="dot green"></span>
-                  </div>
-                  <span class="terminal-title">portfolio.cpp</span>
-                  <button id="run-code-btn" class="run-btn" data-hover="true">
-                    [ RUN CODE ]
-                  </button>
-                </div>
+              <div class="hero-flex-right-col">
                 
-                <div class="terminal-body">
-                  <pre class="code-editor"><code><span class="c-keyword">#include</span> <span class="c-string">&lt;iostream&gt;</span>
+                <!-- Unique Polaroid Catalog Image Frame -->
+                <div class="polaroid-card" id="hero-portrait-frame" data-hover="true">
+                  <div class="polaroid-photo-area">
+                    <div class="portrait-slides" id="hero-portrait-slides">
+                      <img src="./images/profile.png" alt="Prashant Singh Portrait" class="portrait-img active" id="hero-portrait-front" />
+                      <img src="./images/profile-alt.jpg" alt="Prashant Singh Alternate Portrait" class="portrait-img" id="hero-portrait-back" />
+                    </div>
+                  </div>
+                  <div class="polaroid-label-area">
+                    <div class="polaroid-lbl-row">
+                      <span class="lbl-key">SOURCE:</span>
+                      <span class="lbl-val">prashant_singh.cpp</span>
+                    </div>
+                    <div class="polaroid-lbl-row">
+                      <span class="lbl-key">ACADEMICS:</span>
+                      <span class="lbl-val">1st_year_cse</span>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- C++ Interactive Terminal -->
+                <div class="code-terminal">
+                  <div class="terminal-header">
+                    <div class="terminal-dots">
+                      <span class="dot red"></span>
+                      <span class="dot yellow"></span>
+                      <span class="dot green"></span>
+                    </div>
+                    <span class="terminal-title">portfolio.cpp</span>
+                    <button id="run-code-btn" class="run-btn" data-hover="true">
+                      [ RUN CODE ]
+                    </button>
+                  </div>
+                  
+                  <div class="terminal-body">
+                    <pre class="code-editor"><code><span class="c-keyword">#include</span> <span class="c-string">&lt;iostream&gt;</span>
 <span class="c-keyword">#include</span> <span class="c-string">&lt;vector&gt;</span>
 
 <span class="c-keyword">struct</span> <span class="c-type">Developer</span> {
@@ -143,12 +161,14 @@
     coder.<span class="c-func">greet</span>();
     <span class="c-keyword">return</span> <span class="c-number">0</span>;
 }</code></pre>
+                  </div>
+                  
+                  <div class="terminal-console">
+                    <div class="console-header">// CONSOLE OUTPUT</div>
+                    <div id="console-logs" class="console-logs">Click "RUN CODE" to compile and execute program...</div>
+                  </div>
                 </div>
-                
-                <div class="terminal-console">
-                  <div class="console-header">// CONSOLE OUTPUT</div>
-                  <div id="console-logs" class="console-logs">Click "RUN CODE" to compile and execute program...</div>
-                </div>
+
               </div>
             </div>
 
