@@ -11,18 +11,18 @@ export function initEmbeddingsNetwork() {
   let width = container.clientWidth;
   let height = container.clientHeight;
   const camera = new THREE.PerspectiveCamera(50, width / height, 1, 1000);
-  camera.position.set(0, -180, 220); // Sit tilted looking down at grid floor
+  camera.position.set(0, -190, 210); // Look down at the grid floor
 
-  // Renderer with alpha/transparent background
+  // Renderer with transparent background
   const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
   renderer.setSize(width, height);
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
   container.appendChild(renderer.domElement);
 
-  // Plane Geometry representing our blueprint grid layout
-  const gridSegments = 36;
-  const gridWidth = 750;
-  const gridHeight = 750;
+  // Plane Geometry representing a high-density scanning matrix grid
+  const gridSegments = 40; // Increased density for a cooler cyber look
+  const gridWidth = 850;
+  const gridHeight = 850;
   const geometry = new THREE.PlaneGeometry(gridWidth, gridHeight, gridSegments, gridSegments);
 
   // Store initial vertex coordinates to compute wave offsets
@@ -34,42 +34,36 @@ export function initEmbeddingsNetwork() {
     initialPositions[i * 3 + 2] = positionAttr.getZ(i);
   }
 
-  // Wireframe material - clean Cobalt Blue gridlines
+  // Glowing Cyan wireframe material
   const material = new THREE.MeshBasicMaterial({
-    color: 0x2563eb,
+    color: 0x00f0ff, // Electric Cyan
     wireframe: true,
     transparent: true,
-    opacity: 0.12,
-    blending: THREE.NormalBlending
+    opacity: 0.16,
+    blending: THREE.AdditiveBlending // Glow composite additive blending
   });
 
   const gridMesh = new THREE.Mesh(geometry, material);
-  gridMesh.rotation.x = -Math.PI * 0.18; // Tilt plane slightly towards camera
+  gridMesh.rotation.x = -Math.PI * 0.18; // Tilted floor plane
   scene.add(gridMesh);
 
   // Interaction variables
   const raycaster = new THREE.Raycaster();
-  const mouse = new THREE.Vector2(-9999, -9999); // Start far away
+  const mouse = new THREE.Vector2(-9999, -9999);
   const mouseTarget = new THREE.Vector2(-9999, -9999);
   const localIntersectPoint = new THREE.Vector3();
   let hasIntersected = false;
 
-  // Track window size
-  const windowHalfX = window.innerWidth / 2;
-  const windowHalfY = window.innerHeight / 2;
-
-  // Capture mouse positions normalized between -1 and 1
   window.addEventListener('mousemove', (event) => {
     mouseTarget.x = (event.clientX / window.innerWidth) * 2 - 1;
     mouseTarget.y = -(event.clientY / window.innerHeight) * 2 + 1;
   });
 
-  // Track scroll for pausing renderer when out of hero fold
+  // Track scroll for lifecycle performance
   let scrollY = 0;
   let isVisible = true;
   window.addEventListener('scroll', () => {
     scrollY = window.scrollY;
-    // Pause rendering if user scrolls past hero section height (approx 100vh)
     isVisible = scrollY < window.innerHeight;
   });
 
@@ -91,15 +85,15 @@ export function initEmbeddingsNetwork() {
   const animate = () => {
     animationFrameId = requestAnimationFrame(animate);
 
-    if (!isVisible) return; // Skip calculation and draw frames if out of viewport
+    if (!isVisible) return; // Skip logic when hero is out of view
 
-    const time = clock.getElapsedTime() * 0.6;
+    const time = clock.getElapsedTime() * 0.55;
 
-    // Smoothly interpolate mouse coordinates for organic trailing ripple
+    // Interpolate mouse coordinates smoothly for trailing lag
     mouse.x += (mouseTarget.x - mouse.x) * 0.08;
     mouse.y += (mouseTarget.y - mouse.y) * 0.08;
 
-    // Project raycaster on grid plane
+    // Raycast on the mesh grid
     raycaster.setFromCamera(mouse, camera);
     const intersects = raycaster.intersectObject(gridMesh);
 
@@ -113,28 +107,26 @@ export function initEmbeddingsNetwork() {
     const posArray = positionAttr.array;
     const count = positionAttr.count;
 
-    // Deformation & Wave math
+    // Wave and displacement logic
     for (let i = 0; i < count; i++) {
       const idx = i * 3;
       const initX = initialPositions[idx];
       const initY = initialPositions[idx + 1];
 
-      // 1. Organic rolling wave height calculations
-      let waveZ = Math.sin(initX * 0.015 + time) * Math.cos(initY * 0.015 + time) * 15;
-      waveZ += Math.sin(initX * 0.005 - time * 0.5) * 8; // Double wave layering
+      // 1. Double wave layering for digital cyber waves
+      let waveZ = Math.sin(initX * 0.016 + time) * Math.cos(initY * 0.016 + time) * 16;
+      waveZ += Math.sin(initX * 0.006 - time * 0.6) * 9;
 
-      // 2. Mouse grid deformation (pulls mesh nodes down/up near cursor)
+      // 2. Mouse displacement (bulges grid points upward near cursor)
       if (hasIntersected) {
-        // Calculate distance from grid vertex to intersection point in 3D space
         const dx = posArray[idx] - localIntersectPoint.x;
         const dy = posArray[idx + 1] - localIntersectPoint.y;
         const dist = Math.sqrt(dx * dx + dy * dy);
 
-        const rippleRadius = 140;
+        const rippleRadius = 150;
         if (dist < rippleRadius) {
-          // Inverse bell curve for smooth indentation displacement
-          const force = Math.pow(1 - dist / rippleRadius, 2);
-          waveZ -= force * 40; // Push mesh down by max 40px under mouse
+          const force = Math.pow(1 - dist / rippleRadius, 2.5);
+          waveZ += force * 50; // Push vertices UPWARD by 50px for a holographic scan hill
         }
       }
 
@@ -143,8 +135,8 @@ export function initEmbeddingsNetwork() {
 
     positionAttr.needsUpdate = true;
 
-    // Gentle camera parallax movement
-    camera.position.x += (mouse.x * 30 - camera.position.x) * 0.04;
+    // Camera movement matches the mouse slightly
+    camera.position.x += (mouse.x * 25 - camera.position.x) * 0.04;
     camera.lookAt(scene.position);
 
     renderer.render(scene, camera);
@@ -152,7 +144,6 @@ export function initEmbeddingsNetwork() {
 
   animate();
 
-  // Teardown API for SPA lifecycle hygiene
   return () => {
     cancelAnimationFrame(animationFrameId);
     window.removeEventListener('resize', onWindowResize);
