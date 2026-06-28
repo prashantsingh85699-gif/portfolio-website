@@ -1,6 +1,6 @@
 /**
- * Prashant Singh - Dynamic Editorial Portfolio
- * Custom Interactive JavaScript Engine (Light Theme)
+ * Prashant Singh - Swiss Architectural Blueprint Portfolio
+ * Custom Interactive JavaScript Engine
  */
 
 import Lenis from 'lenis';
@@ -47,14 +47,14 @@ function initPreloader() {
   const preloader = document.getElementById('preloader');
   if (!preloader) return;
 
-  // Let the CSS line animation complete first (approx 1.8 seconds)
+  // Let the CSS line animation complete first (approx 1.5 seconds)
   setTimeout(() => {
     preloader.classList.add('loaded');
     lenis.start(); // Unlock scrolling
     
     // Initialize Three.js interactive nodes after the loader has exited
     initEmbeddingsNetwork();
-  }, 2000);
+  }, 1700);
 }
 
 /**
@@ -77,8 +77,7 @@ function initAnchorLinks() {
 
 /**
  * Custom Cursor Follower Engine
- * Implements mouse coordinate listeners and updates a lag-compensated ring follower 
- * using requestAnimationFrame to ensure high performance and fluid rendering.
+ * Implements mouse coordinate listeners and updates a lag-compensated square follower.
  */
 function initCustomCursor() {
   const dot = document.getElementById('cursor-dot');
@@ -92,7 +91,6 @@ function initCustomCursor() {
   let ringY = 0;
   let isMoving = false;
 
-  // Hide default cursor indicators on start, show on first movement
   dot.style.opacity = '0';
   ring.style.opacity = '0';
 
@@ -106,14 +104,12 @@ function initCustomCursor() {
       isMoving = true;
     }
     
-    // Dot moves-instantly
     dot.style.left = `${mouseX}px`;
     dot.style.top = `${mouseY}px`;
   });
 
   // Smooth lag follower loop
   function updateRingPosition() {
-    // 0.15 is the lag coefficient (higher means faster, lower means more trailing lag)
     ringX += (mouseX - ringX) * 0.15;
     ringY += (mouseY - ringY) * 0.15;
 
@@ -130,12 +126,9 @@ function initCustomCursor() {
     const hoverables = document.querySelectorAll('[data-hover="true"]');
     
     hoverables.forEach(el => {
-      // Scale up outer ring on hover
       el.addEventListener('mouseenter', () => {
         ring.classList.add('active');
       });
-      
-      // Reset outer ring on leave
       el.addEventListener('mouseleave', () => {
         ring.classList.remove('active');
       });
@@ -194,7 +187,7 @@ function initScrollSpy() {
 
   const observerOptions = {
     root: null,
-    rootMargin: '-30% 0px -50% 0px',
+    rootMargin: '-35% 0px -45% 0px',
     threshold: 0
   };
 
@@ -223,8 +216,8 @@ function initScrollSpy() {
  */
 function initCertificateFilter() {
   const searchInput = document.getElementById('certificate-search');
-  const filterBtns = document.querySelectorAll('.filter-btn-editorial');
-  const certRows = document.querySelectorAll('.cert-row-editorial');
+  const filterBtns = document.querySelectorAll('.filter-btn-blueprint');
+  const certRows = document.querySelectorAll('.cert-row-blueprint');
 
   if (!searchInput || filterBtns.length === 0 || certRows.length === 0) return;
 
@@ -282,13 +275,10 @@ function initProfileInteraction() {
 
   if (!frame || !slides || !frontImg || !backImg) return;
 
-  // Track hover status for window-mousemove efficiency
   let isHovered = false;
 
   frame.addEventListener('mouseenter', () => {
     isHovered = true;
-
-    // Automatically cross-fade to alternate portrait on hover (CSS transitions this)
     frontImg.classList.remove('active');
     backImg.classList.add('active');
   });
@@ -301,36 +291,28 @@ function initProfileInteraction() {
     const frameCenterX = rect.left + rect.width / 2;
     const frameCenterY = rect.top + rect.height / 2;
 
-    // Offset from center
     const dx = e.clientX - frameCenterX;
     const dy = e.clientY - frameCenterY;
 
-    // Normalised values for rotation limits (max 10deg tilt)
-    const maxTilt = 10;
+    const maxTilt = 8;
     const tiltX = (dy / (window.innerHeight / 2)) * maxTilt;
     const tiltY = -(dx / (window.innerWidth / 2)) * maxTilt;
 
-    // Bound values
     const clampedTiltX = Math.max(-maxTilt, Math.min(maxTilt, tiltX));
     const clampedTiltY = Math.max(-maxTilt, Math.min(maxTilt, tiltY));
 
-    // Rotate frame in 3D space
     frame.style.transform = `rotateX(${clampedTiltX}deg) rotateY(${clampedTiltY}deg) scale(1.03)`;
 
-    // Parallax depth offset: translate slides container inside frame in the opposite direction
-    const moveX = (dx / (window.innerWidth / 2)) * 12; // Max 12px shift
-    const moveY = (dy / (window.innerHeight / 2)) * 12;
+    const moveX = (dx / (window.innerWidth / 2)) * 10;
+    const moveY = (dy / (window.innerHeight / 2)) * 10;
     slides.style.transform = `translate(${-moveX}px, ${-moveY}px)`;
   });
 
   frame.addEventListener('mouseleave', () => {
     isHovered = false;
-
-    // Automatically cross-fade back to main portrait on leave
     backImg.classList.remove('active');
     frontImg.classList.add('active');
     
-    // Smooth reset on cursor exit
     frame.style.transform = 'rotateX(0deg) rotateY(0deg) scale(1)';
     slides.style.transform = 'translate(0px, 0px)';
   });
@@ -348,7 +330,7 @@ function initGSAPAnimations() {
       { scaleX: 0, transformOrigin: 'left center' }, 
       { 
         scaleX: 1, 
-        duration: 1.5, 
+        duration: 1.2, 
         ease: 'power2.out', 
         scrollTrigger: {
           trigger: divider,
@@ -360,13 +342,13 @@ function initGSAPAnimations() {
   });
 
   // 2. Fade & rise reveals for section titles and badges
-  gsap.utils.toArray('.section-title-editorial, .section-badge, .about-headings, .contact-title-editorial').forEach(elem => {
+  gsap.utils.toArray('.section-title-blueprint, .blueprint-tag, .about-headings, .contact-pitch').forEach(elem => {
     gsap.fromTo(elem,
-      { opacity: 0, y: 35 },
+      { opacity: 0, y: 30 },
       {
         opacity: 1,
         y: 0,
-        duration: 1.1,
+        duration: 0.9,
         ease: 'power3.out',
         scrollTrigger: {
           trigger: elem,
@@ -378,16 +360,16 @@ function initGSAPAnimations() {
   });
 
   // 3. Staggered reveal for selected project cards
-  gsap.fromTo('.project-card-editorial',
-    { opacity: 0, y: 55 },
+  gsap.fromTo('.project-card-blueprint',
+    { opacity: 0, y: 40 },
     {
       opacity: 1,
       y: 0,
-      duration: 0.9,
-      stagger: 0.16,
+      duration: 0.8,
+      stagger: 0.12,
       ease: 'power3.out',
       scrollTrigger: {
-        trigger: '.projects-editorial-grid',
+        trigger: '.projects-blueprint-grid',
         start: 'top 82%',
         toggleActions: 'play none none none'
       }
@@ -395,33 +377,33 @@ function initGSAPAnimations() {
   );
 
   // 4. Staggered reveal for hackathon achievement cells
-  gsap.fromTo('.achievement-cell',
-    { opacity: 0, y: 45 },
+  gsap.fromTo('.achievement-cell-blueprint',
+    { opacity: 0, y: 35 },
     {
       opacity: 1,
       y: 0,
-      duration: 0.9,
-      stagger: 0.14,
+      duration: 0.8,
+      stagger: 0.12,
       ease: 'power3.out',
       scrollTrigger: {
-        trigger: '.achievements-editorial-grid',
+        trigger: '.achievements-blueprint-grid',
         start: 'top 82%',
         toggleActions: 'play none none none'
       }
     }
   );
 
-  // 5. Staggered reveal for technical competence columns
-  gsap.fromTo('.skills-column',
-    { opacity: 0, y: 40 },
+  // 5. Staggered reveal for technical competence panels
+  gsap.fromTo('.skills-blueprint-grid > .blueprint-card',
+    { opacity: 0, y: 30 },
     {
       opacity: 1,
       y: 0,
-      duration: 0.9,
-      stagger: 0.12,
+      duration: 0.8,
+      stagger: 0.1,
       ease: 'power3.out',
       scrollTrigger: {
-        trigger: '.skills-editorial-grid',
+        trigger: '.skills-blueprint-grid',
         start: 'top 82%',
         toggleActions: 'play none none none'
       }
@@ -429,16 +411,16 @@ function initGSAPAnimations() {
   );
 
   // 6. Staggered reveal for contact brand cards
-  gsap.fromTo('.contact-card-editorial',
-    { opacity: 0, y: 35 },
+  gsap.fromTo('.contact-card-blueprint-item',
+    { opacity: 0, y: 30 },
     {
       opacity: 1,
       y: 0,
-      duration: 0.9,
-      stagger: 0.1,
+      duration: 0.8,
+      stagger: 0.08,
       ease: 'power3.out',
       scrollTrigger: {
-        trigger: '.contact-grid-editorial',
+        trigger: '.contact-grid-blueprint',
         start: 'top 88%',
         toggleActions: 'play none none none'
       }

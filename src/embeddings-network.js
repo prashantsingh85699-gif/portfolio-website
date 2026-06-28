@@ -10,98 +10,70 @@ export function initEmbeddingsNetwork() {
   // Camera
   let width = container.clientWidth;
   let height = container.clientHeight;
-  const camera = new THREE.PerspectiveCamera(60, width / height, 0.1, 1000);
-  camera.position.z = 250;
+  const camera = new THREE.PerspectiveCamera(50, width / height, 1, 1000);
+  camera.position.set(0, -180, 220); // Sit tilted looking down at grid floor
 
-  // Renderer - using alpha: true for a transparent background
+  // Renderer with alpha/transparent background
   const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
   renderer.setSize(width, height);
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
   container.appendChild(renderer.domElement);
 
-  // Particles Setup
-  const particleCount = 75;
-  const areaSize = 350; // Bounds in which nodes drift
-  const maxDistance = 75; // Distance threshold for connections
+  // Plane Geometry representing our blueprint grid layout
+  const gridSegments = 36;
+  const gridWidth = 750;
+  const gridHeight = 750;
+  const geometry = new THREE.PlaneGeometry(gridWidth, gridHeight, gridSegments, gridSegments);
 
-  const particlesGeometry = new THREE.BufferGeometry();
-  const particlePositions = new Float32Array(particleCount * 3);
-  const particleVelocities = [];
-
-  for (let i = 0; i < particleCount; i++) {
-    // Distribute randomly in a cube space
-    const x = (Math.random() - 0.5) * areaSize;
-    const y = (Math.random() - 0.5) * areaSize;
-    const z = (Math.random() - 0.5) * areaSize;
-    
-    particlePositions[i * 3] = x;
-    particlePositions[i * 3 + 1] = y;
-    particlePositions[i * 3 + 2] = z;
-
-    // Soft velocity vectors for smooth organic floating
-    particleVelocities.push({
-      x: (Math.random() - 0.5) * 0.35,
-      y: (Math.random() - 0.5) * 0.35,
-      z: (Math.random() - 0.5) * 0.35
-    });
+  // Store initial vertex coordinates to compute wave offsets
+  const positionAttr = geometry.attributes.position;
+  const initialPositions = new Float32Array(positionAttr.count * 3);
+  for (let i = 0; i < positionAttr.count; i++) {
+    initialPositions[i * 3] = positionAttr.getX(i);
+    initialPositions[i * 3 + 1] = positionAttr.getY(i);
+    initialPositions[i * 3 + 2] = positionAttr.getZ(i);
   }
 
-  particlesGeometry.setAttribute('position', new THREE.BufferAttribute(particlePositions, 3));
-
-  // Custom round texture for circular particles
-  const canvas = document.createElement('canvas');
-  canvas.width = 16;
-  canvas.height = 16;
-  const ctx = canvas.getContext('2d');
-  ctx.beginPath();
-  ctx.arc(8, 8, 4, 0, Math.PI * 2);
-  ctx.fillStyle = '#2563eb'; // Cobalt blue matching design theme
-  ctx.fill();
-  const texture = new THREE.CanvasTexture(canvas);
-
-  // Points material
-  const particlesMaterial = new THREE.PointsMaterial({
-    size: 7,
-    map: texture,
-    transparent: true,
-    opacity: 0.6,
-    depthWrite: false,
-    blending: THREE.NormalBlending
-  });
-
-  const particleSystem = new THREE.Points(particlesGeometry, particlesMaterial);
-  scene.add(particleSystem);
-
-  // Lines setup for linkages between close nodes
-  const linesGeometry = new THREE.BufferGeometry();
-  const linesMaterial = new THREE.LineBasicMaterial({
+  // Wireframe material - clean Cobalt Blue gridlines
+  const material = new THREE.MeshBasicMaterial({
     color: 0x2563eb,
+    wireframe: true,
     transparent: true,
     opacity: 0.12,
     blending: THREE.NormalBlending
   });
-  
-  const lineMesh = new THREE.LineSegments(linesGeometry, linesMaterial);
-  scene.add(lineMesh);
 
-  // Interaction vectors
-  const mouse = { x: 0, y: 0, targetX: 0, targetY: 0 };
+  const gridMesh = new THREE.Mesh(geometry, material);
+  gridMesh.rotation.x = -Math.PI * 0.18; // Tilt plane slightly towards camera
+  scene.add(gridMesh);
+
+  // Interaction variables
+  const raycaster = new THREE.Raycaster();
+  const mouse = new THREE.Vector2(-9999, -9999); // Start far away
+  const mouseTarget = new THREE.Vector2(-9999, -9999);
+  const localIntersectPoint = new THREE.Vector3();
+  let hasIntersected = false;
+
+  // Track window size
   const windowHalfX = window.innerWidth / 2;
   const windowHalfY = window.innerHeight / 2;
 
-  // Track mouse coordinates for camera parallax
+  // Capture mouse positions normalized between -1 and 1
   window.addEventListener('mousemove', (event) => {
-    mouse.targetX = (event.clientX - windowHalfX) * 0.18;
-    mouse.targetY = (event.clientY - windowHalfY) * 0.18;
+    mouseTarget.x = (event.clientX / window.innerWidth) * 2 - 1;
+    mouseTarget.y = -(event.clientY / window.innerHeight) * 2 + 1;
   });
 
-  // Track scroll position
+  // Track scroll for pausing renderer when out of hero fold
   let scrollY = 0;
+  let isVisible = true;
   window.addEventListener('scroll', () => {
     scrollY = window.scrollY;
+    // Pause rendering if user scrolls past hero section height (approx 100vh)
+    isVisible = scrollY < window.innerHeight;
   });
 
-  // Resize Handler
+  // Handle Resize
   function onWindowResize() {
     if (!container) return;
     width = container.clientWidth;
@@ -113,72 +85,74 @@ export function initEmbeddingsNetwork() {
   window.addEventListener('resize', onWindowResize);
 
   // Animation Loop
+  let clock = new THREE.Clock();
   let animationFrameId;
+
   const animate = () => {
     animationFrameId = requestAnimationFrame(animate);
 
-    // Smooth camera inertia
-    mouse.x += (mouse.targetX - mouse.x) * 0.05;
-    mouse.y += (mouse.targetY - mouse.y) * 0.05;
+    if (!isVisible) return; // Skip calculation and draw frames if out of viewport
 
-    camera.position.x += (mouse.x - camera.position.x) * 0.05;
-    camera.position.y += (-mouse.y - camera.position.y) * 0.05;
-    
-    // Rotate scene slightly based on scroll position
-    camera.rotation.y = scrollY * 0.0006;
-    camera.lookAt(scene.position);
+    const time = clock.getElapsedTime() * 0.6;
 
-    const positions = particlesGeometry.attributes.position.array;
-    const linePositions = [];
+    // Smoothly interpolate mouse coordinates for organic trailing ripple
+    mouse.x += (mouseTarget.x - mouse.x) * 0.08;
+    mouse.y += (mouseTarget.y - mouse.y) * 0.08;
 
-    // Update node positions and compute connections
-    for (let i = 0; i < particleCount; i++) {
+    // Project raycaster on grid plane
+    raycaster.setFromCamera(mouse, camera);
+    const intersects = raycaster.intersectObject(gridMesh);
+
+    if (intersects.length > 0) {
+      localIntersectPoint.copy(intersects[0].point);
+      hasIntersected = true;
+    } else {
+      hasIntersected = false;
+    }
+
+    const posArray = positionAttr.array;
+    const count = positionAttr.count;
+
+    // Deformation & Wave math
+    for (let i = 0; i < count; i++) {
       const idx = i * 3;
-      
-      // Update drift position
-      positions[idx] += particleVelocities[i].x;
-      positions[idx + 1] += particleVelocities[i].y;
-      positions[idx + 2] += particleVelocities[i].z;
+      const initX = initialPositions[idx];
+      const initY = initialPositions[idx + 1];
 
-      // Bounce boundaries
-      if (Math.abs(positions[idx]) > areaSize / 2) particleVelocities[i].x *= -1;
-      if (Math.abs(positions[idx + 1]) > areaSize / 2) particleVelocities[i].y *= -1;
-      if (Math.abs(positions[idx + 2]) > areaSize / 2) particleVelocities[i].z *= -1;
+      // 1. Organic rolling wave height calculations
+      let waveZ = Math.sin(initX * 0.015 + time) * Math.cos(initY * 0.015 + time) * 15;
+      waveZ += Math.sin(initX * 0.005 - time * 0.5) * 8; // Double wave layering
 
-      // Draw connection lines to close particles
-      for (let j = i + 1; j < particleCount; j++) {
-        const jdx = j * 3;
-        
-        const dx = positions[idx] - positions[jdx];
-        const dy = positions[idx + 1] - positions[jdx + 1];
-        const dz = positions[idx + 2] - positions[jdx + 2];
-        const dist = Math.sqrt(dx * dx + dy * dy + dz * dz);
+      // 2. Mouse grid deformation (pulls mesh nodes down/up near cursor)
+      if (hasIntersected) {
+        // Calculate distance from grid vertex to intersection point in 3D space
+        const dx = posArray[idx] - localIntersectPoint.x;
+        const dy = posArray[idx + 1] - localIntersectPoint.y;
+        const dist = Math.sqrt(dx * dx + dy * dy);
 
-        if (dist < maxDistance) {
-          linePositions.push(
-            positions[idx], positions[idx + 1], positions[idx + 2],
-            positions[jdx], positions[jdx + 1], positions[jdx + 2]
-          );
+        const rippleRadius = 140;
+        if (dist < rippleRadius) {
+          // Inverse bell curve for smooth indentation displacement
+          const force = Math.pow(1 - dist / rippleRadius, 2);
+          waveZ -= force * 40; // Push mesh down by max 40px under mouse
         }
       }
+
+      posArray[idx + 2] = waveZ;
     }
 
-    particlesGeometry.attributes.position.needsUpdate = true;
+    positionAttr.needsUpdate = true;
 
-    // Update lines segments
-    if (linePositions.length > 0) {
-      linesGeometry.setAttribute('position', new THREE.Float32BufferAttribute(linePositions, 3));
-      lineMesh.visible = true;
-    } else {
-      lineMesh.visible = false;
-    }
+    // Gentle camera parallax movement
+    camera.position.x += (mouse.x * 30 - camera.position.x) * 0.04;
+    camera.lookAt(scene.position);
 
     renderer.render(scene, camera);
   };
 
   animate();
 
-  // Return teardown function if needed for SPA lifecycles
+  // Teardown API for SPA lifecycle hygiene
   return () => {
     cancelAnimationFrame(animationFrameId);
     window.removeEventListener('resize', onWindowResize);
