@@ -1082,11 +1082,20 @@ button { cursor: pointer; font-family: inherit; }
    CONTACT — DARK PANEL
 ───────────────────────────────────────── */
 .contact-section {
-  background: hsl(222, 28%, 10%);
+  position: relative;
+  background: linear-gradient(rgba(12, 13, 16, 0.88), rgba(12, 13, 16, 0.88)), url('/images/sunset.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
   padding: 7rem 0;
 }
 [data-theme="light"] .contact-section {
-  background: hsl(220, 26%, 14%);
+  background: linear-gradient(rgba(20, 18, 17, 0.9), rgba(20, 18, 17, 0.9)), url('/images/sunset.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
 }
 .contact-inner { max-width: 680px; }
 .eyebrow-tag-light {
