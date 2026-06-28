@@ -1,10 +1,9 @@
 /**
- * Prashant Singh - Warm Minimalist Craftsman Editorial Portfolio
+ * Prashant Singh - Professional Developer Minimalist Portfolio
  * Custom Interactive JavaScript Engine
  */
 
 import Lenis from 'lenis';
-import { initEmbeddingsNetwork } from './embeddings-network.js';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
@@ -12,7 +11,7 @@ gsap.registerPlugin(ScrollTrigger);
 
 // Initialize Lenis smooth scroll
 const lenis = new Lenis({
-  duration: 1.2,
+  duration: 1.1,
   easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
 });
 
@@ -22,15 +21,15 @@ function raf(time) {
 }
 requestAnimationFrame(raf);
 
-// Link Lenis to update GSAP ScrollTrigger
+// Sync ScrollTrigger with Lenis scroll updates
 lenis.on('scroll', ScrollTrigger.update);
 
 // Lock scrolling during preloader
 lenis.stop();
 
 document.addEventListener('DOMContentLoaded', () => {
+  initThemeToggle();
   initPreloader();
-  initCustomCursor();
   initMobileNav();
   initScrollSpy();
   initCertificateFilter();
@@ -40,52 +39,50 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 /**
- * Typographic Curtain Preloader
- * Sequentially transitions through concept stages (01 to 04)
- * before splitting the curtains and starting interactions.
+ * Interactive Light / Dark Theme Switching Logic
+ * Saves preference in localStorage and applies data-theme attributes
+ */
+function initThemeToggle() {
+  const toggleBtn = document.getElementById('theme-toggle');
+  if (!toggleBtn) return;
+
+  // Retrieve saved theme or fallback to user system dark mode preference
+  const savedTheme = localStorage.getItem('theme');
+  const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+  
+  const initialTheme = savedTheme ? savedTheme : (systemPrefersDark ? 'dark' : 'light');
+  
+  // Set initial theme state
+  document.documentElement.setAttribute('data-theme', initialTheme);
+
+  toggleBtn.addEventListener('click', () => {
+    const currentTheme = document.documentElement.getAttribute('data-theme');
+    const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+    
+    // Temporarily add a transition helper class to body to prevent initial load flashes
+    document.body.style.transition = 'background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease';
+    
+    document.documentElement.setAttribute('data-theme', newTheme);
+    localStorage.setItem('theme', newTheme);
+    
+    // Clean up transition rules after switch complete
+    setTimeout(() => {
+      document.body.style.transition = '';
+    }, 400);
+  });
+}
+
+/**
+ * Fast Typographic Fade Preloader
  */
 function initPreloader() {
   const preloader = document.getElementById('preloader');
   if (!preloader) return;
 
-  const stages = [
-    document.getElementById('stage-1'),
-    document.getElementById('stage-2'),
-    document.getElementById('stage-3'),
-    document.getElementById('stage-4')
-  ];
-
-  let currentStageIdx = 0;
-
-  function nextStage() {
-    if (currentStageIdx < stages.length) {
-      if (currentStageIdx > 0) {
-        stages[currentStageIdx - 1].classList.remove('active');
-        stages[currentStageIdx - 1].classList.add('prev');
-      }
-      
-      stages[currentStageIdx].classList.add('active');
-      currentStageIdx++;
-      
-      setTimeout(nextStage, 450); // Speed of each concept stage transition
-    } else {
-      // Remove active on final stage
-      stages[stages.length - 1].classList.remove('active');
-      stages[stages.length - 1].classList.add('prev');
-      
-      // Trigger curtains slide open
-      setTimeout(() => {
-        preloader.classList.add('loaded');
-        lenis.start(); // Unlock scrolling
-        
-        // Load WebGL organic silk waves after curtains draw
-        initEmbeddingsNetwork();
-      }, 350);
-    }
-  }
-
-  // Start sequence
-  setTimeout(nextStage, 250);
+  setTimeout(() => {
+    preloader.classList.add('loaded');
+    lenis.start(); // Enable scroll
+  }, 600);
 }
 
 /**
@@ -107,86 +104,7 @@ function initAnchorLinks() {
 }
 
 /**
- * Custom Cursor Follower Engine
- * Implements mouse coordinate trailing and displays dynamic help badges
- */
-function initCustomCursor() {
-  const dot = document.getElementById('cursor-dot');
-  const ring = document.getElementById('cursor-ring');
-  const cursorText = ring ? ring.querySelector('.cursor-text') : null;
-  
-  if (!dot || !ring || !cursorText) return;
-
-  let mouseX = 0;
-  let mouseY = 0;
-  let ringX = 0;
-  let ringY = 0;
-  let isMoving = false;
-
-  dot.style.opacity = '0';
-  ring.style.opacity = '0';
-
-  window.addEventListener('mousemove', (e) => {
-    mouseX = e.clientX;
-    mouseY = e.clientY;
-    
-    if (!isMoving) {
-      dot.style.opacity = '1';
-      ring.style.opacity = '1';
-      isMoving = true;
-    }
-    
-    dot.style.left = `${mouseX}px`;
-    dot.style.top = `${mouseY}px`;
-  });
-
-  function updateRingPosition() {
-    ringX += (mouseX - ringX) * 0.15;
-    ringY += (mouseY - ringY) * 0.15;
-
-    ring.style.left = `${ringX}px`;
-    ring.style.top = `${ringY}px`;
-
-    requestAnimationFrame(updateRingPosition);
-  }
-  
-  requestAnimationFrame(updateRingPosition);
-
-  // Attach hover helpers (displays [view] / [link] in cursor)
-  const attachHoverListeners = () => {
-    const hoverables = document.querySelectorAll('[data-hover="true"]');
-    
-    hoverables.forEach(el => {
-      el.addEventListener('mouseenter', () => {
-        ring.classList.add('active');
-        
-        // Custom text based on link type
-        if (el.classList.contains('link-card') || el.classList.contains('footer-social-link') || el.classList.contains('contact-card-blueprint-item')) {
-          cursorText.textContent = '[link]';
-        } else if (el.classList.contains('project-card-blueprint') || el.classList.contains('achievement-cell-blueprint')) {
-          cursorText.textContent = '[info]';
-        } else {
-          cursorText.textContent = '[select]';
-        }
-      });
-      
-      el.addEventListener('mouseleave', () => {
-        ring.classList.remove('active');
-        cursorText.textContent = '';
-      });
-    });
-  };
-
-  attachHoverListeners();
-
-  const observer = new MutationObserver(() => {
-    attachHoverListeners();
-  });
-  observer.observe(document.body, { childList: true, subtree: true });
-}
-
-/**
- * Mobile Navigation Toggle Menu
+ * Mobile Navigation Menu Toggle
  */
 function initMobileNav() {
   const toggleBtn = document.getElementById('nav-toggle-btn');
@@ -217,7 +135,7 @@ function initMobileNav() {
 }
 
 /**
- * Scroll Spy Navigation Underliner
+ * Scroll Spy Navigation Underline Updates
  */
 function initScrollSpy() {
   const sections = document.querySelectorAll('main > section');
@@ -251,12 +169,12 @@ function initScrollSpy() {
 }
 
 /**
- * Certificate Filtration Engine
+ * Certificate Filter Engine
  */
 function initCertificateFilter() {
   const searchInput = document.getElementById('certificate-search');
-  const filterBtns = document.querySelectorAll('.filter-btn-blueprint');
-  const certRows = document.querySelectorAll('.cert-row-blueprint');
+  const filterBtns = document.querySelectorAll('.filter-btn');
+  const certRows = document.querySelectorAll('.cert-row');
 
   if (!searchInput || filterBtns.length === 0 || certRows.length === 0) return;
 
@@ -283,9 +201,9 @@ function initCertificateFilter() {
       const rowOrgs = row.getAttribute('data-orgs') || '';
       const matchesCategory = (currentCategory === 'all') || rowOrgs.split(' ').includes(currentCategory);
 
-      const title = row.querySelector('.cert-row-title')?.textContent.toLowerCase() || '';
-      const issuer = row.querySelector('.cert-row-issuer')?.textContent.toLowerCase() || '';
-      const desc = row.querySelector('.cert-row-description')?.textContent.toLowerCase() || '';
+      const title = row.querySelector('.cert-title')?.textContent.toLowerCase() || '';
+      const issuer = row.querySelector('.cert-issuer')?.textContent.toLowerCase() || '';
+      const desc = row.querySelector('.cert-description')?.textContent.toLowerCase() || '';
       
       const matchesText = title.includes(currentSearchQuery) || 
                           issuer.includes(currentSearchQuery) || 
@@ -301,69 +219,37 @@ function initCertificateFilter() {
 }
 
 /**
- * 3D Parallax Tilt Profile Image Interaction
+ * Cross-fade swap for circular profile headshot on hover
  */
 function initProfileInteraction() {
   const frame = document.getElementById('hero-portrait-frame');
-  const slides = document.getElementById('hero-portrait-slides');
   const frontImg = document.getElementById('hero-portrait-front');
   const backImg = document.getElementById('hero-portrait-back');
 
-  if (!frame || !slides || !frontImg || !backImg) return;
-
-  let isHovered = false;
+  if (!frame || !frontImg || !backImg) return;
 
   frame.addEventListener('mouseenter', () => {
-    isHovered = true;
     frontImg.classList.remove('active');
     backImg.classList.add('active');
   });
 
-  window.addEventListener('mousemove', (e) => {
-    if (!isHovered) return;
-
-    const rect = frame.getBoundingClientRect();
-    const frameCenterX = rect.left + rect.width / 2;
-    const frameCenterY = rect.top + rect.height / 2;
-
-    const dx = e.clientX - frameCenterX;
-    const dy = e.clientY - frameCenterY;
-
-    const maxTilt = 8;
-    const tiltX = (dy / (window.innerHeight / 2)) * maxTilt;
-    const tiltY = -(dx / (window.innerWidth / 2)) * maxTilt;
-
-    const clampedTiltX = Math.max(-maxTilt, Math.min(maxTilt, tiltX));
-    const clampedTiltY = Math.max(-maxTilt, Math.min(maxTilt, tiltY));
-
-    frame.style.transform = `rotateX(${clampedTiltX}deg) rotateY(${clampedTiltY}deg) scale(1.03)`;
-
-    const moveX = (dx / (window.innerWidth / 2)) * 10;
-    const moveY = (dy / (window.innerHeight / 2)) * 10;
-    slides.style.transform = `translate(${-moveX}px, ${-moveY}px)`;
-  });
-
   frame.addEventListener('mouseleave', () => {
-    isHovered = false;
     backImg.classList.remove('active');
     frontImg.classList.add('active');
-    
-    frame.style.transform = 'rotateX(0deg) rotateY(0deg) scale(1)';
-    slides.style.transform = 'translate(0px, 0px)';
   });
 }
 
 /**
- * Premium GSAP Scroll-Trigger Reveals
+ * Crisp GSAP Scroll-Trigger Reveals
  */
 function initGSAPAnimations() {
-  // 1. Growing horizontal dividers
-  gsap.utils.toArray('.editorial-divider').forEach(divider => {
+  // 1. Divider line animations
+  gsap.utils.toArray('.section-divider').forEach(divider => {
     gsap.fromTo(divider, 
       { scaleX: 0, transformOrigin: 'left center' }, 
       { 
         scaleX: 1, 
-        duration: 1.2, 
+        duration: 1, 
         ease: 'power2.out', 
         scrollTrigger: {
           trigger: divider,
@@ -374,14 +260,14 @@ function initGSAPAnimations() {
     );
   });
 
-  // 2. Fade & rise reveals for titles and tags
-  gsap.utils.toArray('.section-title-blueprint, .blueprint-tag, .about-headings, .contact-pitch').forEach(elem => {
+  // 2. Text elements fade-in
+  gsap.utils.toArray('.section-title, .section-tag, .stats-panel, .bio-text').forEach(elem => {
     gsap.fromTo(elem,
-      { opacity: 0, y: 30 },
+      { opacity: 0, y: 20 },
       {
         opacity: 1,
         y: 0,
-        duration: 0.9,
+        duration: 0.7,
         ease: 'power3.out',
         scrollTrigger: {
           trigger: elem,
@@ -392,68 +278,68 @@ function initGSAPAnimations() {
     );
   });
 
-  // 3. Staggered reveal for selected project cards
-  gsap.fromTo('.project-card-blueprint',
-    { opacity: 0, y: 40 },
-    {
-      opacity: 1,
-      y: 0,
-      duration: 0.8,
-      stagger: 0.12,
-      ease: 'power3.out',
-      scrollTrigger: {
-        trigger: '.projects-blueprint-grid',
-        start: 'top 82%',
-        toggleActions: 'play none none none'
-      }
-    }
-  );
-
-  // 4. Staggered reveal for hackathon cells
-  gsap.fromTo('.achievement-cell-blueprint',
-    { opacity: 0, y: 35 },
-    {
-      opacity: 1,
-      y: 0,
-      duration: 0.8,
-      stagger: 0.12,
-      ease: 'power3.out',
-      scrollTrigger: {
-        trigger: '.achievements-blueprint-grid',
-        start: 'top 82%',
-        toggleActions: 'play none none none'
-      }
-    }
-  );
-
-  // 5. Staggered reveal for competence cards
-  gsap.fromTo('.skills-blueprint-grid > .blueprint-card',
+  // 3. Staggered project cards reveal
+  gsap.fromTo('.project-card',
     { opacity: 0, y: 30 },
     {
       opacity: 1,
       y: 0,
-      duration: 0.8,
+      duration: 0.7,
       stagger: 0.1,
       ease: 'power3.out',
       scrollTrigger: {
-        trigger: '.skills-blueprint-grid',
+        trigger: '.projects-grid',
         start: 'top 82%',
         toggleActions: 'play none none none'
       }
     }
   );
 
-  // 6. Staggered reveal for contact items
-  gsap.fromTo('.contact-card-blueprint-item',
+  // 4. Staggered hackathon cards reveal
+  gsap.fromTo('.hackathon-card',
     { opacity: 0, y: 30 },
     {
       opacity: 1,
       y: 0,
-      duration: 0.8,
+      duration: 0.7,
+      stagger: 0.1,
+      ease: 'power3.out',
+      scrollTrigger: {
+        trigger: '.hackathon-grid',
+        start: 'top 82%',
+        toggleActions: 'play none none none'
+      }
+    }
+  );
+
+  // 5. Staggered detail grids reveal
+  gsap.fromTo('.skills-grid > .details-card',
+    { opacity: 0, y: 20 },
+    {
+      opacity: 1,
+      y: 0,
+      duration: 0.7,
       stagger: 0.08,
       ease: 'power3.out',
       scrollTrigger: {
-        trigger: '.contact-grid-blueprint',
+        trigger: '.skills-grid',
+        start: 'top 82%',
+        toggleActions: 'play none none none'
+      }
+    }
+  );
+
+  // 6. Staggered contact items reveal
+  gsap.fromTo('.contact-card',
+    { opacity: 0, y: 20 },
+    {
+      opacity: 1,
+      y: 0,
+      duration: 0.7,
+      stagger: 0.08,
+      ease: 'power3.out',
+      scrollTrigger: {
+        trigger: '.contact-grid',
         start: 'top 88%',
         toggleActions: 'play none none none'
       }

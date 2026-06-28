@@ -5,54 +5,63 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     
     <!-- SEO Optimization -->
-    <title>Prashant Singh | Systems Builder &amp; Software Developer</title>
-    <meta name="description" content="Portfolio of Prashant Singh. Focused on building high-integrity systems, web performance, and applied intelligence pipelines." />
+    <title>Prashant Singh | B.Tech CSE Student &amp; Developer</title>
+    <meta name="description" content="Portfolio of Prashant Singh. Computer Science student, systems builder, and aspiring software engineer." />
     
-    <!-- Google Fonts: Fraunces (Editorial Display Serif), IBM Plex Mono (Technical Monospace), Inter (Readable Sans-serif) -->
+    <!-- Google Fonts: Inter (headings and body) & Space Mono (metadata labels) -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,600;0,9..144,800;1,9..144,400&family=IBM+Plex+Mono:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
     
     <!-- CSS Stylesheet -->
     <link rel="stylesheet" href="/src/style.css" />
   </head>
   <body>
-    <!-- Preloader Screen (Split-Curtain Editorial Intro) -->
+    <!-- Simple Fade preloader -->
     <div class="preloader" id="preloader">
-      <div class="preloader-curtain curtain-left"></div>
-      <div class="preloader-curtain curtain-right"></div>
       <div class="preloader-content">
-        <div class="loader-stages">
-          <span class="stage active" id="stage-1">01 / CONCEPT</span>
-          <span class="stage" id="stage-2">02 / STRUCTURE</span>
-          <span class="stage" id="stage-3">03 / SYNTAX</span>
-          <span class="stage" id="stage-4">04 / SYSTEM</span>
-        </div>
-        <div class="loader-title">PRASHANT SINGH</div>
+        <span class="preloader-name">[ prashant_singh ]</span>
+        <div class="preloader-line"></div>
       </div>
     </div>
 
-    <!-- Custom Cursor Follower (Elegant Minimalist Reticle) -->
-    <div class="cursor-dot" id="cursor-dot"></div>
-    <div class="cursor-ring" id="cursor-ring"><span class="cursor-text"></span></div>
-
-    <!-- Background Noise Overlay (Fine Paper Texture) -->
-    <div class="noise-layer" aria-hidden="true"></div>
-
-    <!-- Sticky Navbar (Clean Editorial Border) -->
+    <!-- Sticky Navbar -->
     <header class="navbar" id="site-header">
       <div class="nav-container">
         <a href="#home" class="nav-logo" id="nav-logo-link" data-hover="true">
           PRASHANT SINGH
         </a>
-        <nav class="nav-menu" id="nav-menu-bar">
-          <a href="#home" class="nav-link active" id="nav-link-home" data-hover="true"><span class="nav-num">[00]</span>index</a>
-          <a href="#about" class="nav-link" id="nav-link-about" data-hover="true"><span class="nav-num">[01]</span>biography</a>
-          <a href="#skills" class="nav-link" id="nav-link-skills" data-hover="true"><span class="nav-num">[02]</span>toolkit</a>
-          <a href="#projects" class="nav-link" id="nav-link-projects" data-hover="true"><span class="nav-num">[03]</span>builds</a>
-          <a href="#certificates" class="nav-link" id="nav-link-certificates" data-hover="true"><span class="nav-num">[04]</span>credentials</a>
-          <a href="#contact" class="nav-link" id="nav-link-contact" data-hover="true"><span class="nav-num">[05]</span>contact</a>
-        </nav>
+        <div class="nav-menu-wrapper">
+          <nav class="nav-menu" id="nav-menu-bar">
+            <a href="#home" class="nav-link active" id="nav-link-home" data-hover="true">index</a>
+            <a href="#about" class="nav-link" id="nav-link-about" data-hover="true">about</a>
+            <a href="#skills" class="nav-link" id="nav-link-skills" data-hover="true">skills</a>
+            <a href="#projects" class="nav-link" id="nav-link-projects" data-hover="true">projects</a>
+            <a href="#certificates" class="nav-link" id="nav-link-certificates" data-hover="true">certs</a>
+            <a href="#contact" class="nav-link" id="nav-link-contact" data-hover="true">contact</a>
+          </nav>
+          
+          <!-- Theme Toggle Button -->
+          <button id="theme-toggle" class="theme-toggle-btn" aria-label="Toggle light/dark theme" data-hover="true">
+            <!-- Sun Icon (displayed in dark mode) -->
+            <svg class="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="5"></circle>
+              <line x1="12" y1="1" x2="12" y2="3"></line>
+              <line x1="12" y1="21" x2="12" y2="23"></line>
+              <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+              <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+              <line x1="1" y1="12" x2="3" y2="12"></line>
+              <line x1="21" y1="12" x2="23" y2="12"></line>
+              <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+              <line x1="18.36" y1="4.22" x2="19.78" y2="5.64"></line>
+            </svg>
+            <!-- Moon Icon (displayed in light mode) -->
+            <svg class="moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+            </svg>
+          </button>
+        </div>
+
         <!-- Mobile Menu Toggle -->
         <button class="nav-toggle" id="nav-toggle-btn" aria-label="Toggle navigation menu" data-hover="true">
           <span class="toggle-bar"></span>
@@ -63,88 +72,55 @@
     </header>
 
     <main>
-      <!-- Hero Section (Asymmetrical Editorial Layout) -->
+      <!-- Hero Section -->
       <section class="hero-section" id="home">
-        <!-- 3D Organic Silk Waves Background -->
-        <div id="embeddings-canvas-container" class="embeddings-canvas-container" aria-hidden="true"></div>
-        
         <div class="hero-container">
-          <div class="hero-blueprint-grid">
+          <div class="hero-grid">
             
-            <!-- Left Column: Typographic Branding & Focus -->
-            <div class="hero-left-col">
-              <div class="blueprint-tag">[00 // INITIALIZATION]</div>
-              <h1 class="hero-title-blueprint">
-                Prashant<br /><span class="serif-italic">Singh</span>
-              </h1>
-              <p class="hero-tagline-blueprint">Systems Builder &amp; Aspiring Software Engineer</p>
+            <!-- Left: Name, Bio, Specifications -->
+            <div class="hero-left">
+              <span class="section-tag">[00 // START]</span>
+              <h1 class="hero-name">PRASHANT SINGH</h1>
+              <p class="hero-title-tag">B.Tech CSE Student &amp; Software Explorer</p>
               
-              <div class="hero-craft-statement">
-                <p>"I collaborate with teams to design modular systems, optimize web performance, and build functional pipelines that turn theoretical models into products."</p>
-              </div>
+              <p class="hero-desc">
+                I am a Computer Science student focused on learning the core foundations of software systems. I enjoy writing clean code, building responsive interfaces, and understanding how data pipelines function under the hood.
+              </p>
               
-              <!-- Clean Specs Matrix -->
-              <div class="blueprint-spec-card">
-                <div class="card-title-mono">// SYSTEM GRID PARAMETERS</div>
-                <div class="spec-row">
-                  <span class="spec-label">DEVELOPER:</span>
-                  <span class="spec-val">Prashant Singh</span>
+              <!-- Clean Monospace Specs Table -->
+              <div class="specs-table">
+                <div class="specs-row">
+                  <span class="spec-lbl">Academic_Grid:</span>
+                  <span class="spec-val">Vivekananda Global University × NIAT</span>
                 </div>
-                <div class="spec-row">
-                  <span class="spec-label">CURRICULUM:</span>
-                  <span class="spec-val">VGU × NIAT (B.Tech CSE)</span>
+                <div class="specs-row">
+                  <span class="spec-lbl">Location_Coords:</span>
+                  <span class="spec-val">Satna, MP, India</span>
                 </div>
-                <div class="spec-row">
-                  <span class="spec-label">GEOLOCATION:</span>
-                  <span class="spec-val">Satna, MP [24.57° N, 80.83° E]</span>
+                <div class="specs-row">
+                  <span class="spec-lbl">Radar_Status:</span>
+                  <span class="spec-val text-green">[Active // Seeking Internships 2026]</span>
                 </div>
-                <div class="spec-row">
-                  <span class="spec-label">RADAR_SWEEP:</span>
-                  <span class="spec-val text-green">[ACTIVE // AVAILABLE_FOR_INTERNSHIPS]</span>
-                </div>
-                <div class="spec-row">
-                  <span class="spec-label">PIPELINE:</span>
-                  <span class="spec-val">BRAVE Project [Modular System Integration]</span>
+                <div class="specs-row">
+                  <span class="spec-lbl">Current_Project:</span>
+                  <span class="spec-val">BRAVE Modular System Integration</span>
                 </div>
               </div>
 
-              <!-- View work action -->
-              <div class="hero-actions-blueprint">
-                <a href="#projects" class="btn-blueprint" id="btn-view-work" data-hover="true">
-                  <span class="btn-num">[01]</span> View Selected Work
+              <div class="hero-actions">
+                <a href="#projects" class="btn-primary" id="btn-view-work" data-hover="true">
+                  View Selected Work
                 </a>
               </div>
             </div>
             
-            <!-- Right Column: Framed Portrait Board -->
-            <div class="hero-right-col">
-              <div class="hero-drafting-board">
-                <!-- Ticks and annotations -->
-                <div class="board-tick-top-left"></div>
-                <div class="board-tick-top-right"></div>
-                <div class="board-tick-bottom-left"></div>
-                <div class="board-tick-bottom-right"></div>
-                
-                <span class="board-coord-tag top-left">RECORD: PS_PORTRAIT_01</span>
-                <span class="board-coord-tag top-right">RADIUS: 100MM</span>
-                <span class="board-coord-tag bottom-left">SCALE: 1.00 // HUMAN_INPUT_SENSORS</span>
-                
-                <div class="hero-image-wrapper">
-                  <!-- Rotating sweep indicator -->
-                  <div class="rotating-text-ring">
-                    <svg viewBox="0 0 200 200" class="rotating-text-svg">
-                      <path id="textCirclePath" d="M 100, 100 m -80, 0 a 80,80 0 1,1 160,0 a 80,80 0 1,1 -160,0" fill="none"></path>
-                      <text fill="#c2593f" font-family="IBM Plex Mono" font-size="7.5" font-weight="700" letter-spacing="2.8px">
-                        <textPath href="#textCirclePath">SYSTEMS ARCHITECTURE • APPLIED AI • WEB PIPELINES •</textPath>
-                      </text>
-                    </svg>
-                  </div>
-                  <!-- Circular portrait frame with 3D parallax tilt -->
-                  <div class="hero-portrait-frame" id="hero-portrait-frame" data-hover="true">
-                    <div class="hero-portrait-slides" id="hero-portrait-slides">
-                      <img src="/images/profile.png" alt="Prashant Singh Portrait" class="hero-portrait-img active" id="hero-portrait-front" />
-                      <img src="/images/profile-alt.jpg" alt="Prashant Singh Alternate Portrait" class="hero-portrait-img" id="hero-portrait-back" />
-                    </div>
+            <!-- Right: Elegant Circular Portrait Mount -->
+            <div class="hero-right">
+              <div class="portrait-mount-box">
+                <div class="portrait-frame" id="hero-portrait-frame" data-hover="true">
+                  <div class="portrait-slides" id="hero-portrait-slides">
+                    <img src="/images/profile.png" alt="Prashant Singh Portrait" class="portrait-img active" id="hero-portrait-front" />
+                    <img src="/images/profile-alt.jpg" alt="Prashant Singh Alternate Portrait" class="portrait-img" id="hero-portrait-back" />
                   </div>
                 </div>
               </div>
@@ -157,59 +133,56 @@
       <!-- About & Education Section -->
       <section class="about-section" id="about">
         <div class="section-container">
-          <div class="editorial-divider"></div>
-          
-          <div class="blueprint-tag">[01 // BIOGRAPHY]</div>
+          <div class="section-divider"></div>
+          <span class="section-tag">[01 // BIOGRAPHY]</span>
           
           <div class="about-grid">
-            <!-- Left Panel: Stats and Parameters -->
-            <div class="about-headings">
-              <div class="blueprint-card p-6 mb-6">
-                <div class="card-title-mono">// RECORD DATA INDEX</div>
-                <div class="editorial-stats-row">
-                  <div class="stat-box">
-                    <span class="stat-number">5+</span>
-                    <span class="stat-label">Hackathons Completed</span>
-                  </div>
-                  <div class="stat-box">
-                    <span class="stat-number">11</span>
-                    <span class="stat-label">Verified Certifications</span>
-                  </div>
+            <!-- Left: Highlights & Stats -->
+            <div class="about-left">
+              <h2 class="section-title">Introduction</h2>
+              <div class="stats-panel">
+                <div class="stat-item">
+                  <span class="stat-val">5+</span>
+                  <span class="stat-lbl">Hackathons Completed</span>
+                </div>
+                <div class="stat-item">
+                  <span class="stat-val">11</span>
+                  <span class="stat-lbl">Verified Certifications</span>
                 </div>
               </div>
             </div>
             
-            <!-- Right Panel: Bio & Current Education -->
-            <div class="about-content">
-              <p class="body-editorial drop-cap">
-                A strong project is created by real constraints. I build at the intersection of structured code and applied intelligence, focusing on creating applications that perform efficiently under pressure. I enjoy working on projects where software meets tight timelines, limited resources, and concrete outcomes.
+            <!-- Right: Bio & Education Grid -->
+            <div class="about-right">
+              <p class="bio-text">
+                My journey into software engineering started with curiosity about how software solves daily challenges. As a first-year student, I focus on coding fundamentals, structures, and building projects. I enjoy participating in college hackathons because they push me to plan, collaborate, and ship functional web prototypes under time constraints.
               </p>
-              <p class="body-editorial">
-                Like a craftsman, I prefer starting from raw materials. Hackathons are my preferred mode of building: tight scopes, hard deadlines, and forced decisions that keep projects practical. When I'm not in competitions, I focus on building independently: structuring search algorithms, experimenting with text embeddings, and setting up workflows from scratch.
+              <p class="bio-text">
+                Beyond coursework, I spend my time exploring database schemas, experimenting with Web APIs, and learning how modern AI models can be integrated into web applications. I believe in hands-on learning—writing code from scratch, testing pipelines, and deploying working prototypes.
               </p>
               
-              <div class="status-edu-flex-container">
+              <div class="details-grid">
                 <!-- Current projects card -->
-                <div class="blueprint-card">
-                  <h3 class="panel-heading">// ACTIVE PIPELINES</h3>
-                  <ul class="panel-list">
+                <div class="details-card">
+                  <h3 class="details-heading">// ACTIVE MODULES</h3>
+                  <ul class="details-list">
                     <li>
-                      <span class="panel-item-badge text-green">System</span>
-                      <div class="panel-item-content">
+                      <span class="badge badge-green">System</span>
+                      <div class="details-list-content">
                         <strong>BRAVE Project</strong>
                         <span>Undergoing modular system integration at NIAT</span>
                       </div>
                     </li>
                     <li>
-                      <span class="panel-item-badge text-blue">Curriculum</span>
-                      <div class="panel-item-content">
+                      <span class="badge badge-blue">Curriculum</span>
+                      <div class="details-list-content">
                         <strong>GRIT Program</strong>
                         <span>Advanced professional training pathway</span>
                       </div>
                     </li>
                     <li>
-                      <span class="panel-item-badge text-orange">Exploring</span>
-                      <div class="panel-item-content">
+                      <span class="badge badge-orange">Exploring</span>
+                      <div class="details-list-content">
                         <strong>React Library</strong>
                         <span>Exploring component states and clean renders</span>
                       </div>
@@ -218,16 +191,16 @@
                 </div>
 
                 <!-- Education details -->
-                <div class="blueprint-card">
-                  <h3 class="panel-heading">// ACADEMIC MATRIX</h3>
-                  <div class="panel-edu-item">
-                    <h4 class="edu-degree">B.Tech in Computer Science</h4>
-                    <p class="edu-institution">Vivekananda Global University × NIAT</p>
+                <div class="details-card">
+                  <h3 class="details-heading">// EDUCATION HISTORY</h3>
+                  <div class="edu-item">
+                    <h4 class="edu-title">B.Tech in Computer Science</h4>
+                    <p class="edu-school">Vivekananda Global University × NIAT</p>
                     <p class="edu-meta">1st Year (2nd Semester Completed)</p>
                   </div>
-                  <div class="panel-edu-item mt-4">
-                    <h4 class="edu-degree">GRIT Program Cohort</h4>
-                    <p class="edu-institution">NxtWave Institute of Advanced Technologies</p>
+                  <div class="edu-item mt-3">
+                    <h4 class="edu-title">GRIT Program Cohort</h4>
+                    <p class="edu-school">NxtWave Institute of Advanced Technologies</p>
                     <p class="edu-meta">Advanced Technical Frameworks</p>
                   </div>
                 </div>
@@ -237,47 +210,44 @@
         </div>
       </section>
 
-      <!-- Key Highlights Section (Asymmetric grid with borders) -->
+      <!-- Hackathons Section -->
       <section class="achievements-section" id="achievements">
         <div class="section-container">
-          <div class="editorial-divider"></div>
+          <div class="section-divider"></div>
+          <span class="section-tag">[02 // HACKATHONS]</span>
+          <h2 class="section-title">Competitive Builds</h2>
           
-          <div class="achievements-section-header">
-            <div class="blueprint-tag">[02 // SYSTEM_BUILD_LOGS]</div>
-            <h2 class="section-title-blueprint">Hackathons &amp; Builds</h2>
-          </div>
-          
-          <div class="achievements-blueprint-grid">
+          <div class="hackathon-grid">
             <!-- Card 1 -->
-            <div class="achievement-cell-blueprint" data-hover="true">
-              <span class="cell-num">[01/04]</span>
-              <h3 class="cell-title">2nd Position</h3>
-              <span class="cell-subtitle">Web-A-Thon, Panache S-16</span>
-              <p class="cell-desc">Collaborated with my team to build a high-performance web solution under severe time limits at VGU's flagship tech festival, securing 2nd place.</p>
+            <div class="hackathon-card" data-hover="true">
+              <span class="card-num">[01]</span>
+              <h3 class="card-title">2nd Position</h3>
+              <span class="card-subtitle">Web-A-Thon, Panache S-16</span>
+              <p class="card-desc">Worked with a team of three to build a functional event portal under a 6-hour deadline, focusing on layout and fast navigation.</p>
             </div>
             
             <!-- Card 2 -->
-            <div class="achievement-cell-blueprint" data-hover="true">
-              <span class="cell-num">[02/04]</span>
-              <h3 class="cell-title">State-Level Qualifier</h3>
-              <span class="cell-subtitle">OpenAI Academy × NxtWave × INDIAai</span>
-              <p class="cell-desc">Qualified for the state buildathon after developing a functional prototype that passed regional rounds evaluated by industry leads.</p>
+            <div class="hackathon-card" data-hover="true">
+              <span class="card-num">[02]</span>
+              <h3 class="card-title">State-Level Qualifier</h3>
+              <span class="card-subtitle">OpenAI Academy × NxtWave × INDIAai</span>
+              <p class="card-desc">Qualified for the state buildathon after developing an AI prototype that parsed text documents to generate structured answers.</p>
             </div>
             
             <!-- Card 3 -->
-            <div class="achievement-cell-blueprint" data-hover="true">
-              <span class="cell-num">[03/04]</span>
-              <h3 class="cell-title">Solo Builder</h3>
-              <span class="cell-subtitle">Regional Buildathon, Delhi</span>
-              <p class="cell-desc">Took charge of the complete product lifecycle solo — from conceptual mapping and schema writing to final front-end deployment.</p>
+            <div class="hackathon-card" data-hover="true">
+              <span class="card-num">[03]</span>
+              <h3 class="card-title">Solo Builder</h3>
+              <span class="card-subtitle">Regional Buildathon, Delhi</span>
+              <p class="card-desc">Took responsibility for designing the front-end layout and wiring API fetch calls to display live database records.</p>
             </div>
             
             <!-- Card 4 -->
-            <div class="achievement-cell-blueprint" data-hover="true">
-              <span class="cell-num">[04/04]</span>
-              <h3 class="cell-title">3 Sites, 5 Hours</h3>
-              <span class="cell-subtitle">College Webathon Fest</span>
-              <p class="cell-desc">Coded and pushed three fully structured web properties from scratch within 5 hours, using only clean, hand-written HTML/CSS/JS.</p>
+            <div class="hackathon-card" data-hover="true">
+              <span class="card-num">[04]</span>
+              <h3 class="card-title">3 Sites, 5 Hours</h3>
+              <span class="card-subtitle">College Webathon Fest</span>
+              <p class="card-desc">Coded and deployed three static sites in 5 hours, practicing semantic HTML structures and responsive CSS layouts.</p>
             </div>
           </div>
         </div>
@@ -286,102 +256,87 @@
       <!-- Technical Skills Section -->
       <section class="skills-section" id="skills">
         <div class="section-container">
-          <div class="editorial-divider"></div>
+          <div class="section-divider"></div>
+          <span class="section-tag">[03 // TOOLKIT]</span>
+          <h2 class="section-title">Skills &amp; Technologies</h2>
           
-          <div class="skills-section-header">
-            <div class="blueprint-tag">[03 // PIPELINE_TOOLKIT]</div>
-            <h2 class="section-title-blueprint">Technical Competence</h2>
-          </div>
-          
-          <div class="skills-blueprint-grid">
+          <div class="skills-grid">
             <!-- Programming Languages -->
-            <div class="blueprint-card">
-              <div class="skills-col-header">
-                <span class="skills-col-index">01 //</span>
-                <h3 class="skills-col-title">Languages</h3>
-              </div>
-              <div class="skills-col-content-blueprint">
-                <div class="skill-name-row">
-                  <span class="skill-name-mono">C++</span>
-                  <span class="skill-meta-mono">[advanced]</span>
+            <div class="details-card">
+              <h3 class="skills-heading">Languages</h3>
+              <div class="skills-content">
+                <div class="skill-item">
+                  <span class="skill-name">C++</span>
+                  <span class="skill-level">[advanced]</span>
                 </div>
-                <div class="skill-name-row">
-                  <span class="skill-name-mono">Python</span>
-                  <span class="skill-meta-mono">[advanced]</span>
+                <div class="skill-item">
+                  <span class="skill-name">Python</span>
+                  <span class="skill-level">[advanced]</span>
                 </div>
-                <div class="skill-name-row">
-                  <span class="skill-name-mono">JavaScript</span>
-                  <span class="skill-meta-mono">[intermediate]</span>
+                <div class="skill-item">
+                  <span class="skill-name">JavaScript</span>
+                  <span class="skill-level">[intermediate]</span>
                 </div>
               </div>
             </div>
 
             <!-- Web Development -->
-            <div class="blueprint-card">
-              <div class="skills-col-header">
-                <span class="skills-col-index">02 //</span>
-                <h3 class="skills-col-title">Web Dev</h3>
-              </div>
-              <div class="skills-col-content-blueprint">
-                <div class="skill-name-row">
-                  <span class="skill-name-mono">HTML</span>
-                  <span class="skill-meta-mono">[expert]</span>
+            <div class="details-card">
+              <h3 class="skills-heading">Web Dev</h3>
+              <div class="skills-content">
+                <div class="skill-item">
+                  <span class="skill-name">HTML</span>
+                  <span class="skill-level">[expert]</span>
                 </div>
-                <div class="skill-name-row">
-                  <span class="skill-name-mono">CSS</span>
-                  <span class="skill-meta-mono">[advanced]</span>
+                <div class="skill-item">
+                  <span class="skill-name">CSS</span>
+                  <span class="skill-level">[advanced]</span>
                 </div>
-                <div class="skill-name-row">
-                  <span class="skill-name-mono">React</span>
-                  <span class="skill-meta-mono">[learning]</span>
+                <div class="skill-item">
+                  <span class="skill-name">React</span>
+                  <span class="skill-level">[learning]</span>
                 </div>
               </div>
             </div>
 
             <!-- AI / ML -->
-            <div class="blueprint-card">
-              <div class="skills-col-header">
-                <span class="skills-col-index">03 //</span>
-                <h3 class="skills-col-title">Applied AI</h3>
-              </div>
-              <div class="skills-col-content-blueprint">
-                <div class="skill-name-row">
-                  <span class="skill-name-mono">Generative AI</span>
-                  <span class="skill-meta-mono">[advanced]</span>
+            <div class="details-card">
+              <h3 class="skills-heading">Applied AI</h3>
+              <div class="skills-content">
+                <div class="skill-item">
+                  <span class="skill-name">Generative AI</span>
+                  <span class="skill-level">[advanced]</span>
                 </div>
-                <div class="skill-name-row">
-                  <span class="skill-name-mono">LLMs</span>
-                  <span class="skill-meta-mono">[advanced]</span>
+                <div class="skill-item">
+                  <span class="skill-name">LLMs</span>
+                  <span class="skill-level">[advanced]</span>
                 </div>
-                <div class="skill-name-row">
-                  <span class="skill-name-mono">Embeddings</span>
-                  <span class="skill-meta-mono">[functional]</span>
+                <div class="skill-item">
+                  <span class="skill-name">Embeddings</span>
+                  <span class="skill-level">[functional]</span>
                 </div>
-                <div class="skill-name-row">
-                  <span class="skill-name-mono">AI Agents</span>
-                  <span class="skill-meta-mono">[functional]</span>
+                <div class="skill-item">
+                  <span class="skill-name">AI Workflows</span>
+                  <span class="skill-level">[functional]</span>
                 </div>
               </div>
             </div>
 
             <!-- Developer Tools -->
-            <div class="blueprint-card">
-              <div class="skills-col-header">
-                <span class="skills-col-index">04 //</span>
-                <h3 class="skills-col-title">Developer Tools</h3>
-              </div>
-              <div class="skills-col-content-blueprint">
-                <div class="skill-name-row">
-                  <span class="skill-name-mono">Git</span>
-                  <span class="skill-meta-mono">[advanced]</span>
+            <div class="details-card">
+              <h3 class="skills-heading">Developer Tools</h3>
+              <div class="skills-content">
+                <div class="skill-item">
+                  <span class="skill-name">Git</span>
+                  <span class="skill-level">[advanced]</span>
                 </div>
-                <div class="skill-name-row">
-                  <span class="skill-name-mono">GitHub</span>
-                  <span class="skill-meta-mono">[advanced]</span>
+                <div class="skill-item">
+                  <span class="skill-name">GitHub</span>
+                  <span class="skill-level">[advanced]</span>
                 </div>
-                <div class="skill-name-row">
-                  <span class="skill-name-mono">Base44</span>
-                  <span class="skill-meta-mono">[functional]</span>
+                <div class="skill-item">
+                  <span class="skill-name">Base44</span>
+                  <span class="skill-level">[functional]</span>
                 </div>
               </div>
             </div>
@@ -392,27 +347,24 @@
       <!-- Selected Projects Section -->
       <section class="projects-section" id="projects">
         <div class="section-container">
-          <div class="editorial-divider"></div>
+          <div class="section-divider"></div>
+          <span class="section-tag">[04 // SHIPPED_PROJECTS]</span>
+          <h2 class="section-title">Functional Projects</h2>
           
-          <div class="projects-section-header">
-            <div class="blueprint-tag">[04 // DEPLOYED_SHIPPED_BUILDS]</div>
-            <h2 class="section-title-blueprint">Functional Projects</h2>
-          </div>
-          
-          <div class="projects-blueprint-grid">
+          <div class="projects-grid">
             <!-- Project 1: X Manage -->
-            <div class="project-card-blueprint" data-hover="true">
-              <div class="project-card-head">
-                <span class="project-index">[01]</span>
-                <span class="project-badge success">Live Build</span>
+            <div class="project-card" data-hover="true">
+              <div class="project-head">
+                <span class="project-idx">[01]</span>
+                <span class="project-badge label-green">Live Build</span>
               </div>
-              <div class="project-card-body">
-                <h3 class="project-title-label">X Manage</h3>
-                <span class="project-tagline-label">Hackathon Event Management Dashboard</span>
-                <p class="project-desc-label">
-                  An event management web app featuring score integrations, login state verification, and event creation modules. Built from scratch with my team in under 5 hours during a live Webathon.
+              <div class="project-body">
+                <h3 class="project-title">X Manage</h3>
+                <span class="project-tagline">Hackathon Event Management Dashboard</span>
+                <p class="project-desc">
+                  An event coordinator tool featuring login state checks and scoring boards, built during a hackathon.
                 </p>
-                <div class="project-tech-pills">
+                <div class="project-pills">
                   <span>HTML</span>
                   <span>CSS</span>
                   <span>JavaScript</span>
@@ -421,18 +373,18 @@
             </div>
 
             <!-- Project 2: Web-A-Thon -->
-            <div class="project-card-blueprint" data-hover="true">
-              <div class="project-card-head">
-                <span class="project-index">[02]</span>
-                <span class="project-badge gold">2nd Place</span>
+            <div class="project-card" data-hover="true">
+              <div class="project-head">
+                <span class="project-idx">[02]</span>
+                <span class="project-badge label-orange">2nd Place</span>
               </div>
-              <div class="project-card-body">
-                <h3 class="project-title-label">Web-A-Thon Project</h3>
-                <span class="project-tagline-label">High-Performance VGU Festival Portal</span>
-                <p class="project-desc-label">
-                  A high-performance client web solution designed to handle rapid navigation requests smoothly under festival competition limits. Built during Panache S-16 at VGU.
+              <div class="project-body">
+                <h3 class="project-title">Web-A-Thon Project</h3>
+                <span class="project-tagline">High-Performance VGU Festival Portal</span>
+                <p class="project-desc">
+                  A fast-loading festival hub designed to handle scheduling and participant listings efficiently.
                 </p>
-                <div class="project-tech-pills">
+                <div class="project-pills">
                   <span>HTML</span>
                   <span>CSS</span>
                   <span>React JS</span>
@@ -441,18 +393,18 @@
             </div>
 
             <!-- Project 3: Base44 Hackathon -->
-            <div class="project-card-blueprint" data-hover="true">
-              <div class="project-card-head">
-                <span class="project-index">[03]</span>
+            <div class="project-card" data-hover="true">
+              <div class="project-head">
+                <span class="project-idx">[03]</span>
                 <span class="project-badge">D-Coders Team</span>
               </div>
-              <div class="project-card-body">
-                <h3 class="project-title-label">Base44 Hackathon Project</h3>
-                <span class="project-tagline-label">Module Integration App</span>
-                <p class="project-desc-label">
-                  A web application built using the Base44 system architecture. Focuses on integrating API modules to parse inputs and update user states in real time.
+              <div class="project-body">
+                <h3 class="project-title">Base44 Hackathon Project</h3>
+                <span class="project-tagline">Module Integration App</span>
+                <p class="project-desc">
+                  A prototype demonstrating user state tracking and API module data parsing, built with Base44 architecture.
                 </p>
-                <div class="project-tech-pills">
+                <div class="project-pills">
                   <span>Base44</span>
                   <span>JavaScript</span>
                   <span>HTML/CSS</span>
@@ -461,18 +413,18 @@
             </div>
 
             <!-- Project 4: AI Buildathon -->
-            <div class="project-card-blueprint" data-hover="true">
-              <div class="project-card-head">
-                <span class="project-index">[04]</span>
-                <span class="project-badge state">State Qualifier</span>
+            <div class="project-card" data-hover="true">
+              <div class="project-head">
+                <span class="project-idx">[04]</span>
+                <span class="project-badge label-blue">State Qualifier</span>
               </div>
-              <div class="project-card-body">
-                <h3 class="project-title-label">AI Buildathon Project</h3>
-                <span class="project-tagline-label">OpenAI Academy × NxtWave Model Agent</span>
-                <p class="project-desc-label">
-                  An AI agent solution built solo. Designed to interact with local text structures to retrieve and evaluate queries, qualifying for the state-level round.
+              <div class="project-body">
+                <h3 class="project-title">AI Buildathon Project</h3>
+                <span class="project-tagline">OpenAI Academy × NxtWave Model Agent</span>
+                <p class="project-desc">
+                  A locally run model script designed to read text logs and retrieve relevant details based on queries.
                 </p>
-                <div class="project-tech-pills">
+                <div class="project-pills">
                   <span>Python</span>
                   <span>Generative AI</span>
                   <span>LLMs</span>
@@ -481,18 +433,18 @@
             </div>
 
             <!-- Project 5: The DeskLaunch Co -->
-            <a href="https://thedesklaunchco.vercel.app/" target="_blank" rel="noopener noreferrer" class="project-card-blueprint link-card" data-hover="true">
-              <div class="project-card-head">
-                <span class="project-index">[05]</span>
-                <span class="project-badge success">Live Site ↗</span>
+            <a href="https://thedesklaunchco.vercel.app/" target="_blank" rel="noopener noreferrer" class="project-card link-card" data-hover="true">
+              <div class="project-head">
+                <span class="project-idx">[05]</span>
+                <span class="project-badge label-green">Live Site ↗</span>
               </div>
-              <div class="project-card-body">
-                <h3 class="project-title-label">The DeskLaunch Co</h3>
-                <span class="project-tagline-label">Workspace Operations &amp; Booking Portal</span>
-                <p class="project-desc-label">
-                  A client-facing digital portal built to manage co-working workspace operations, bookings, and active workflows. Integrated under the BRAVE systems architecture at NIAT.
+              <div class="project-body">
+                <h3 class="project-title">The DeskLaunch Co</h3>
+                <span class="project-tagline">Workspace Operations &amp; Booking Portal</span>
+                <p class="project-desc">
+                  A workspace booking platform built to coordinate active desk bookings and operational pipelines. Hosted on Vercel.
                 </p>
-                <div class="project-tech-pills">
+                <div class="project-pills">
                   <span>HTML</span>
                   <span>CSS</span>
                   <span>JavaScript</span>
@@ -502,18 +454,18 @@
             </a>
 
             <!-- Project 6: Lead to Cash MVP -->
-            <a href="https://lead-to-cash-mvp-519202414917.asia-southeast1.run.app" target="_blank" rel="noopener noreferrer" class="project-card-blueprint link-card" data-hover="true">
-              <div class="project-card-head">
-                <span class="project-index">[06]</span>
-                <span class="project-badge success">Live App ↗</span>
+            <a href="https://lead-to-cash-mvp-519202414917.asia-southeast1.run.app" target="_blank" rel="noopener noreferrer" class="project-card link-card" data-hover="true">
+              <div class="project-head">
+                <span class="project-idx">[06]</span>
+                <span class="project-badge label-green">Live App ↗</span>
               </div>
-              <div class="project-card-body">
-                <h3 class="project-title-label">Lead to Cash MVP</h3>
-                <span class="project-tagline-label">Containerized Billing &amp; Lifecycle Pipeline</span>
-                <p class="project-desc-label">
-                  A high-integrity billing realization and customer state pipeline application deployed as a containerized service on Google Cloud Run, showcasing modular backend integration.
+              <div class="project-body">
+                <h3 class="project-title">Lead to Cash MVP</h3>
+                <span class="project-tagline">Containerized Billing &amp; Lifecycle Pipeline</span>
+                <p class="project-desc">
+                  A containerized client billing service deployed as a modular backend on Google Cloud Run.
                 </p>
-                <div class="project-tech-pills">
+                <div class="project-pills">
                   <span>Python</span>
                   <span>Docker</span>
                   <span>Cloud Run</span>
@@ -523,18 +475,18 @@
             </a>
 
             <!-- Project 7: BRAVE (Active construction) -->
-            <div class="project-card-blueprint active-project" data-hover="true">
-              <div class="project-card-head">
-                <span class="project-index">[07]</span>
-                <span class="project-badge info">Active Building</span>
+            <div class="project-card active-project" data-hover="true">
+              <div class="project-head">
+                <span class="project-idx">[07]</span>
+                <span class="project-badge label-blue">Active Building</span>
               </div>
-              <div class="project-card-body">
-                <h3 class="project-title-label">BRAVE</h3>
-                <span class="project-tagline-label">NIAT Program System Modules</span>
-                <p class="project-desc-label">
-                  Ongoing engineering project designed to manage workflows. Implementing systems logic and data integration pipelines under current academic guidelines.
+              <div class="project-body">
+                <h3 class="project-title">BRAVE</h3>
+                <span class="project-tagline">NIAT Program System Modules</span>
+                <p class="project-desc">
+                  Academic project focusing on workflow automation and data integrations under NIAT guidelines.
                 </p>
-                <div class="project-tech-pills">
+                <div class="project-pills">
                   <span>Python</span>
                   <span>Git</span>
                   <span>Engineering</span>
@@ -548,151 +500,148 @@
       <!-- Certificates Section -->
       <section class="certificates-section" id="certificates">
         <div class="section-container">
-          <div class="editorial-divider"></div>
+          <div class="section-divider"></div>
+          <span class="section-tag">[05 // VERIFICATIONS]</span>
+          <h2 class="section-title">Certifications &amp; Masterclasses</h2>
           
-          <div class="certificates-section-header">
-            <div class="blueprint-tag">[05 // CERTIFICATION_VERIFIED]</div>
-            <h2 class="section-title-blueprint">Masterclasses &amp; Hackathons</h2>
-          </div>
-          
-          <!-- Form Search Line (Editorial style) -->
-          <div class="certificates-filter-wrapper-blueprint">
+          <!-- Subtle Search and Filter -->
+          <div class="certs-filter-wrapper">
             <div class="filter-search-container">
-              <input type="text" id="certificate-search" placeholder="Type name or issuer to search database..." class="filter-search-input-blueprint" aria-label="Search certificates" data-hover="true" />
+              <input type="text" id="certificate-search" placeholder="Type keyphrase to search certs..." class="filter-search-input" aria-label="Search certificates" data-hover="true" />
             </div>
             
             <div class="filter-badges-wrapper" id="filter-badges-container">
-              <button class="filter-btn-blueprint active" data-org="all" id="btn-filter-all" data-hover="true">All</button>
-              <button class="filter-btn-blueprint" data-org="openai" id="btn-filter-openai" data-hover="true">OpenAI / NxtWave</button>
-              <button class="filter-btn-blueprint" data-org="niat" id="btn-filter-niat" data-hover="true">NIAT Masterclass</button>
-              <button class="filter-btn-blueprint" data-org="robotics" id="btn-filter-robotics" data-hover="true">Robotics Team</button>
-              <button class="filter-btn-blueprint" data-org="other" id="btn-filter-other" data-hover="true">Others</button>
+              <button class="filter-btn active" data-org="all" id="btn-filter-all" data-hover="true">All</button>
+              <button class="filter-btn" data-org="openai" id="btn-filter-openai" data-hover="true">OpenAI / NxtWave</button>
+              <button class="filter-btn" data-org="niat" id="btn-filter-niat" data-hover="true">NIAT Masterclass</button>
+              <button class="filter-btn" data-org="robotics" id="btn-filter-robotics" data-hover="true">Robotics Team</button>
+              <button class="filter-btn" data-org="other" id="btn-filter-other" data-hover="true">Others</button>
             </div>
           </div>
 
-          <!-- Clean list grid layout -->
-          <div class="certs-list-container" id="certs-grid">
+          <!-- Clean list layout -->
+          <div class="certs-list" id="certs-grid">
             
             <!-- Cert 1 -->
-            <div class="cert-row-blueprint" data-orgs="openai niat" data-hover="true">
-              <div class="cert-row-meta">
-                <span class="cert-row-date">Aug 2025</span>
-                <span class="cert-row-issuer">OpenAI Academy × NxtWave</span>
+            <div class="cert-row" data-orgs="openai niat" data-hover="true">
+              <div class="cert-meta">
+                <span class="cert-date">Aug 2025</span>
+                <span class="cert-issuer">OpenAI Academy × NxtWave</span>
               </div>
-              <div class="cert-row-main">
-                <h3 class="cert-row-title">Generative AI Mastery Workshop</h3>
+              <div class="cert-main">
+                <h3 class="cert-title">Generative AI Mastery Workshop</h3>
               </div>
             </div>
 
             <!-- Cert 2 -->
-            <div class="cert-row-blueprint" data-orgs="openai niat" data-hover="true">
-              <div class="cert-row-meta">
-                <span class="cert-row-date">Sep 2025</span>
-                <span class="cert-row-issuer">OpenAI Academy × NxtWave</span>
+            <div class="cert-row" data-orgs="openai niat" data-hover="true">
+              <div class="cert-meta">
+                <span class="cert-date">Sep 2025</span>
+                <span class="cert-issuer">OpenAI Academy × NxtWave</span>
               </div>
-              <div class="cert-row-main">
-                <h3 class="cert-row-title">Generative AI Mastery Workshop Certificate of Appreciation</h3>
+              <div class="cert-main">
+                <h3 class="cert-title">Generative AI Mastery Workshop Certificate of Appreciation</h3>
               </div>
             </div>
 
             <!-- Cert 3 -->
-            <div class="cert-row-blueprint" data-orgs="niat other" data-hover="true">
-              <div class="cert-row-meta">
-                <span class="cert-row-date">Nov 2025</span>
-                <span class="cert-row-issuer">NIAT × Base44</span>
+            <div class="cert-row" data-orgs="niat other" data-hover="true">
+              <div class="cert-meta">
+                <span class="cert-date">Nov 2025</span>
+                <span class="cert-issuer">NIAT × Base44</span>
               </div>
-              <div class="cert-row-main">
-                <h3 class="cert-row-title">Base44 Hackathon (D-Coders Team)</h3>
+              <div class="cert-main">
+                <h3 class="cert-title">Base44 Hackathon (D-Coders Team)</h3>
               </div>
             </div>
 
             <!-- Cert 4 -->
-            <div class="cert-row-blueprint" data-orgs="other" data-hover="true">
-              <div class="cert-row-meta">
-                <span class="cert-row-date">Jan 2026</span>
-                <span class="cert-row-issuer">India AI Impact Summit (JECC Jaipur)</span>
+            <div class="cert-row" data-orgs="other" data-hover="true">
+              <div class="cert-meta">
+                <span class="cert-date">Jan 2026</span>
+                <span class="cert-issuer">India AI Impact Summit (JECC Jaipur)</span>
               </div>
-              <div class="cert-row-main">
-                <h3 class="cert-row-title">AI Hackathon</h3>
+              <div class="cert-main">
+                <h3 class="cert-title">AI Hackathon</h3>
               </div>
             </div>
 
             <!-- Cert 5 -->
-            <div class="cert-row-blueprint" data-orgs="other" data-hover="true">
-              <div class="cert-row-meta">
-                <span class="cert-row-date">Feb 2026</span>
-                <span class="cert-row-issuer">GUVI × HCL (Summit 2026)</span>
+            <div class="cert-row" data-orgs="other" data-hover="true">
+              <div class="cert-meta">
+                <span class="cert-date">Feb 2026</span>
+                <span class="cert-issuer">GUVI × HCL (Summit 2026)</span>
               </div>
-              <div class="cert-row-main">
-                <h3 class="cert-row-title">India AI Impact Buildathon</h3>
-                <span class="cert-row-description">Competed among 40,000+ participants</span>
+              <div class="cert-main">
+                <h3 class="cert-title">India AI Impact Buildathon</h3>
+                <span class="cert-description">Competed among 40,000+ participants</span>
               </div>
             </div>
 
             <!-- Cert 6 -->
-            <div class="cert-row-blueprint" data-orgs="other" data-hover="true">
-              <div class="cert-row-meta">
-                <span class="cert-row-date">Feb 2026</span>
-                <span class="cert-row-issuer">IEEE × VGU (Dept. of CSE)</span>
+            <div class="cert-row" data-orgs="other" data-hover="true">
+              <div class="cert-meta">
+                <span class="cert-date">Feb 2026</span>
+                <span class="cert-issuer">IEEE × VGU (Dept. of CSE)</span>
               </div>
-              <div class="cert-row-main">
-                <h3 class="cert-row-title">Geoinformatics &amp; AI Workshop</h3>
+              <div class="cert-main">
+                <h3 class="cert-title">Geoinformatics &amp; AI Workshop</h3>
               </div>
             </div>
 
             <!-- Cert 7 -->
-            <div class="cert-row-blueprint" data-orgs="niat" data-hover="true">
-              <div class="cert-row-meta">
-                <span class="cert-row-date">Feb 24, 2026</span>
-                <span class="cert-row-issuer">NIAT Masterclass</span>
+            <div class="cert-row" data-orgs="niat" data-hover="true">
+              <div class="cert-meta">
+                <span class="cert-date">Feb 24, 2026</span>
+                <span class="cert-issuer">NIAT Masterclass</span>
               </div>
-              <div class="cert-row-main">
-                <h3 class="cert-row-title">Text Embeddings in LLM Systems</h3>
-                <span class="cert-row-description">Delivered by Stuti Gupta, Data Scientist at Flipkart</span>
+              <div class="cert-main">
+                <h3 class="cert-title">Text Embeddings in LLM Systems</h3>
+                <span class="cert-description">Delivered by Stuti Gupta, Data Scientist at Flipkart</span>
               </div>
             </div>
 
             <!-- Cert 8 -->
-            <div class="cert-row-blueprint" data-orgs="robotics niat" data-hover="true">
-              <div class="cert-row-meta">
-                <span class="cert-row-date">Feb 27, 2026</span>
-                <span class="cert-row-issuer">Robotics Team, NIAT</span>
+            <div class="cert-row" data-orgs="robotics niat" data-hover="true">
+              <div class="cert-meta">
+                <span class="cert-date">Feb 27, 2026</span>
+                <span class="cert-issuer">Robotics Team, NIAT</span>
               </div>
-              <div class="cert-row-main">
-                <h3 class="cert-row-title">Hack the Human Signal Workshop</h3>
+              <div class="cert-main">
+                <h3 class="cert-title">Hack the Human Signal Workshop</h3>
               </div>
             </div>
 
             <!-- Cert 9 -->
-            <div class="cert-row-blueprint" data-orgs="other" data-hover="true">
-              <div class="cert-row-meta">
-                <span class="cert-row-date">Jan 23, 2026</span>
-                <span class="cert-row-issuer">Murf.AI Workshop</span>
+            <div class="cert-row" data-orgs="other" data-hover="true">
+              <div class="cert-meta">
+                <span class="cert-date">Jan 23, 2026</span>
+                <span class="cert-issuer">Murf.AI Workshop</span>
               </div>
-              <div class="cert-row-main">
-                <h3 class="cert-row-title">Murf.AI Hands-On App Building Workshop</h3>
+              <div class="cert-main">
+                <h3 class="cert-title">Murf.AI Hands-On App Building Workshop</h3>
               </div>
             </div>
 
             <!-- Cert 10 -->
-            <div class="cert-row-blueprint" data-orgs="niat" data-hover="true">
-              <div class="cert-row-meta">
-                <span class="cert-row-date">Apr 13, 2026</span>
-                <span class="cert-row-issuer">NIAT</span>
+            <div class="cert-row" data-orgs="niat" data-hover="true">
+              <div class="cert-meta">
+                <span class="cert-date">Apr 13, 2026</span>
+                <span class="cert-issuer">NIAT</span>
               </div>
-              <div class="cert-row-main">
-                <h3 class="cert-row-title">AI Agents 201 Hands-On Workshop</h3>
+              <div class="cert-main">
+                <h3 class="cert-title">AI Agents 201 Hands-On Workshop</h3>
               </div>
             </div>
 
             <!-- Cert 11 -->
-            <div class="cert-row-blueprint" data-orgs="robotics niat" data-hover="true">
-              <div class="cert-row-meta">
-                <span class="cert-row-date">Apr 10, 2026</span>
-                <span class="cert-row-issuer">Robotics Team, NIAT</span>
+            <div class="cert-row" data-orgs="robotics niat" data-hover="true">
+              <div class="cert-meta">
+                <span class="cert-date">Apr 10, 2026</span>
+                <span class="cert-issuer">Robotics Team, NIAT</span>
               </div>
-              <div class="cert-row-main">
-                <h3 class="cert-row-title">Gesture Tech Workshop</h3>
+              <div class="cert-main">
+                <h3 class="cert-title">Gesture Tech Workshop</h3>
               </div>
             </div>
             
@@ -700,75 +649,74 @@
         </div>
       </section>
 
-      <!-- Contact Section (Blueprint Comm Grid) -->
+      <!-- Contact Section -->
       <section class="contact-section" id="contact">
         <div class="section-container">
-          <div class="editorial-divider"></div>
+          <div class="section-divider"></div>
+          <span class="section-tag">[06 // CONNECT]</span>
           
-          <div class="contact-wrapper" style="max-width: 950px;">
-            <div class="blueprint-tag">[06 // ESTABLISH_COMMUNICATIONS]</div>
-            <h2 class="section-title-blueprint">Let's build systems together.</h2>
+          <div class="contact-wrapper">
+            <h2 class="section-title">Let's build systems together.</h2>
             <p class="contact-pitch">
-              I am open to software engineering internships, collaborative builds, and technical teams. Initiate query on any of these ports:
+              I am open to software engineering internships, collaborative builds, and technical teams. Connect with me on any of these platforms:
             </p>
             
-            <!-- Blueprint Contact Grid -->
-            <div class="contact-grid-blueprint">
-              <!-- LinkedIn Card -->
-              <a href="https://linkedin.com/in/prashant-singh-8b629b380" target="_blank" rel="noopener noreferrer" class="contact-card-blueprint-item linkedin" data-hover="true">
+            <div class="contact-grid">
+              <!-- LinkedIn -->
+              <a href="https://linkedin.com/in/prashant-singh-8b629b380" target="_blank" rel="noopener noreferrer" class="contact-card linkedin" data-hover="true">
                 <div class="contact-card-icon">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
                 </div>
                 <div class="contact-card-info">
-                  <span class="contact-card-label">LINKEDIN // 01</span>
+                  <span class="contact-card-label">LinkedIn</span>
                   <span class="contact-card-value">Prashant Singh</span>
                 </div>
                 <span class="contact-card-arrow">→</span>
               </a>
 
-              <!-- WhatsApp Card -->
-              <a href="https://wa.me/916268239789" target="_blank" rel="noopener noreferrer" class="contact-card-blueprint-item whatsapp" data-hover="true">
+              <!-- WhatsApp -->
+              <a href="https://wa.me/916268239789" target="_blank" rel="noopener noreferrer" class="contact-card whatsapp" data-hover="true">
                 <div class="contact-card-icon">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
                 </div>
                 <div class="contact-card-info">
-                  <span class="contact-card-label">WHATSAPP // 02</span>
+                  <span class="contact-card-label">WhatsApp</span>
                   <span class="contact-card-value">+91 62682 39789</span>
                 </div>
                 <span class="contact-card-arrow">→</span>
               </a>
 
-              <!-- Email Card -->
-              <a href="mailto:prashantsingh85699@gmail.com" class="contact-card-blueprint-item email" data-hover="true">
+              <!-- Email -->
+              <a href="mailto:prashantsingh85699@gmail.com" class="contact-card email" data-hover="true">
                 <div class="contact-card-icon">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
                 </div>
                 <div class="contact-card-info">
-                  <span class="contact-card-label">EMAIL // 03</span>
+                  <span class="contact-card-label">Email</span>
                   <span class="contact-card-value">prashantsingh85699@gmail.com</span>
                 </div>
                 <span class="contact-card-arrow">→</span>
               </a>
 
-              <!-- Instagram Card -->
-              <a href="https://instagram.com/PSB43836" target="_blank" rel="noopener noreferrer" class="contact-card-blueprint-item instagram" data-hover="true">
+              <!-- Instagram -->
+              <a href="https://instagram.com/PSB43836" target="_blank" rel="noopener noreferrer" class="contact-card instagram" data-hover="true">
                 <div class="contact-card-icon">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
                 </div>
                 <div class="contact-card-info">
-                  <span class="contact-card-label">INSTAGRAM // 04</span>
+                  <span class="contact-card-label">Instagram</span>
                   <span class="contact-card-value">@PSB43836</span>
                 </div>
                 <span class="contact-card-arrow">→</span>
               </a>
 
-              <!-- YouTube Card -->
-              <a href="https://youtube.com/channel/UCpYyUINFekKDI60PMH074iw" target="_blank" rel="noopener noreferrer" class="contact-card-blueprint-item youtube" data-hover="true">
+              <!-- YouTube -->
+              <a href="https://youtube.com/channel/UCpYyUINFekKDI60PMH074iw" target="_blank" rel="noopener noreferrer" class="contact-card youtube" data-hover="true">
                 <div class="contact-card-icon">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"></path><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"></polygon></svg>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"></path><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"></polygon></svg>
                 </div>
                 <div class="contact-card-info">
-                  <span class="contact-card-label">YOUTUBE // 05</span>
+                  <span class="contact-card-label">YouTube</span>
                   <span class="contact-card-value">Prashant Singh</span>
                 </div>
                 <span class="contact-card-arrow">→</span>
@@ -785,27 +733,27 @@
         <div class="footer-social-row">
           <!-- LinkedIn -->
           <a href="https://linkedin.com/in/prashant-singh-8b629b380" target="_blank" rel="noopener noreferrer" class="footer-social-link" title="LinkedIn" data-hover="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
           </a>
           <!-- WhatsApp -->
           <a href="https://wa.me/916268239789" target="_blank" rel="noopener noreferrer" class="footer-social-link" title="WhatsApp" data-hover="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
           </a>
           <!-- Email -->
           <a href="mailto:prashantsingh85699@gmail.com" class="footer-social-link" title="Email" data-hover="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
           </a>
           <!-- Instagram -->
           <a href="https://instagram.com/PSB43836" target="_blank" rel="noopener noreferrer" class="footer-social-link" title="Instagram" data-hover="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
           </a>
           <!-- YouTube -->
           <a href="https://youtube.com/channel/UCpYyUINFekKDI60PMH074iw" target="_blank" rel="noopener noreferrer" class="footer-social-link" title="YouTube" data-hover="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"></path><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"></polygon></svg>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"></path><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"></polygon></svg>
           </a>
         </div>
         <p>&copy; 2026 Prashant Singh. All rights reserved.</p>
-        <p class="footer-tech-note">Designed &amp; Coded from Raw Materials: Vanilla HTML, CSS, JavaScript, and WebGL.</p>
+        <p class="footer-tech-note">Designed &amp; Coded from scratch with Vanilla HTML, CSS, and JS.</p>
       </div>
     </footer>
 
