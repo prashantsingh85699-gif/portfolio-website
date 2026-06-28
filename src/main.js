@@ -1,6 +1,7 @@
 /**
- * Prashant Singh - Professional Developer Minimalist Portfolio
- * Custom Interactive JavaScript Engine
+ * Prashant Singh — Portfolio JS Engine
+ * Handles: preloader, theme, scroll progress, GSAP reveals,
+ *          copy protection, terminal simulation, cert filter, nav spy
  */
 
 import Lenis from 'lenis';
@@ -9,421 +10,270 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 gsap.registerPlugin(ScrollTrigger);
 
-// Initialize Lenis smooth scroll
+// ─── Smooth Scroll ──────────────────────────────────────────────────────────
 const lenis = new Lenis({
   duration: 1.1,
-  easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+  easing: t => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
 });
+lenis.stop(); // Hold until preloader done
 
-function raf(time) {
-  lenis.raf(time);
-  requestAnimationFrame(raf);
-}
+function raf(time) { lenis.raf(time); requestAnimationFrame(raf); }
 requestAnimationFrame(raf);
-
-// Sync ScrollTrigger with Lenis scroll updates
 lenis.on('scroll', ScrollTrigger.update);
 
-// Lock scrolling during preloader
-lenis.stop();
-
+// ─── Init on DOM Ready ────────────────────────────────────────────────────────
 document.addEventListener('DOMContentLoaded', () => {
-  initThemeToggle();
+  initTheme();
   initPreloader();
+  initCopyProtection();
   initMobileNav();
-  initScrollSpy();
-  initCertificateFilter();
+  initScrollProgress();
+  initScrollTop();
+  initNavSpy();
   initAnchorLinks();
-  initProfileInteraction();
-  initTerminalSimulation();
-  initCopyProtection(); // Load anti-copy mechanisms
-  initGSAPAnimations();
+  initPortraitSwap();
+  initTerminal();
+  initCertFilter();
+  initGSAP();
 });
 
-/**
- * Copy Protection System (with Owner Exception)
- * Prevents unauthorized text selection, right-click, devtools inspection, and copy hotkeys.
- * Access with URL parameter "?admin=true" to bypass blocks.
- */
-function initCopyProtection() {
-  const urlParams = new URLSearchParams(window.location.search);
-  const isOwner = urlParams.get('admin') === 'true' || localStorage.getItem('admin') === 'true';
+// ─── Theme Toggle ─────────────────────────────────────────────────────────────
+function initTheme() {
+  const btn = document.getElementById('theme-toggle');
+  if (!btn) return;
+  const saved = localStorage.getItem('theme');
+  const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+  const initial = saved || (prefersDark ? 'dark' : 'light');
+  document.documentElement.setAttribute('data-theme', initial);
 
+  btn.addEventListener('click', () => {
+    const current = document.documentElement.getAttribute('data-theme');
+    const next = current === 'dark' ? 'light' : 'dark';
+    document.documentElement.setAttribute('data-theme', next);
+    localStorage.setItem('theme', next);
+  });
+}
+
+// ─── Preloader ────────────────────────────────────────────────────────────────
+function initPreloader() {
+  const el = document.getElementById('preloader');
+  if (!el) { lenis.start(); return; }
+
+  // Give animations time to play (wipe + bar ≈ 1.5s)
+  setTimeout(() => {
+    el.classList.add('loaded');
+    lenis.start();
+  }, 1600);
+}
+
+// ─── Copy Protection ─────────────────────────────────────────────────────────
+function initCopyProtection() {
+  const params = new URLSearchParams(window.location.search);
+  const isOwner = params.get('admin') === 'true' || localStorage.getItem('admin') === 'true';
   if (isOwner) {
-    // Enable full copy access for the owner
     document.body.classList.add('allow-copy');
     localStorage.setItem('admin', 'true');
-    console.log('[SYSTEM: Owner session authorized. Copy protection disabled.]');
     return;
   }
-
-  // 1. Disable Right Click Context Menu
-  document.addEventListener('contextmenu', (e) => {
-    e.preventDefault();
-  });
-
-  // 2. Prevent Keyboard Hotkeys (Ctrl+C, Ctrl+X, Ctrl+A, Ctrl+U, Ctrl+S, F12, Ctrl+Shift+I/J/C)
-  document.addEventListener('keydown', (e) => {
-    // Disable F12
-    if (e.key === 'F12' || e.keyCode === 123) {
-      e.preventDefault();
-      return false;
-    }
-
-    // Disable Ctrl combinations
+  document.addEventListener('contextmenu', e => e.preventDefault());
+  document.addEventListener('keydown', e => {
+    if (e.key === 'F12' || e.keyCode === 123) { e.preventDefault(); return false; }
     if (e.ctrlKey) {
-      const key = e.key.toLowerCase();
-      if (key === 'c' || key === 'x' || key === 'a' || key === 'u' || key === 's') {
-        e.preventDefault();
-        return false;
-      }
-      
-      // Disable Ctrl+Shift+I / J / C
-      if (e.shiftKey && (key === 'i' || key === 'j' || key === 'c')) {
-        e.preventDefault();
-        return false;
-      }
+      const k = e.key.toLowerCase();
+      if ('cxaus'.includes(k)) { e.preventDefault(); return false; }
+      if (e.shiftKey && 'ijc'.includes(k)) { e.preventDefault(); return false; }
     }
   });
-
-  // 3. Disable Text Drag Selection via JS fallback
-  document.addEventListener('selectstart', (e) => {
-    e.preventDefault();
-  });
-
-  // 4. Disable Image Dragging
-  document.querySelectorAll('img').forEach(img => {
-    img.addEventListener('dragstart', (e) => {
-      e.preventDefault();
-    });
-  });
+  document.addEventListener('selectstart', e => e.preventDefault());
+  document.querySelectorAll('img').forEach(img =>
+    img.addEventListener('dragstart', e => e.preventDefault())
+  );
 }
 
-/**
- * Interactive C++ Code Terminal Simulation
- */
-function initTerminalSimulation() {
-  const runBtn = document.getElementById('run-code-btn');
-  const consoleLogs = document.getElementById('console-logs');
-
-  if (!runBtn || !consoleLogs) return;
-
-  runBtn.addEventListener('click', () => {
-    if (runBtn.disabled) return;
-    runBtn.disabled = true;
-    runBtn.textContent = '[ COMPILING... ]';
-    
-    consoleLogs.style.color = '#71717a';
-    consoleLogs.textContent = '$ g++ portfolio.cpp -o portfolio && ./portfolio\nCompiling source tree...';
-
-    setTimeout(() => {
-      consoleLogs.style.color = '#10b981';
-      consoleLogs.textContent = `$ g++ portfolio.cpp -o portfolio && ./portfolio\n\nStatus: Ready to build\nB.Tech CSE Student @ VGU x NIAT\n\n[Process completed with exit code 0]`;
-      
-      runBtn.disabled = false;
-      runBtn.textContent = '[ RUN CODE ]';
-    }, 700);
-  });
-}
-
-/**
- * Interactive Light / Dark Theme Switching Logic
- */
-function initThemeToggle() {
-  const toggleBtn = document.getElementById('theme-toggle');
-  if (!toggleBtn) return;
-
-  const savedTheme = localStorage.getItem('theme');
-  const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-  const initialTheme = savedTheme ? savedTheme : (systemPrefersDark ? 'dark' : 'light');
-  
-  document.documentElement.setAttribute('data-theme', initialTheme);
-
-  toggleBtn.addEventListener('click', () => {
-    const currentTheme = document.documentElement.getAttribute('data-theme');
-    const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-    
-    document.body.style.transition = 'background-color 0.35s ease, color 0.35s ease, border-color 0.35s ease';
-    document.documentElement.setAttribute('data-theme', newTheme);
-    localStorage.setItem('theme', newTheme);
-    
-    setTimeout(() => {
-      document.body.style.transition = '';
-    }, 450);
-  });
-}
-
-/**
- * Fast Typographic Fade Preloader
- */
-function initPreloader() {
-  const preloader = document.getElementById('preloader');
-  if (!preloader) return;
-
-  setTimeout(() => {
-    preloader.classList.add('loaded');
-    lenis.start();
-  }, 600);
-}
-
-/**
- * Intercept anchor clicks and scroll smoothly using Lenis
- */
-function initAnchorLinks() {
-  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
-      e.preventDefault();
-      const targetId = this.getAttribute('href');
-      if (targetId === '#') return;
-
-      const targetElement = document.querySelector(targetId);
-      if (targetElement) {
-        lenis.scrollTo(targetElement);
-      }
-    });
-  });
-}
-
-/**
- * Mobile Navigation Menu Toggle
- */
+// ─── Mobile Nav ───────────────────────────────────────────────────────────────
 function initMobileNav() {
-  const toggleBtn = document.getElementById('nav-toggle-btn');
-  const navMenu = document.getElementById('nav-menu-bar');
-  const navLinks = document.querySelectorAll('.nav-link');
-
-  if (!toggleBtn || !navMenu) return;
-
-  toggleBtn.addEventListener('click', (e) => {
-    e.stopPropagation();
-    navMenu.classList.toggle('open');
-    toggleBtn.classList.toggle('active');
+  const burger = document.getElementById('nav-toggle-btn');
+  const menu   = document.getElementById('nav-menu-bar');
+  if (!burger || !menu) return;
+  burger.addEventListener('click', e => { e.stopPropagation(); menu.classList.toggle('open'); });
+  document.addEventListener('click', e => {
+    if (menu.classList.contains('open') && !menu.contains(e.target) && e.target !== burger)
+      menu.classList.remove('open');
   });
+  menu.querySelectorAll('.nav-link').forEach(l =>
+    l.addEventListener('click', () => menu.classList.remove('open'))
+  );
+}
 
-  document.addEventListener('click', (e) => {
-    if (navMenu.classList.contains('open') && !navMenu.contains(e.target) && e.target !== toggleBtn) {
-      navMenu.classList.remove('open');
-      toggleBtn.classList.remove('active');
-    }
-  });
-
-  navLinks.forEach(link => {
-    link.addEventListener('click', () => {
-      navMenu.classList.remove('open');
-      toggleBtn.classList.remove('active');
-    });
+// ─── Scroll Progress Bar ─────────────────────────────────────────────────────
+function initScrollProgress() {
+  const fill = document.getElementById('scroll-progress-fill');
+  if (!fill) return;
+  lenis.on('scroll', ({ progress }) => {
+    fill.style.height = (progress * 100) + '%';
   });
 }
 
-/**
- * Scroll Spy Navigation Underline Updates
- */
-function initScrollSpy() {
-  const sections = document.querySelectorAll('main > section');
-  const navLinks = document.querySelectorAll('.nav-link');
-  
-  if (sections.length === 0 || navLinks.length === 0) return;
+// ─── Scroll-to-Top Button ─────────────────────────────────────────────────────
+function initScrollTop() {
+  const btn = document.getElementById('scroll-top-btn');
+  if (!btn) return;
+  lenis.on('scroll', ({ scroll }) => {
+    btn.classList.toggle('visible', scroll > 500);
+  });
+  btn.addEventListener('click', () => lenis.scrollTo(0, { duration: 1.2 }));
+}
 
-  const observerOptions = {
-    root: null,
-    rootMargin: '-35% 0px -45% 0px',
-    threshold: 0
-  };
+// ─── Nav Scroll Spy ───────────────────────────────────────────────────────────
+function initNavSpy() {
+  const sections = document.querySelectorAll('section[id]');
+  const links    = document.querySelectorAll('.nav-link');
+  if (!sections.length || !links.length) return;
 
-  const observerCallback = (entries) => {
+  const obs = new IntersectionObserver(entries => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
-        const id = entry.target.getAttribute('id');
-        
-        navLinks.forEach(link => {
-          link.classList.remove('active');
-          if (link.getAttribute('href') === `#${id}`) {
-            link.classList.add('active');
-          }
+        const id = entry.target.id;
+        links.forEach(l => {
+          l.classList.toggle('active', l.getAttribute('href') === `#${id}`);
         });
       }
     });
-  };
+  }, { rootMargin: '-35% 0px -45% 0px', threshold: 0 });
 
-  const observer = new IntersectionObserver(observerCallback, observerOptions);
-  sections.forEach(section => observer.observe(section));
+  sections.forEach(s => obs.observe(s));
 }
 
-/**
- * Certificate Filter Engine
- */
-function initCertificateFilter() {
-  const searchInput = document.getElementById('certificate-search');
-  const filterBtns = document.querySelectorAll('.filter-btn');
-  const certRows = document.querySelectorAll('.cert-row');
-
-  if (!searchInput || filterBtns.length === 0 || certRows.length === 0) return;
-
-  let currentCategory = 'all';
-  let currentSearchQuery = '';
-
-  searchInput.addEventListener('input', (e) => {
-    currentSearchQuery = e.target.value.toLowerCase().trim();
-    applyCombinedFilters();
-  });
-
-  filterBtns.forEach(btn => {
-    btn.addEventListener('click', () => {
-      filterBtns.forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-
-      currentCategory = btn.getAttribute('data-org');
-      applyCombinedFilters();
+// ─── Smooth Anchor Links ─────────────────────────────────────────────────────
+function initAnchorLinks() {
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      e.preventDefault();
+      const target = document.querySelector(a.getAttribute('href'));
+      if (target) lenis.scrollTo(target);
     });
   });
+}
 
-  function applyCombinedFilters() {
-    certRows.forEach(row => {
-      const rowOrgs = row.getAttribute('data-orgs') || '';
-      const matchesCategory = (currentCategory === 'all') || rowOrgs.split(' ').includes(currentCategory);
+// ─── Portrait Swap ────────────────────────────────────────────────────────────
+function initPortraitSwap() {
+  const frame = document.getElementById('hero-portrait-frame');
+  const front = document.getElementById('hero-portrait-front');
+  const back  = document.getElementById('hero-portrait-back');
+  if (!frame || !front || !back) return;
+  frame.addEventListener('mouseenter', () => { front.classList.remove('active'); back.classList.add('active'); });
+  frame.addEventListener('mouseleave', () => { back.classList.remove('active'); front.classList.add('active'); });
+}
 
-      const title = row.querySelector('.cert-title')?.textContent.toLowerCase() || '';
-      const issuer = row.querySelector('.cert-issuer')?.textContent.toLowerCase() || '';
-      const desc = row.querySelector('.cert-description')?.textContent.toLowerCase() || '';
-      
-      const matchesText = title.includes(currentSearchQuery) || 
-                          issuer.includes(currentSearchQuery) || 
-                          desc.includes(currentSearchQuery);
+// ─── C++ Terminal Simulation ─────────────────────────────────────────────────
+function initTerminal() {
+  const btn  = document.getElementById('run-code-btn');
+  const logs = document.getElementById('console-logs');
+  if (!btn || !logs) return;
 
-      if (matchesCategory && matchesText) {
-        row.classList.remove('hidden');
-      } else {
-        row.classList.add('hidden');
-      }
+  btn.addEventListener('click', () => {
+    if (btn.disabled) return;
+    btn.disabled = true;
+    btn.textContent = '⟳ Compiling...';
+    logs.style.color = '#71717a';
+    logs.textContent = '$ g++ portfolio.cpp -o portfolio\nCompiling...';
+
+    setTimeout(() => {
+      logs.style.color = '#10b981';
+      logs.textContent = `$ g++ portfolio.cpp -o portfolio && ./portfolio\n\nHello, I build things.\nCurrently @ VGU x NIAT\n\n[exit code: 0]`;
+      btn.disabled = false;
+      btn.textContent = '▶ Run';
+    }, 800);
+  });
+}
+
+// ─── Certificate Filter ───────────────────────────────────────────────────────
+function initCertFilter() {
+  const search  = document.getElementById('certificate-search');
+  const buttons = document.querySelectorAll('.cfbtn');
+  const rows    = document.querySelectorAll('.cert-row');
+  if (!search || !buttons.length || !rows.length) return;
+
+  let cat = 'all';
+  let q   = '';
+
+  function apply() {
+    rows.forEach(row => {
+      const orgs  = (row.getAttribute('data-orgs') || '').split(' ');
+      const catOk = cat === 'all' || orgs.includes(cat);
+      const text  = row.textContent.toLowerCase();
+      const qOk   = !q || text.includes(q);
+      row.classList.toggle('hidden', !(catOk && qOk));
     });
   }
-}
 
-/**
- * Cross-fade swap for circular profile headshot on hover
- */
-function initProfileInteraction() {
-  const frame = document.getElementById('hero-portrait-frame');
-  const frontImg = document.getElementById('hero-portrait-front');
-  const backImg = document.getElementById('hero-portrait-back');
-
-  if (!frame || !frontImg || !backImg) return;
-
-  frame.addEventListener('mouseenter', () => {
-    frontImg.classList.remove('active');
-    backImg.classList.add('active');
-  });
-
-  frame.addEventListener('mouseleave', () => {
-    backImg.classList.remove('active');
-    frontImg.classList.add('active');
+  search.addEventListener('input', e => { q = e.target.value.toLowerCase().trim(); apply(); });
+  buttons.forEach(b => {
+    b.addEventListener('click', () => {
+      buttons.forEach(x => x.classList.remove('active'));
+      b.classList.add('active');
+      cat = b.getAttribute('data-org');
+      apply();
+    });
   });
 }
 
-/**
- * Crisp GSAP Scroll-Trigger Reveals
- */
-function initGSAPAnimations() {
-  // 1. Divider line animations
-  gsap.utils.toArray('.section-divider').forEach(divider => {
-    gsap.fromTo(divider, 
-      { scaleX: 0, transformOrigin: 'left center' }, 
-      { 
-        scaleX: 1, 
-        duration: 1, 
-        ease: 'power2.out', 
-        scrollTrigger: {
-          trigger: divider,
-          start: 'top 92%',
-          toggleActions: 'play none none none'
-        }
-      }
-    );
-  });
-
-  // 2. Text elements fade-in
-  gsap.utils.toArray('.section-title, .section-tag, .stats-panel, .bio-text').forEach(elem => {
-    gsap.fromTo(elem,
-      { opacity: 0, y: 20 },
-      {
-        opacity: 1,
-        y: 0,
-        duration: 0.7,
-        ease: 'power3.out',
-        scrollTrigger: {
-          trigger: elem,
-          start: 'top 88%',
-          toggleActions: 'play none none none'
-        }
-      }
-    );
-  });
-
-  // 3. Staggered project cards reveal
-  gsap.fromTo('.project-card',
-    { opacity: 0, y: 30 },
-    {
+// ─── GSAP Scroll Animations ───────────────────────────────────────────────────
+function initGSAP() {
+  // Reveal all .reveal-left and .reveal-right elements
+  gsap.utils.toArray('.reveal-left').forEach(el => {
+    gsap.to(el, {
       opacity: 1,
-      y: 0,
-      duration: 0.7,
-      stagger: 0.1,
+      x: 0,
+      duration: 0.75,
       ease: 'power3.out',
       scrollTrigger: {
-        trigger: '.projects-grid',
-        start: 'top 82%',
-        toggleActions: 'play none none none'
-      }
-    }
-  );
-
-  // 4. Staggered hackathon cards reveal
-  gsap.fromTo('.hackathon-card',
-    { opacity: 0, y: 30 },
-    {
-      opacity: 1,
-      y: 0,
-      duration: 0.7,
-      stagger: 0.1,
-      ease: 'power3.out',
-      scrollTrigger: {
-        trigger: '.hackathon-grid',
-        start: 'top 82%',
-        toggleActions: 'play none none none'
-      }
-    }
-  );
-
-  // 5. Staggered detail grids reveal
-  gsap.fromTo('.skills-grid > .details-card',
-    { opacity: 0, y: 20 },
-    {
-      opacity: 1,
-      y: 0,
-      duration: 0.7,
-      stagger: 0.08,
-      ease: 'power3.out',
-      scrollTrigger: {
-        trigger: '.skills-grid',
-        start: 'top 82%',
-        toggleActions: 'play none none none'
-      }
-    }
-  );
-
-  // 6. Staggered contact items reveal
-  gsap.fromTo('.contact-card',
-    { opacity: 0, y: 20 },
-    {
-      opacity: 1,
-      y: 0,
-      duration: 0.7,
-      stagger: 0.08,
-      ease: 'power3.out',
-      scrollTrigger: {
-        trigger: '.contact-grid',
+        trigger: el,
         start: 'top 88%',
-        toggleActions: 'play none none none'
-      }
+        toggleActions: 'play none none none',
+      },
+    });
+  });
+
+  gsap.utils.toArray('.reveal-right').forEach(el => {
+    gsap.to(el, {
+      opacity: 1,
+      x: 0,
+      duration: 0.75,
+      ease: 'power3.out',
+      scrollTrigger: {
+        trigger: el,
+        start: 'top 88%',
+        toggleActions: 'play none none none',
+      },
+    });
+  });
+
+  // Stagger bento cards
+  gsap.fromTo('.bento-card',
+    { opacity: 0, y: 24 },
+    {
+      opacity: 1, y: 0,
+      duration: 0.65,
+      stagger: 0.08,
+      ease: 'power3.out',
+      scrollTrigger: { trigger: '.bento', start: 'top 82%', toggleActions: 'play none none none' },
     }
   );
+
+  // Hero elements special stagger (on load, not on scroll)
+  gsap.timeline({ delay: 1.7 })
+    .fromTo('.hero-eyebrow',   { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 0.5, ease: 'power2.out' })
+    .fromTo('.hero-name',      { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.65, ease: 'power3.out' }, '-=0.25')
+    .fromTo('.hero-role',      { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 0.4, ease: 'power2.out' }, '-=0.3')
+    .fromTo('.hero-desc',      { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 0.4, ease: 'power2.out' }, '-=0.2')
+    .fromTo('.hero-stats',     { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 0.4, ease: 'power2.out' }, '-=0.15')
+    .fromTo('.hero-cta-row',   { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 0.4, ease: 'power2.out' }, '-=0.1')
+    .fromTo('.photo-card',     { opacity: 0, x: 24 }, { opacity: 1, x: 0, duration: 0.6, ease: 'power3.out' }, '-=0.5')
+    .fromTo('.code-terminal',  { opacity: 0, x: 24 }, { opacity: 1, x: 0, duration: 0.6, ease: 'power3.out' }, '-=0.4');
+
+  // Make hero elements visible (they start as reveal-right/left but won't be triggered by scroll since hero is above fold)
+  document.querySelectorAll('.hero-left.reveal-left, .hero-right .reveal-right').forEach(el => {
+    el.style.opacity = '0';
+  });
 }
