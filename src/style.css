@@ -78,7 +78,22 @@ body {
   background: var(--color-text-dim);
 }
 
-/* --- Preloader --- */
+/* --- Background Noise Overlay (Subtle) --- */
+.noise-layer {
+  position: fixed;
+  top: -50%;
+  left: -50%;
+  right: -50%;
+  bottom: -50%;
+  width: 200%;
+  height: 200%;
+  background: transparent url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E") repeat;
+  opacity: 0.012;
+  pointer-events: none;
+  z-index: 9998;
+}
+
+/* --- Preloader (With Profile Image) --- */
 .preloader {
   position: fixed;
   inset: 0;
@@ -105,15 +120,43 @@ body {
   gap: 0.75rem;
 }
 
+.preloader-avatar-container {
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  border: 2px solid var(--color-accent);
+  padding: 3px;
+  background-color: var(--color-bg);
+  margin-bottom: 0.5rem;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: avatarPulse 2s infinite ease-in-out;
+}
+
+.preloader-avatar {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+@keyframes avatarPulse {
+  0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(37, 99, 235, 0.2); }
+  50% { transform: scale(1.03); box-shadow: 0 0 12px 4px rgba(37, 99, 235, 0.15); }
+  100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(37, 99, 235, 0.2); }
+}
+
 .preloader-name {
   font-family: var(--font-mono);
-  font-size: 0.85rem;
+  font-size: 0.82rem;
   color: var(--color-accent);
   letter-spacing: 0.05em;
 }
 
 .preloader-line {
-  width: 100px;
+  width: 120px;
   height: 1.5px;
   background-color: var(--color-border);
   position: relative;
@@ -363,20 +406,37 @@ h1, h2, h3, h4 {
   transform: translateY(-2px);
 }
 
-/* Circular Portrait Frame */
-.portrait-frame {
-  position: relative;
-  width: 90px;
-  height: 90px;
-  border-radius: 50%;
-  overflow: hidden;
-  border: 2px solid var(--color-border);
-  padding: 2px;
-  background-color: var(--color-bg);
-  flex-shrink: 0;
+/* --- Hero Right Layout: Polaroid & C++ Terminal Stack --- */
+.hero-flex-right-col {
   display: flex;
-  align-items: center;
-  justify-content: center;
+  flex-direction: column;
+  gap: 1.75rem;
+  width: 100%;
+}
+
+/* Unique Polaroid Card index Mount */
+.polaroid-card {
+  background-color: var(--color-bg-secondary);
+  border: 1px solid var(--color-border);
+  padding: 0.85rem 0.85rem 1.25rem 0.85rem;
+  max-width: 250px;
+  align-self: flex-end;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.04);
+  transition: transform var(--transition-normal), border-color var(--transition-normal);
+}
+
+.polaroid-card:hover {
+  transform: translateY(-6px) rotate(1deg);
+  border-color: var(--color-accent);
+}
+
+.polaroid-photo-area {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  border: 1px solid var(--color-border);
+  background-color: var(--color-bg);
 }
 
 .portrait-slides {
@@ -393,15 +453,38 @@ h1, h2, h3, h4 {
   width: calc(100% - 6px);
   height: calc(100% - 6px);
   object-fit: cover;
-  border-radius: 50%;
   opacity: 0;
-  transform: scale(0.96);
+  transform: translateY(12px); /* Vertical slide swap */
   transition: opacity 0.4s var(--transition-normal), transform 0.4s var(--transition-normal);
 }
 
 .portrait-img.active {
   opacity: 1;
-  transform: scale(1);
+  transform: translateY(0);
+}
+
+.polaroid-label-area {
+  margin-top: 0.85rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.polaroid-lbl-row {
+  display: flex;
+  justify-content: space-between;
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  line-height: 1.2;
+}
+
+.polaroid-lbl-row .lbl-key {
+  color: var(--color-text-dim);
+}
+
+.polaroid-lbl-row .lbl-val {
+  color: var(--color-text);
+  font-weight: 700;
 }
 
 /* --- Interactive C++ Code Terminal --- */
@@ -1169,9 +1252,9 @@ h1, h2, h3, h4 {
     grid-template-columns: repeat(2, 1fr);
   }
   
-  .portrait-frame {
-    width: 100px;
-    height: 100px;
+  .polaroid-card {
+    align-self: center;
+    margin: 0 auto;
   }
 }
 
