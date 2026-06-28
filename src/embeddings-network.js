@@ -4,28 +4,24 @@ export function initEmbeddingsNetwork() {
   const container = document.getElementById('embeddings-canvas-container');
   if (!container) return;
 
-  // Scene setup
   const scene = new THREE.Scene();
   
-  // Camera
   let width = container.clientWidth;
   let height = container.clientHeight;
-  const camera = new THREE.PerspectiveCamera(50, width / height, 1, 1000);
-  camera.position.set(0, -190, 210); // Look down at the grid floor
+  const camera = new THREE.PerspectiveCamera(45, width / height, 1, 1000);
+  camera.position.set(0, -220, 240); // Tilted perspective camera looking down
 
-  // Renderer with transparent background
   const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
   renderer.setSize(width, height);
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
   container.appendChild(renderer.domElement);
 
-  // Plane Geometry representing a high-density scanning matrix grid
-  const gridSegments = 40; // Increased density for a cooler cyber look
-  const gridWidth = 850;
-  const gridHeight = 850;
+  // Silk mesh geometry with fine segments
+  const gridSegments = 44;
+  const gridWidth = 800;
+  const gridHeight = 800;
   const geometry = new THREE.PlaneGeometry(gridWidth, gridHeight, gridSegments, gridSegments);
 
-  // Store initial vertex coordinates to compute wave offsets
   const positionAttr = geometry.attributes.position;
   const initialPositions = new Float32Array(positionAttr.count * 3);
   for (let i = 0; i < positionAttr.count; i++) {
@@ -34,20 +30,20 @@ export function initEmbeddingsNetwork() {
     initialPositions[i * 3 + 2] = positionAttr.getZ(i);
   }
 
-  // Glowing Cyan wireframe material
+  // Elegant dark olive organic wireframe mesh
   const material = new THREE.MeshBasicMaterial({
-    color: 0x00f0ff, // Electric Cyan
+    color: 0x3c4e3b, // Dark Olive Green
     wireframe: true,
     transparent: true,
-    opacity: 0.16,
-    blending: THREE.AdditiveBlending // Glow composite additive blending
+    opacity: 0.07, // Ultra subtle for a premium clean paper look
+    blending: THREE.NormalBlending
   });
 
   const gridMesh = new THREE.Mesh(geometry, material);
-  gridMesh.rotation.x = -Math.PI * 0.18; // Tilted floor plane
+  gridMesh.rotation.x = -Math.PI * 0.2; // Tilted angle
   scene.add(gridMesh);
 
-  // Interaction variables
+  // Mouse interaction setup
   const raycaster = new THREE.Raycaster();
   const mouse = new THREE.Vector2(-9999, -9999);
   const mouseTarget = new THREE.Vector2(-9999, -9999);
@@ -59,7 +55,6 @@ export function initEmbeddingsNetwork() {
     mouseTarget.y = -(event.clientY / window.innerHeight) * 2 + 1;
   });
 
-  // Track scroll for lifecycle performance
   let scrollY = 0;
   let isVisible = true;
   window.addEventListener('scroll', () => {
@@ -67,7 +62,6 @@ export function initEmbeddingsNetwork() {
     isVisible = scrollY < window.innerHeight;
   });
 
-  // Handle Resize
   function onWindowResize() {
     if (!container) return;
     width = container.clientWidth;
@@ -78,22 +72,19 @@ export function initEmbeddingsNetwork() {
   }
   window.addEventListener('resize', onWindowResize);
 
-  // Animation Loop
   let clock = new THREE.Clock();
   let animationFrameId;
 
   const animate = () => {
     animationFrameId = requestAnimationFrame(animate);
 
-    if (!isVisible) return; // Skip logic when hero is out of view
+    if (!isVisible) return;
 
-    const time = clock.getElapsedTime() * 0.55;
+    const time = clock.getElapsedTime() * 0.45; // Gentle wind speed
 
-    // Interpolate mouse coordinates smoothly for trailing lag
-    mouse.x += (mouseTarget.x - mouse.x) * 0.08;
-    mouse.y += (mouseTarget.y - mouse.y) * 0.08;
+    mouse.x += (mouseTarget.x - mouse.x) * 0.06;
+    mouse.y += (mouseTarget.y - mouse.y) * 0.06;
 
-    // Raycast on the mesh grid
     raycaster.setFromCamera(mouse, camera);
     const intersects = raycaster.intersectObject(gridMesh);
 
@@ -107,26 +98,26 @@ export function initEmbeddingsNetwork() {
     const posArray = positionAttr.array;
     const count = positionAttr.count;
 
-    // Wave and displacement logic
     for (let i = 0; i < count; i++) {
       const idx = i * 3;
       const initX = initialPositions[idx];
       const initY = initialPositions[idx + 1];
 
-      // 1. Double wave layering for digital cyber waves
-      let waveZ = Math.sin(initX * 0.016 + time) * Math.cos(initY * 0.016 + time) * 16;
-      waveZ += Math.sin(initX * 0.006 - time * 0.6) * 9;
+      // 1. Organic wind ripple equations
+      let waveZ = Math.sin(initX * 0.012 + time) * Math.cos(initY * 0.01 + time * 0.6) * 18;
+      waveZ += Math.sin(initY * 0.004 - time * 0.3) * 10;
 
-      // 2. Mouse displacement (bulges grid points upward near cursor)
+      // 2. Localized cursor fabric swell
       if (hasIntersected) {
         const dx = posArray[idx] - localIntersectPoint.x;
         const dy = posArray[idx + 1] - localIntersectPoint.y;
         const dist = Math.sqrt(dx * dx + dy * dy);
 
-        const rippleRadius = 150;
-        if (dist < rippleRadius) {
-          const force = Math.pow(1 - dist / rippleRadius, 2.5);
-          waveZ += force * 50; // Push vertices UPWARD by 50px for a holographic scan hill
+        const swellRadius = 160;
+        if (dist < swellRadius) {
+          // Smooth bell curve swell (fabric bulge)
+          const force = Math.pow(1 - dist / swellRadius, 2);
+          waveZ += force * 35; 
         }
       }
 
@@ -135,8 +126,8 @@ export function initEmbeddingsNetwork() {
 
     positionAttr.needsUpdate = true;
 
-    // Camera movement matches the mouse slightly
-    camera.position.x += (mouse.x * 25 - camera.position.x) * 0.04;
+    // Smooth camera lag
+    camera.position.x += (mouse.x * 20 - camera.position.x) * 0.03;
     camera.lookAt(scene.position);
 
     renderer.render(scene, camera);

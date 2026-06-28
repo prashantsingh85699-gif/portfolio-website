@@ -1,5 +1,5 @@
 /**
- * Prashant Singh - Swiss Architectural Blueprint Portfolio
+ * Prashant Singh - Warm Minimalist Craftsman Editorial Portfolio
  * Custom Interactive JavaScript Engine
  */
 
@@ -13,7 +13,7 @@ gsap.registerPlugin(ScrollTrigger);
 // Initialize Lenis smooth scroll
 const lenis = new Lenis({
   duration: 1.2,
-  easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // Custom out-cubic-like easing
+  easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
 });
 
 function raf(time) {
@@ -22,10 +22,10 @@ function raf(time) {
 }
 requestAnimationFrame(raf);
 
-// Link Lenis to update GSAP ScrollTrigger on scroll
+// Link Lenis to update GSAP ScrollTrigger
 lenis.on('scroll', ScrollTrigger.update);
 
-// Lock scrolling during preloader phase
+// Lock scrolling during preloader
 lenis.stop();
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -40,21 +40,52 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 /**
- * Preloader Controller
- * Handles visual delays, line fill timings, and the slide-up exit transition.
+ * Typographic Curtain Preloader
+ * Sequentially transitions through concept stages (01 to 04)
+ * before splitting the curtains and starting interactions.
  */
 function initPreloader() {
   const preloader = document.getElementById('preloader');
   if (!preloader) return;
 
-  // Let the CSS line animation complete first (approx 1.5 seconds)
-  setTimeout(() => {
-    preloader.classList.add('loaded');
-    lenis.start(); // Unlock scrolling
-    
-    // Initialize Three.js interactive nodes after the loader has exited
-    initEmbeddingsNetwork();
-  }, 1700);
+  const stages = [
+    document.getElementById('stage-1'),
+    document.getElementById('stage-2'),
+    document.getElementById('stage-3'),
+    document.getElementById('stage-4')
+  ];
+
+  let currentStageIdx = 0;
+
+  function nextStage() {
+    if (currentStageIdx < stages.length) {
+      if (currentStageIdx > 0) {
+        stages[currentStageIdx - 1].classList.remove('active');
+        stages[currentStageIdx - 1].classList.add('prev');
+      }
+      
+      stages[currentStageIdx].classList.add('active');
+      currentStageIdx++;
+      
+      setTimeout(nextStage, 450); // Speed of each concept stage transition
+    } else {
+      // Remove active on final stage
+      stages[stages.length - 1].classList.remove('active');
+      stages[stages.length - 1].classList.add('prev');
+      
+      // Trigger curtains slide open
+      setTimeout(() => {
+        preloader.classList.add('loaded');
+        lenis.start(); // Unlock scrolling
+        
+        // Load WebGL organic silk waves after curtains draw
+        initEmbeddingsNetwork();
+      }, 350);
+    }
+  }
+
+  // Start sequence
+  setTimeout(nextStage, 250);
 }
 
 /**
@@ -77,13 +108,14 @@ function initAnchorLinks() {
 
 /**
  * Custom Cursor Follower Engine
- * Implements mouse coordinate listeners and updates a lag-compensated square follower.
+ * Implements mouse coordinate trailing and displays dynamic help badges
  */
 function initCustomCursor() {
   const dot = document.getElementById('cursor-dot');
   const ring = document.getElementById('cursor-ring');
+  const cursorText = ring ? ring.querySelector('.cursor-text') : null;
   
-  if (!dot || !ring) return;
+  if (!dot || !ring || !cursorText) return;
 
   let mouseX = 0;
   let mouseY = 0;
@@ -108,7 +140,6 @@ function initCustomCursor() {
     dot.style.top = `${mouseY}px`;
   });
 
-  // Smooth lag follower loop
   function updateRingPosition() {
     ringX += (mouseX - ringX) * 0.15;
     ringY += (mouseY - ringY) * 0.15;
@@ -121,27 +152,36 @@ function initCustomCursor() {
   
   requestAnimationFrame(updateRingPosition);
 
-  // Attach hover expanding listeners to all tagged elements
+  // Attach hover helpers (displays [view] / [link] in cursor)
   const attachHoverListeners = () => {
     const hoverables = document.querySelectorAll('[data-hover="true"]');
     
     hoverables.forEach(el => {
       el.addEventListener('mouseenter', () => {
         ring.classList.add('active');
+        
+        // Custom text based on link type
+        if (el.classList.contains('link-card') || el.classList.contains('footer-social-link') || el.classList.contains('contact-card-blueprint-item')) {
+          cursorText.textContent = '[link]';
+        } else if (el.classList.contains('project-card-blueprint') || el.classList.contains('achievement-cell-blueprint')) {
+          cursorText.textContent = '[info]';
+        } else {
+          cursorText.textContent = '[select]';
+        }
       });
+      
       el.addEventListener('mouseleave', () => {
         ring.classList.remove('active');
+        cursorText.textContent = '';
       });
     });
   };
 
   attachHoverListeners();
 
-  // Re-observe if elements are dynamically filtered/changed
   const observer = new MutationObserver(() => {
     attachHoverListeners();
   });
-  
   observer.observe(document.body, { childList: true, subtree: true });
 }
 
@@ -211,8 +251,7 @@ function initScrollSpy() {
 }
 
 /**
- * Combined Certificate Filtration Engine
- * Integrates keyphrase search inputs with category badges.
+ * Certificate Filtration Engine
  */
 function initCertificateFilter() {
   const searchInput = document.getElementById('certificate-search');
@@ -262,10 +301,7 @@ function initCertificateFilter() {
 }
 
 /**
- * 3D Parallax Tilt and Hover-Swap Profile Image Interaction
- * Rotates the circular profile frame on hover to track the cursor,
- * shifts the nested slides container in the opposite direction for 3D depth,
- * and swaps between formal and casual portraits smoothly without visual jumps.
+ * 3D Parallax Tilt Profile Image Interaction
  */
 function initProfileInteraction() {
   const frame = document.getElementById('hero-portrait-frame');
@@ -283,7 +319,6 @@ function initProfileInteraction() {
     backImg.classList.add('active');
   });
 
-  // Smooth 3D tilt coordinates
   window.addEventListener('mousemove', (e) => {
     if (!isHovered) return;
 
@@ -319,12 +354,10 @@ function initProfileInteraction() {
 }
 
 /**
- * Premium GSAP Scroll-Trigger Reveals & Visual Effects
- * Animates vertical hairline dividers, staggers grid card cascades,
- * and slides up display headings gracefully as they enter the viewport.
+ * Premium GSAP Scroll-Trigger Reveals
  */
 function initGSAPAnimations() {
-  // 1. Growing horizontal hairline dividers
+  // 1. Growing horizontal dividers
   gsap.utils.toArray('.editorial-divider').forEach(divider => {
     gsap.fromTo(divider, 
       { scaleX: 0, transformOrigin: 'left center' }, 
@@ -341,7 +374,7 @@ function initGSAPAnimations() {
     );
   });
 
-  // 2. Fade & rise reveals for section titles and badges
+  // 2. Fade & rise reveals for titles and tags
   gsap.utils.toArray('.section-title-blueprint, .blueprint-tag, .about-headings, .contact-pitch').forEach(elem => {
     gsap.fromTo(elem,
       { opacity: 0, y: 30 },
@@ -376,7 +409,7 @@ function initGSAPAnimations() {
     }
   );
 
-  // 4. Staggered reveal for hackathon achievement cells
+  // 4. Staggered reveal for hackathon cells
   gsap.fromTo('.achievement-cell-blueprint',
     { opacity: 0, y: 35 },
     {
@@ -393,7 +426,7 @@ function initGSAPAnimations() {
     }
   );
 
-  // 5. Staggered reveal for technical competence panels
+  // 5. Staggered reveal for competence cards
   gsap.fromTo('.skills-blueprint-grid > .blueprint-card',
     { opacity: 0, y: 30 },
     {
@@ -410,7 +443,7 @@ function initGSAPAnimations() {
     }
   );
 
-  // 6. Staggered reveal for contact brand cards
+  // 6. Staggered reveal for contact items
   gsap.fromTo('.contact-card-blueprint-item',
     { opacity: 0, y: 30 },
     {
