@@ -35,40 +35,63 @@ document.addEventListener('DOMContentLoaded', () => {
   initCertificateFilter();
   initAnchorLinks();
   initProfileInteraction();
+  initTerminalSimulation();
   initGSAPAnimations();
 });
 
 /**
+ * Interactive C++ Code Terminal Simulation
+ */
+function initTerminalSimulation() {
+  const runBtn = document.getElementById('run-code-btn');
+  const consoleLogs = document.getElementById('console-logs');
+
+  if (!runBtn || !consoleLogs) return;
+
+  runBtn.addEventListener('click', () => {
+    // Disable during compile simulation
+    if (runBtn.disabled) return;
+    runBtn.disabled = true;
+    runBtn.textContent = '[ COMPILING... ]';
+    
+    consoleLogs.style.color = '#71717a'; // Muted color during compilation
+    consoleLogs.textContent = '$ g++ portfolio.cpp -o portfolio && ./portfolio\nCompiling source tree...';
+
+    setTimeout(() => {
+      // Simulation outcome
+      consoleLogs.style.color = '#10b981'; // Green console output
+      consoleLogs.textContent = `$ g++ portfolio.cpp -o portfolio && ./portfolio\n\nStatus: Ready to build\nB.Tech CSE Student @ VGU x NIAT\n\n[Process completed with exit code 0]`;
+      
+      runBtn.disabled = false;
+      runBtn.textContent = '[ RUN CODE ]';
+    }, 700);
+  });
+}
+
+/**
  * Interactive Light / Dark Theme Switching Logic
- * Saves preference in localStorage and applies data-theme attributes
  */
 function initThemeToggle() {
   const toggleBtn = document.getElementById('theme-toggle');
   if (!toggleBtn) return;
 
-  // Retrieve saved theme or fallback to user system dark mode preference
   const savedTheme = localStorage.getItem('theme');
   const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-  
   const initialTheme = savedTheme ? savedTheme : (systemPrefersDark ? 'dark' : 'light');
   
-  // Set initial theme state
   document.documentElement.setAttribute('data-theme', initialTheme);
 
   toggleBtn.addEventListener('click', () => {
     const currentTheme = document.documentElement.getAttribute('data-theme');
     const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
     
-    // Temporarily add a transition helper class to body to prevent initial load flashes
-    document.body.style.transition = 'background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease';
-    
+    document.body.style.transition = 'background-color 0.35s ease, color 0.35s ease, border-color 0.35s ease';
     document.documentElement.setAttribute('data-theme', newTheme);
     localStorage.setItem('theme', newTheme);
     
-    // Clean up transition rules after switch complete
     setTimeout(() => {
       document.body.style.transition = '';
-    }, 400);
+    }, 450);
   });
 }
 
