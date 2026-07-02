@@ -7,8 +7,12 @@
 import Lenis from 'lenis';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { inject } from '@vercel/analytics';
 
 gsap.registerPlugin(ScrollTrigger);
+
+// ─── Vercel Web Analytics ────────────────────────────────────────────────────
+inject();
 
 // ─── Smooth Scroll ──────────────────────────────────────────────────────────
 const lenis = new Lenis({
@@ -165,7 +169,7 @@ function initPortraitSwap() {
   frame.addEventListener('mouseleave', () => { back.classList.remove('active'); front.classList.add('active'); });
 }
 
-// ─── C++ Terminal Simulation ─────────────────────────────────────────────────
+// ─── C++ Terminal Simulation ──────────────────────────────���──────────────────
 function initTerminal() {
   const btn  = document.getElementById('run-code-btn');
   const logs = document.getElementById('console-logs');
