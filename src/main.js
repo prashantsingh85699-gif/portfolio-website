@@ -12,7 +12,10 @@ import { inject } from '@vercel/analytics';
 gsap.registerPlugin(ScrollTrigger);
 
 // ─── Vercel Web Analytics ────────────────────────────────────────────────────
-inject();
+inject({
+  mode: import.meta.env.MODE === 'production' ? 'production' : 'development',
+  debug: import.meta.env.MODE !== 'production',
+});
 
 // ─── Smooth Scroll ──────────────────────────────────────────────────────────
 const lenis = new Lenis({
